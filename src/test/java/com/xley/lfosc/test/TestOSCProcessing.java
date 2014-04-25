@@ -26,6 +26,7 @@ import com.illposed.osc.OSCPortIn;
 import junit.framework.TestCase;
 
 import java.io.DataOutputStream;
+import java.net.InetAddress;
 import java.net.Socket;
 
 /**
@@ -44,14 +45,15 @@ public class TestOSCProcessing extends TestCase {
         super.setUp();
         server = new Thread(new TestOSCProxyServer());
         server.start();
-        receiver = new OSCPortIn(OSCPort.defaultSCOSCPort());
+        receiver = new OSCPortIn(InetAddress.getLoopbackAddress().getHostAddress(), OSCPort.defaultSCOSCPort());
     }
 
     @Override
     protected void tearDown() throws Exception {
-        super.tearDown();
+
         server.interrupt();
         receiver.close();
+        super.tearDown();
     }
 
     public void testProxy() throws Exception {
@@ -62,9 +64,9 @@ public class TestOSCProcessing extends TestCase {
         Socket clientSocket = null;
         DataOutputStream outToServer = null;
         try {
-            clientSocket = new Socket("localhost", 3100);
+            clientSocket = new Socket(InetAddress.getLoopbackAddress(), 3100);
             outToServer = new DataOutputStream(clientSocket.getOutputStream());
-            String data = "osc@127.0.0.1:" + OSCPort.defaultSCOSCPort() + " /message/receiving\n";
+            String data = "osc@"+InetAddress.getLoopbackAddress().getHostAddress()+":" + OSCPort.defaultSCOSCPort() + " /message/receiving\n";
             outToServer.writeBytes(data);
             Thread.sleep(100); // wait a bit
         } finally {
