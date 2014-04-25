@@ -60,7 +60,7 @@ public class OSCProxy {
             System.exit(0);
         }
 
-        OSCProxy.logger.info("LightFactory OSC Proxy Service");
+        OSCProxy.logger.info("LightFactory OSC Proxy Service, see -? for more help. Use CTRL-C to shutdown the service.");
 
         if (options.has("d")) {
             logger.setLevel(Level.toLevel((String) options.valueOf("d")));
