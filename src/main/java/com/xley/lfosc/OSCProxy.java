@@ -54,7 +54,7 @@ public class OSCProxy {
             }
         };
         OptionSet options = parser.parse(args);
-        if (options.hasArgument("?")) {
+        if (options.has("?")) {
             System.out.println("LightFactory OSC Proxy Service");
             parser.printHelpOn(System.out);
             System.exit(0);
