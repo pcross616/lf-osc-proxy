@@ -9,16 +9,57 @@
     </properties>
 	
 	<scm>
+		<connection>scm:git:https://github.com/pcross616/lf-osc-proxy.git</connection>
 		<developerConnection>scm:git:https://github.com/pcross616/lf-osc-proxy.git</developerConnection>
-	  <tag>HEAD</tag>
-  </scm>
+		<url>https://github.com/pcross616/lf-osc-proxy</url>
+		<tag>HEAD</tag>
+	</scm>
+
+  <distributionManagement>
+	  <repository>
+		<id>bintray</id>
+		<url>https://api.bintray.com/maven/pcross616/generic/lf-osc-proxy</url>
+	  </repository>
+  </distributionManagement>
 
     <name>LightFactory OSC Proxy</name>
 
     <groupId>lf-osc-proxy</groupId>
     <artifactId>lf-osc-proxy</artifactId>
-    <version>0.2-SNAPSHOT</version>
+    <version>0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <build>
         <defaultGoal>package</defaultGoal>
@@ -28,6 +69,12 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.5</version>
+                <configuration>
+                    <useReleaseProfile>false</useReleaseProfile>
+                    <releaseProfiles>release</releaseProfiles>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <goals>deploy assembly:single</goals>
+                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
