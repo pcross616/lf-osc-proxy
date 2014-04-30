@@ -10,14 +10,14 @@
 	
 	<scm>
 		<developerConnection>scm:git:https://github.com/pcross616/lf-osc-proxy.git</developerConnection>
-	  <tag>lf-osc-proxy-0.1</tag>
+	  <tag>HEAD</tag>
   </scm>
 
     <name>LightFactory OSC Proxy</name>
 
     <groupId>lf-osc-proxy</groupId>
     <artifactId>lf-osc-proxy</artifactId>
-    <version>0.1</version>
+    <version>0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <build>
