@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <properties>
@@ -9,18 +7,28 @@
         <project.packageName>com.xley.lfosc</project.packageName>
         <project.mainClass>com.xley.lfosc.OSCProxy</project.mainClass>
     </properties>
+	
+	<scm>
+		<developerConnection>scm:git:https://github.com/pcross616/lf-osc-proxy.git</developerConnection>
+	  <tag>lf-osc-proxy-0.1</tag>
+  </scm>
 
     <name>LightFactory OSC Proxy</name>
 
     <groupId>lf-osc-proxy</groupId>
     <artifactId>lf-osc-proxy</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.1</version>
     <packaging>jar</packaging>
 
     <build>
         <defaultGoal>package</defaultGoal>
 
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5</version>
+            </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
