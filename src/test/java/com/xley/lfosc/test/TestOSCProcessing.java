@@ -45,7 +45,8 @@ public class TestOSCProcessing extends TestCase {
         super.setUp();
         server = new Thread(new TestOSCProxyServer());
         server.start();
-        receiver = new OSCPortIn(InetAddress.getLoopbackAddress().getHostAddress(), OSCPort.defaultSCOSCPort());
+        //receiver = new OSCPortIn(InetAddress.getLoopbackAddress().getHostAddress(), OSCPort.defaultSCOSCPort());
+        receiver = new OSCPortIn(OSCPort.defaultSCOSCPort());
     }
 
     @Override
