@@ -26,7 +26,9 @@ import com.illposed.osc.OSCPortIn;
 import junit.framework.TestCase;
 
 import java.io.DataOutputStream;
+import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 
 /**
@@ -45,8 +47,8 @@ public class TestOSCProcessing extends TestCase {
         super.setUp();
         server = new Thread(new TestOSCProxyServer());
         server.start();
-        //receiver = new OSCPortIn(InetAddress.getLoopbackAddress().getHostAddress(), OSCPort.defaultSCOSCPort());
-        receiver = new OSCPortIn(OSCPort.defaultSCOSCPort());
+        receiver = new OSCPortIn(new DatagramSocket(
+                                 new InetSocketAddress(InetAddress.getLoopbackAddress(),OSCPort.defaultSCOSCPort())));
     }
 
     @Override
