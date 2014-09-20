@@ -11,6 +11,9 @@ Using Lightfactory create a connection to the OSC Proxy service (may want to cre
   * `SEND <server or ip> osc@<target osc enpoint> /message/command data` - the SEND option can be used with or without the ip
 
 
+Download Binary
+  * https://bintray.com/pcross616/generic/lf-osc-proxy
+
 
 Building Lightfactory OSC Proxy
 
