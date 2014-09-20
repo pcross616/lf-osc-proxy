@@ -19,3 +19,6 @@ Building Lightfactory OSC Proxy
 
   * `mvn clean package` - will create an all in one runnable jar file
   * `java -jar lf-osc-proxy-0.1-SNAPSHOT-sharded.jar` - Will run the proxy and listen on 127.0.0.1:3100, use -? to determine flags to change bind address and port.
+
+
+[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GBMCJURP727AC)
