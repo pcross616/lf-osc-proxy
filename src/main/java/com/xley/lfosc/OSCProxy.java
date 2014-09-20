@@ -39,7 +39,7 @@ public class OSCProxy {
 
     public static void main(String[] args) throws IOException {
         PatternLayout layout = new PatternLayout();
-        layout.setConversionPattern("%d %-5p [%t] %c - %m%n");
+        layout.setConversionPattern("[%p] %c %M - %m%n");
         logger.addAppender(new ConsoleAppender(layout));
         OptionParser parser = new OptionParser() {
             {
@@ -60,7 +60,7 @@ public class OSCProxy {
             System.exit(0);
         }
 
-        OSCProxy.logger.info("LightFactory OSC Proxy Service, see -? for more help. Use CTRL-C to shutdown the service.");
+        System.out.println("LightFactory OSC Proxy Service\nUse CTRL-C to shutdown the service or for more help use -?\n");
 
         if (options.has("d")) {
             logger.setLevel(Level.toLevel((String) options.valueOf("d")));
