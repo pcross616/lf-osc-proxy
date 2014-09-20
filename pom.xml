@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.packageName>com.xley.lfosc</project.packageName>
+        <project.binaryName>lf-osc-proxy</project.binaryName>
         <project.mainClass>com.xley.lfosc.OSCProxy</project.mainClass>
     </properties>
-	
-	<scm>
-		<connection>scm:git:https://github.com/pcross616/lf-osc-proxy.git</connection>
-		<developerConnection>scm:git:https://github.com/pcross616/lf-osc-proxy.git</developerConnection>
-		<url>https://github.com/pcross616/lf-osc-proxy</url>
-		<tag>HEAD</tag>
-	</scm>
 
-  <distributionManagement>
-	  <repository>
-		<id>bintray</id>
-		<url>https://api.bintray.com/maven/pcross616/generic/lf-osc-proxy</url>
-	  </repository>
-  </distributionManagement>
+    <scm>
+        <connection>scm:git:https://github.com/pcross616/lf-osc-proxy.git</connection>
+        <developerConnection>scm:git:https://github.com/pcross616/lf-osc-proxy.git</developerConnection>
+        <url>https://github.com/pcross616/lf-osc-proxy</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>bintray</id>
+            <url>https://api.bintray.com/maven/pcross616/generic/lf-osc-proxy</url>
+        </repository>
+    </distributionManagement>
 
     <name>LightFactory OSC Proxy</name>
 
@@ -29,53 +31,9 @@
     <version>0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <profiles>
-        <profile>
-            <id>release</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-source-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>attach-sources</id>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>attach-javadocs</id>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-
     <build>
         <defaultGoal>package</defaultGoal>
-
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.5</version>
-                <configuration>
-                    <useReleaseProfile>false</useReleaseProfile>
-                    <releaseProfiles>release</releaseProfiles>
-                    <autoVersionSubmodules>true</autoVersionSubmodules>
-                    <goals>deploy assembly:single</goals>
-                </configuration>
-            </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
@@ -85,25 +43,97 @@
                 </configuration>
             </plugin>
             <!-- The configuration of maven-assembly-plugin -->
-            <plugin>
+            <!--<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.2.2</version>
-                <!-- The configuration of the plugin -->
+                <version>2.4</version>
+                &lt;!&ndash; The configuration of the plugin &ndash;&gt;
                 <configuration>
-                    <!-- Specifies the configuration file of the assembly plugin -->
-                    <!--<descriptors>
-                        <descriptor>/src/main/resources/assemblies/lfosc.xml</descriptor>
-                    </descriptors>-->
                     <archive>
                         <manifest>
                             <mainClass>${project.mainClass}</mainClass>
                         </manifest>
                     </archive>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <finalName>${artifactId}-${version}-full</finalName>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
                 </configuration>
+
+               <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>assembly</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+            </plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>1.7.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <shadedArtifactAttached>true</shadedArtifactAttached>
+                    <shadedClassifierName>shaded</shadedClassifierName>
+                    <transformers>
+                        <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                            <mainClass>${project.mainClass}</mainClass>
+                        </transformer>
+                    </transformers>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.akathist.maven.plugins.launch4j</groupId>
+                <artifactId>launch4j-maven-plugin</artifactId>
+                <version>1.5.2</version>
+                <executions>
+                    <execution>
+                        <id>l4j-clui</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>launch4j</goal>
+                        </goals>
+                        <configuration>
+                            <headerType>console</headerType>
+                            <jar>${project.build.directory}/${artifactId}-${version}-shaded.jar</jar>
+                            <outfile>${project.build.directory}/${project.binaryName}.exe</outfile>
+                            <downloadUrl>http://java.com/download</downloadUrl>
+                            <classPath>
+                                <mainClass>${project.mainClass}</mainClass>
+                                <preCp>anything</preCp>
+                            </classPath>
+                            <!--<icon>application.ico</icon>-->
+                            <jre>
+                                <minVersion>1.7.0</minVersion>
+                                <jdkPreference>preferJre</jdkPreference>
+                            </jre>
+                            <versionInfo>
+                                <fileVersion>1.0.0.0</fileVersion>
+                                <txtFileVersion>${project.version}</txtFileVersion>
+                                <fileDescription>${project.name}</fileDescription>
+                                <copyright>2014 xley.com</copyright>
+                                <productVersion>1.0.0.0</productVersion>
+                                <txtProductVersion>1.0.0.0</txtProductVersion>
+                                <productName>${project.name}</productName>
+                                <companyName>XLEY.com</companyName>
+                                <internalName>${project.binaryName}</internalName>
+                                <originalFilename>${project.binaryName}.exe</originalFilename>
+                            </versionInfo>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
