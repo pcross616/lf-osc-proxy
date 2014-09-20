@@ -11,8 +11,11 @@ Using Lightfactory create a connection to the OSC Proxy service (may want to cre
   * `SEND <server or ip> osc@<target osc enpoint> /message/command data` - the SEND option can be used with or without the ip
 
 
+Download Binary
+  * https://bintray.com/pcross616/generic/lf-osc-proxy
+
 
 Building Lightfactory OSC Proxy
 
-  * `mvn clean assembly:assembly` - will create an all in one runnable jar file
-  * `java -jar lf-osc-proxy-0.1-SNAPSHOT-jar-with-dependencies.jar` - Will run the proxy and listen on 127.0.0.1:3100, use -? to determine flags to change bind address and port.
+  * `mvn clean package` - will create an all in one runnable jar file
+  * `java -jar lf-osc-proxy-0.1-SNAPSHOT-sharded.jar` - Will run the proxy and listen on 127.0.0.1:3100, use -? to determine flags to change bind address and port.
