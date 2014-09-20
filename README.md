@@ -17,5 +17,5 @@ Download Binary
 
 Building Lightfactory OSC Proxy
 
-  * `mvn clean assembly:assembly` - will create an all in one runnable jar file
-  * `java -jar lf-osc-proxy-0.1-SNAPSHOT-jar-with-dependencies.jar` - Will run the proxy and listen on 127.0.0.1:3100, use -? to determine flags to change bind address and port.
+  * `mvn clean package` - will create an all in one runnable jar file
+  * `java -jar lf-osc-proxy-0.1-SNAPSHOT-sharded.jar` - Will run the proxy and listen on 127.0.0.1:3100, use -? to determine flags to change bind address and port.
