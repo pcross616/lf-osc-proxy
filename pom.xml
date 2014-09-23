@@ -92,7 +92,7 @@
                         <configuration>
                             <headerType>console</headerType>
                             <jar>${project.build.directory}/${project.artifactId}-${project.version}-shaded.jar</jar>
-                            <outfile>${project.build.directory}/${project.binaryName}.exe</outfile>
+                            <outfile>${project.build.directory}/${project.binaryName}-${project.version}.exe</outfile>
                             <downloadUrl>http://java.com/download</downloadUrl>
                             <classPath>
                                 <mainClass>${project.mainClass}</mainClass>

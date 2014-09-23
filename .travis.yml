@@ -4,8 +4,10 @@ before_install:
   - if [ `uname -m` = x86_64 ]; then sudo apt-get install -qq --force-yes libgd2-xpm ia32-libs ia32-libs-multiarch > /dev/null; fi
 script: mvn test -Djava.net.preferIPv4Stack=true
 after_success:
-  - sudo curl -T target/lf-osc-proxy.exe -upcross616:$BINTRAY_API_KEY https://api.bintray.com/content/pcross616/generic/lf-osc-proxy/0.2/lf-osc-proxy-0.2.exe?publish=1
-  - sudo curl -T target/lf-osc-proxy-0.2-SNAPSHOT-sharded.jar -upcross616:$BINTRAY_API_KEY https://api.bintray.com/content/pcross616/generic/lf-osc-proxy/0.2/lf-osc-proxy-0.2-SNAPSHOT-shaded.jar?publish=1
+  - sudo curl -T target/lf-osc-proxy-$PROJECT_VERSION.exe -upcross616:$BINTRAY_API_KEY https://api.bintray.com/content/pcross616/generic/lf-osc-proxy/$VERSION_NUMBER/lf-osc-proxy-$PROJECT_VERSION.exe;publish=1
+  - sudo curl -T target/lf-osc-proxy-$PROJECT_VERSION-shaded.jar -upcross616:$BINTRAY_API_KEY https://api.bintray.com/content/pcross616/generic/lf-osc-proxy/$VERSION_NUMBER/lf-osc-proxy-$PROJECT_VERSION-shaded.jar;publish=1
 env:
+  - VERSION_NUMBER=0.2
+  - PROJECT_VERSION=$VERSION_NUMBER-SNAPSHOT
   global:
     secure: aTPuhArLn0yNtr3D/lk7qLBXK8zr4/NzwqZIZywyJd7riydrkOIyry69auSV2LWeGY6ihVAswGWKfw6ClxPLAltu74ktHCgwbpIj3UJCI08OPokO44fNtwsDBONbMVtY1MQiYotoq6kWS/LUGsp7rOLX/4BBlnfDUYSWm0k50ow=
