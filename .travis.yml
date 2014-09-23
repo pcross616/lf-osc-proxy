@@ -1,5 +1,5 @@
 language: java
 before_install:
   - sudo apt-get update -qq
-  - sudo apt-get install -y ia32-libs ia32-libs-multiarch
+  - sudo apt-get install -y ia32-libs ia32-libs-multiarch -f
 script: mvn test -Djava.net.preferIPv4Stack=true
