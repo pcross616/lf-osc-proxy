@@ -1,5 +1,8 @@
 language: java
 before_install:
+  - sudo dpkg --add-architecture i386
+  - sudo sed -i -e's/[arch=amd64]/[arch=amd64,i386]/' /etc/apt/sources.list
   - sudo apt-get update -qq
-  - sudo apt-get install -y ia32-libs ia32-libs-multiarch -f
+  - sudo apt-get -y upgrade
+  - sudo apt-get -y dist-upgrade
 script: mvn test -Djava.net.preferIPv4Stack=true
