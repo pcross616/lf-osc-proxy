@@ -8,6 +8,6 @@ after_success:
   - sudo curl -T target/lf-osc-proxy-$PROJECT_VERSION-shaded.jar -upcross616:$BINTRAY_API_KEY https://api.bintray.com/content/pcross616/generic/lf-osc-proxy/$VERSION_NUMBER/lf-osc-proxy-$PROJECT_VERSION-shaded.jar;publish=1
 env:
   global:
-    - VERSION_NUMBER="0.2"
-    - PROJECT_VERSION="$VERSION_NUMBER-SNAPSHOT"
-    secure: aTPuhArLn0yNtr3D/lk7qLBXK8zr4/NzwqZIZywyJd7riydrkOIyry69auSV2LWeGY6ihVAswGWKfw6ClxPLAltu74ktHCgwbpIj3UJCI08OPokO44fNtwsDBONbMVtY1MQiYotoq6kWS/LUGsp7rOLX/4BBlnfDUYSWm0k50ow=
+    - VERSION_NUMBER=0.2
+    - PROJECT_VERSION=$VERSION_NUMBER-SNAPSHOT
+    - secure: aTPuhArLn0yNtr3D/lk7qLBXK8zr4/NzwqZIZywyJd7riydrkOIyry69auSV2LWeGY6ihVAswGWKfw6ClxPLAltu74ktHCgwbpIj3UJCI08OPokO44fNtwsDBONbMVtY1MQiYotoq6kWS/LUGsp7rOLX/4BBlnfDUYSWm0k50ow=
