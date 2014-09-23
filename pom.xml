@@ -98,7 +98,7 @@
                                 <mainClass>${project.mainClass}</mainClass>
                                 <preCp>anything</preCp>
                             </classPath>
-                            <!--<icon>application.ico</icon>-->
+                            <icon>lf_osc_proxy.ico</icon>
                             <jre>
                                 <minVersion>1.7.0</minVersion>
                                 <jdkPreference>preferJre</jdkPreference>
