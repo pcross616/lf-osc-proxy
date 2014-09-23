@@ -32,7 +32,7 @@ public class OSCProxyProtocol {
     protected final static Pattern oscPattern = Pattern.compile("^osc@(.*):(\\d+)\\s+(\\/\\S+)(.*)$", Pattern.CASE_INSENSITIVE + Pattern.MULTILINE);
     protected final static Pattern dataPattern = Pattern.compile("((\"((?<token>.*?)(?<!\\\\)\")|(?<token1>[\\S]+))(\\s)*)", Pattern.CASE_INSENSITIVE + Pattern.MULTILINE);
 
-    public String processInput(String theInput) {
+    public String processLFRemoteCommand(String theInput) {
         /**
          * 1. parse input syntax
          *   osc@address:port /first/this/one data

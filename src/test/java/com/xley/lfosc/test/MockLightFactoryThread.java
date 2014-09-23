@@ -19,46 +19,49 @@
  * under the License.
  */
 
-package com.xley.lfosc;
+package com.xley.lfosc.test;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.concurrent.atomic.AtomicInteger;
 
-public class OSCProxyThread extends Thread {
-    private final static AtomicInteger count = new AtomicInteger();
-    private Socket socket = null;
-
-    public OSCProxyThread(Socket socket) {
-        super("OSCProxyThread - " + count.incrementAndGet());
-        this.socket = socket;
+public class MockLightFactoryThread extends Thread {
+    protected volatile String lastValue;
+    private Socket socket;
+    public MockLightFactoryThread(Socket socket) {
+        super();
+        this.socket=socket;
     }
 
+    @Override
     public void run() {
-        OSCProxy.logger.info("OSC connection established. Remote Address: " + socket.getInetAddress().getHostAddress());
+
+
         try (
-                PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+                DataOutputStream outToClient = new DataOutputStream(socket.getOutputStream());
                 BufferedReader in = new BufferedReader(
                         new InputStreamReader(
                                 socket.getInputStream()));
         ) {
             String inputLine, outputLine;
-            OSCProxyProtocol opp = new OSCProxyProtocol();
+            outToClient.writeBytes("LF Mock Server: CONNECT\n");
             while (socket.isConnected() && (inputLine = in.readLine()) != null) {
-                inputLine = inputLine.trim();
-                OSCProxy.logger.trace(">> " + inputLine);
-                outputLine = opp.processLFRemoteCommand(inputLine);
-                out.println(outputLine);
-                OSCProxy.logger.trace("<< " + outputLine);
+                lastValue = inputLine.trim();
+                outToClient.writeBytes("OK I got - " + lastValue + "\n");
             }
-            socket.close();
-        } catch (IOException e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            OSCProxy.logger.info("OSC connection disconnected. Remote Address: " + socket.getInetAddress().getHostAddress());
+        }
+        finally {
+            try {
+                socket.close();
+                socket = null;
+            } catch (IOException e) {
+                //
+            }
         }
     }
 }

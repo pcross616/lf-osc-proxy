@@ -6,9 +6,9 @@ lf-osc-proxy
 Light Factory OSC Proxy Service, enables Open Sound Control messages to be sent from Light Factory using the built in CONNECT and SEND functions.
 
 
-Using Lightfactory create a connection to the OSC Proxy service (may want to create a macro so it can be used in a cue)
+Using LightFactory create a connection to the OSC Proxy service (may want to create a macro so it can be used in a cue)
   * `CONNECT <server or ip with the proxy>` - Once connected you can then send commands to this enpoint.
-  * `SEND <server or ip> osc@<target osc enpoint> /message/command data` - the SEND option can be used with or without the ip
+  * `SEND <server or ip> osc@<target osc endpoint> /message/command data` - the SEND option can be used with or without the ip
 
 
 Download Binary

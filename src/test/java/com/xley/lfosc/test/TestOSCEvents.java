@@ -38,28 +38,34 @@ import java.net.Socket;
  * Time: 11:19 PM
  * To change this template use File | Settings | File Templates.
  */
-public class TestOSCProcessing extends TestCase {
+public class TestOSCEvents extends TestCase {
     private Thread server = null;
     private OSCPortIn receiver = null;
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        server = new Thread(new TestOSCProxyServer());
+        server = new Thread(new TestOSCProxyServer("bridge"));
         server.start();
         receiver = new OSCPortIn(new DatagramSocket(
                                  new InetSocketAddress(InetAddress.getLoopbackAddress(),OSCPort.defaultSCOSCPort())));
+
+        System.out.println("Waiting for servers to start... (5 sec)");
+        Thread.sleep(5000);
     }
 
     @Override
     protected void tearDown() throws Exception {
 
         server.interrupt();
-        receiver.close();
+        if (receiver != null) {
+            receiver.close();
+        }
+        Thread.sleep(3000);
         super.tearDown();
     }
 
-    public void testProxy() throws Exception {
+    public void testOSCProxy() throws Exception {
         TestOSCListener listener = new TestOSCListener();
         receiver.addListener("/message/receiving", listener);
         receiver.startListening();
