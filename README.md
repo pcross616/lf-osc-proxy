@@ -21,6 +21,7 @@ Download Binary Files
   * Self executing JAR file for other Operating Systems
   * https://bintray.com/pcross616/generic/lf-osc-proxy (https://dl.bintray.com/pcross616/generic/)
 
+[![Get automatic notifications about new "lf-osc-proxy" versions](https://www.bintray.com/docs/images/bintray_badge_color.png)](https://bintray.com/pcross616/generic/lf-osc-proxy/view?source=watch)
 
 Building LightFactory-OSC Proxy
 --------
