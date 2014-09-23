@@ -8,8 +8,8 @@
         <project.packageName>com.xley.lfosc</project.packageName>
         <project.binaryName>lf-osc-proxy</project.binaryName>
         <project.mainClass>com.xley.lfosc.OSCProxy</project.mainClass>
-        <project.fileversion>1.0.0.0</project.fileversion>
-        <project.productversion>1.0.0.0</project.productversion>
+        <project.fileversion>1.2.0.0</project.fileversion>
+        <project.productversion>1.2.0.0</project.productversion>
     </properties>
 
     <scm>
@@ -30,12 +30,24 @@
 
     <groupId>lf-osc-proxy</groupId>
     <artifactId>lf-osc-proxy</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <build>
         <defaultGoal>package</defaultGoal>
         <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>2.1</version>
+            </plugin>
+            <plugin>
+                <artifactId>maven-scm-plugin</artifactId>
+                <version>1.8.1</version>
+                <configuration>
+                    <tag>v${project.version}</tag>
+                </configuration>
+            </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>

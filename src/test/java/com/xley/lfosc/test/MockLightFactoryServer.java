@@ -21,21 +21,28 @@
 
 package com.xley.lfosc.test;
 
-
-import com.xley.lfosc.OSCProxy;
-
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.concurrent.atomic.AtomicInteger;
 
-public class TestOSCProxyServer implements Runnable {
-    private String mode = "both";
-    public TestOSCProxyServer(String mode) {
-        this.mode=mode;
+
+public class MockLightFactoryServer implements Runnable {
+    private MockLightFactoryThread mockServer;
+
+    public String getLastValue() {
+        return mockServer.lastValue;
     }
 
     @Override
     public void run() {
+
         try {
-            OSCProxy.main(new String[]{"-d", "TRACE", "-m", mode});
+            mockServer = new MockLightFactoryThread(new ServerSocket(3300).accept());
+            mockServer.start();
+
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -21,6 +21,7 @@
 
 package com.xley.lfosc;
 
+import com.illposed.osc.OSCPortIn;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import org.apache.log4j.ConsoleAppender;
@@ -29,6 +30,7 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 
 import java.io.IOException;
+import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
@@ -37,14 +39,21 @@ public class OSCProxy {
 
     protected static final Logger logger = Logger.getLogger(OSCProxy.class);
 
-    public static void main(String[] args) throws IOException {
+    static {
         PatternLayout layout = new PatternLayout();
-        layout.setConversionPattern("[%p] %c %M - %m%n");
+        layout.setConversionPattern("[%p] %c - %m%n");
         logger.addAppender(new ConsoleAppender(layout));
+    }
+
+    public static void main(String[] args) throws IOException {
         OptionParser parser = new OptionParser() {
             {
                 accepts("p").withOptionalArg().ofType(Integer.class)
                         .describedAs("bind port").defaultsTo(3100);
+                accepts("l").withOptionalArg().ofType(Integer.class)
+                        .describedAs("osc bind port").defaultsTo(3200);
+                accepts("m").withOptionalArg().ofType(String.class)
+                        .describedAs("Proxy mode (osc | bridge | both)").defaultsTo("both");
                 accepts("b").withOptionalArg().ofType(String.class)
                         .describedAs("bind address").defaultsTo("127.0.0.1");
                 accepts("t").withOptionalArg().ofType(Integer.class)
@@ -67,21 +76,68 @@ public class OSCProxy {
         }
 
         int portNumber = (int) options.valueOf("p");
+        int oscPortNumber = (int) options.valueOf("l");
         int threads = (int) options.valueOf("t");
+        boolean oscEnabled = true;
+        boolean lfBridgeEnabled = true;
+
+        switch (String.valueOf(options.valueOf("m"))) {
+            case "osc":
+                oscEnabled = true;
+                lfBridgeEnabled = false;
+                break;
+            case "bridge":
+                oscEnabled = false;
+                lfBridgeEnabled = true;
+                break;
+            default:
+                break;
+        }
+
         String host = String.valueOf(options.valueOf("b"));
         InetSocketAddress binding = new InetSocketAddress(InetAddress.getByName(host), portNumber);
-        boolean listening = true;
+        InetSocketAddress oscBinding = new InetSocketAddress(InetAddress.getByName(host), oscPortNumber);
 
-        try (ServerSocket serverSocket = new ServerSocket(binding.getPort(), threads, binding.getAddress())) {
-            logger.info("Listening on " + host + ":" + portNumber);
-            while (listening) {
-                new OSCProxyThread(serverSocket.accept()).start();
+        boolean listening = true;
+        OSCPortIn receiver = null;
+        OSCBridgeListener listener = null;
+        try {
+            if (oscEnabled) {
+                logger.info("Listening for OSC Events on " + host + ":" + oscPortNumber);
+                receiver = new OSCPortIn(new DatagramSocket(oscBinding));
+                listener = new OSCBridgeListener();
+                receiver.addListener("/lf/*/*", listener);
+                receiver.startListening();
+
+                //check to see if we are the only listener to run.
+                if (!lfBridgeEnabled) {
+                    while (listening && receiver.isListening()) {
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            listening = false;
+                        }
+                    }
+                }
+
             }
-        } catch (IOException e) {
-            logger.fatal("Could not listen on " + host + ":" + portNumber);
-            System.exit(-1);
+            if (lfBridgeEnabled) {
+                try (ServerSocket serverSocket = new ServerSocket(binding.getPort(), threads, binding.getAddress())) {
+                    logger.info("Listening for LightFactory connection on " + host + ":" + portNumber);
+                    while (listening) {
+                        new OSCProxyThread(serverSocket.accept()).start();
+                    }
+                } catch (IOException e) {
+                    logger.fatal("Could not listen for LightFactory on " + host + ":" + portNumber);
+                    System.exit(-1);
+                }
+            }
+
         } finally {
+            if (receiver != null)
+                receiver.stopListening();
+            }
+
             logger.info("Shutting down..");
         }
-    }
 }
