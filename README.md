@@ -17,13 +17,16 @@ Using an OSC event to control LightFactory via LightFactory-OSC Proxy service
 
 Download Binary Files
 --------
+  * Windows executable support
+  * Self executing JAR file for other Operating Systems
   * https://bintray.com/pcross616/generic/lf-osc-proxy (https://dl.bintray.com/pcross616/generic/)
 
 
 Building LightFactory-OSC Proxy
 --------
+  * requires Java7 and Maven 3
   * `mvn clean package` - will create an all in one runnable jar file
-  * `java -jar lf-osc-proxy-0.2-SNAPSHOT-sharded.jar` - Will run the proxy and listen on 127.0.0.1:3100 for LF commands and 127.0.0.1:3200 for OSC events, use -? to determine flags to change bind address and port.
+  * `java -jar lf-osc-proxy-0.2-SNAPSHOT-shaded.jar` - Will run the proxy and listen on 127.0.0.1:3100 for LF commands and 127.0.0.1:3200 for OSC events, use -? to determine flags to change bind address and port.
  
 Command Line Options
 --------
