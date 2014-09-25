@@ -6,6 +6,7 @@ script: mvn test -Djava.net.preferIPv4Stack=true
 after_success:
   - sudo curl -T target/lf-osc-proxy-$PROJECT_VERSION.exe -upcross616:$BINTRAY_API_KEY https://api.bintray.com/content/pcross616/generic/lf-osc-proxy/$VERSION_NUMBER/lf-osc-proxy-$PROJECT_VERSION.exe;publish=1
   - sudo curl -T target/lf-osc-proxy-$PROJECT_VERSION-shaded.jar -upcross616:$BINTRAY_API_KEY https://api.bintray.com/content/pcross616/generic/lf-osc-proxy/$VERSION_NUMBER/lf-osc-proxy-$PROJECT_VERSION-shaded.jar;publish=1
+  - mvn clean cobertura:cobertura coveralls:cobertura
 env:
   global:
     - VERSION_NUMBER=0.2
