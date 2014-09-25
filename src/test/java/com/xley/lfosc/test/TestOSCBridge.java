@@ -63,6 +63,14 @@ public class TestOSCBridge extends TestCase {
         if (receiver != null) {
             receiver.close();
         }
+
+        mockServer = null;
+        mockThread = null;
+        server = null;
+        receiver = null;
+
+        System.gc();
+
         Thread.sleep(3000);
         super.tearDown();
     }
