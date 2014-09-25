@@ -19,7 +19,7 @@
  * under the License.
  */
 
-package com.xley.lfosc;
+package com.xley.lfosc.impl;
 
 import com.illposed.osc.OSCMessage;
 

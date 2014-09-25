@@ -19,7 +19,9 @@
  * under the License.
  */
 
-package com.xley.lfosc;
+package com.xley.lfosc.impl;
+
+import com.xley.lfosc.OSCProxy;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -47,17 +49,22 @@ public class OSCProxyThread extends Thread {
         ) {
             String inputLine, outputLine;
             OSCProxyProtocol opp = new OSCProxyProtocol();
-            while (socket.isConnected() && (inputLine = in.readLine()) != null) {
+            while (socket.isConnected() && in.ready() && (inputLine = in.readLine()) != null) {
                 inputLine = inputLine.trim();
                 OSCProxy.logger.trace(">> " + inputLine);
                 outputLine = opp.processLFRemoteCommand(inputLine);
                 out.println(outputLine);
                 OSCProxy.logger.trace("<< " + outputLine);
             }
-            socket.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            OSCProxy.logger.error("OSC Connection Error:", e);
         } finally {
+            if (socket != null) {
+                try {
+                    socket.close();
+                } catch (IOException e) {
+                }
+            }
             OSCProxy.logger.info("OSC connection disconnected. Remote Address: " + socket.getInetAddress().getHostAddress());
         }
     }

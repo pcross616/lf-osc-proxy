@@ -70,8 +70,8 @@ public class TestOSCBridge extends TestCase {
     public void testBridge() throws Exception {
         OSCPortOut oscPortOut = new OSCPortOut(InetAddress.getLoopbackAddress(), 3200);
         String[] args = {"bar","1234"};
-        OSCMessage mesg = new OSCMessage("/lf/localhost:3300/foo", Arrays.<Object>asList(args));
-        oscPortOut.send(mesg);
+        OSCMessage msg = new OSCMessage("/lf/localhost:3300/foo", Arrays.asList((Object[])args));
+        oscPortOut.send(msg);
         oscPortOut.close();
         Thread.sleep(5000);
         assertEquals("foo bar 1234", mockServer.getLastValue());

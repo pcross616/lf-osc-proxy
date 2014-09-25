@@ -19,11 +19,13 @@
  * under the License.
  */
 
-package com.xley.lfosc;
+package com.xley.lfosc.impl;
 
 import com.illposed.osc.OSCMessage;
 import com.illposed.osc.OSCPortOut;
+import com.xley.lfosc.OSCProxy;
 
+import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -81,8 +83,8 @@ public class OSCProxyProtocol {
         return "OSC Event Invalid! Syntax 'osc@address:port /container data'";
     }
 
-    Object convertToOSCType(String data) {
-        Object ret = data;
+    Object convertToOSCType(String data) throws UnsupportedEncodingException {
+        Object ret = new String(data.getBytes("UTF-8"));
         try {
             try {
                 ret = Integer.parseInt(data);

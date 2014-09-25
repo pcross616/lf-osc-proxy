@@ -36,7 +36,7 @@ public class TestOSCProxyServer implements Runnable {
     public void run() {
         try {
             OSCProxy.main(new String[]{"-d", "TRACE", "-m", mode});
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
