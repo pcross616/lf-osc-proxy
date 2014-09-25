@@ -21,11 +21,15 @@
 
 package com.xley.lfosc.test;
 
+import com.illposed.osc.OSCMessage;
 import com.illposed.osc.OSCPort;
 import com.illposed.osc.OSCPortIn;
 import junit.framework.TestCase;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.InputStreamReader;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
@@ -41,14 +45,19 @@ import java.net.Socket;
 public class TestOSCEvents extends TestCase {
     private Thread server = null;
     private OSCPortIn receiver = null;
+    private TestOSCListener listener = null;
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        server = new Thread(new TestOSCProxyServer("bridge"));
+        server = new Thread(new TestOSCProxyServer("bridge"), "Test Process - Server Thread");
         server.start();
         receiver = new OSCPortIn(new DatagramSocket(
                                  new InetSocketAddress(InetAddress.getLoopbackAddress(),OSCPort.defaultSCOSCPort())));
+
+        listener = new TestOSCListener();
+        receiver.addListener("/message/receiving", listener);
+        receiver.startListening();
 
         System.out.println("Waiting for servers to start... (5 sec)");
         Thread.sleep(5000);
@@ -59,25 +68,86 @@ public class TestOSCEvents extends TestCase {
 
         server.interrupt();
         if (receiver != null) {
+            receiver.stopListening();
             receiver.close();
         }
+
+        //clean up for gc
+        server = null;
+        receiver = null;
+        listener = null;
+        System.gc();
+
         Thread.sleep(3000);
         super.tearDown();
     }
 
     public void testOSCProxy() throws Exception {
-        TestOSCListener listener = new TestOSCListener();
-        receiver.addListener("/message/receiving", listener);
-        receiver.startListening();
-
         Socket clientSocket = null;
         DataOutputStream outToServer = null;
         try {
             clientSocket = new Socket(InetAddress.getLoopbackAddress(), 3100);
             outToServer = new DataOutputStream(clientSocket.getOutputStream());
-            String data = "osc@"+InetAddress.getLoopbackAddress().getHostAddress()+":" + OSCPort.defaultSCOSCPort() + " /message/receiving\n";
+            // *** TODO: Once https://github.com/hoijui/JavaOSC/pull/14 is resolved this above test OSC message will work
+            //String data = "osc@"+InetAddress.getLoopbackAddress().getHostAddress()+":" + OSCPort.defaultSCOSCPort() + " /message/receiving testoscproxy 123 0.222\n";
+            String data = "osc@"+InetAddress.getLoopbackAddress().getHostAddress()+":" + OSCPort.defaultSCOSCPort() + " /message/receiving testoscproxy 123 0.222 bar\n";
             outToServer.writeBytes(data);
-            Thread.sleep(100); // wait a bit
+        } finally {
+            if (outToServer != null) {
+                outToServer.close();
+            }
+            if (clientSocket != null) {
+                clientSocket.close();
+            }
+        }
+        Thread.sleep(2000); // wait a bit
+        assertEquals(listener.getMessages().size(), 1);
+        assertEquals(((OSCMessage)listener.getMessages().toArray()[0]).getArguments().get(0), "testoscproxy");
+    }
+
+    public void testInvalidOSCFormat() throws Exception {
+        Socket clientSocket = null;
+        DataOutputStream outToServer = null;
+        BufferedReader inFromServer = null;
+        try {
+            clientSocket = new Socket(InetAddress.getLoopbackAddress(), 3100);
+            outToServer = new DataOutputStream(clientSocket.getOutputStream());
+            inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            String data = "osc@"+InetAddress.getLoopbackAddress().getHostAddress()+":" + OSCPort.defaultSCOSCPort();
+            outToServer.writeBytes(data);
+            outToServer.flush();
+            clientSocket.shutdownOutput();
+
+            //wait
+            Thread.sleep(1000);
+
+            //did we get the error?
+            assertEquals(inFromServer.readLine(), "OSC Event Invalid! Syntax 'osc@address:port /container data'");
+
+        } finally {
+            if (inFromServer != null) {
+                inFromServer.close();
+            }
+            if (outToServer != null) {
+                outToServer.close();
+            }
+            if (clientSocket != null) {
+                clientSocket.close();
+            }
+        }
+
+        Thread.sleep(2000); // wait a bit
+        assertEquals(listener.getMessages().size(), 0);
+    }
+
+    public void testOSCBadEndpoint() throws Exception {
+        Socket clientSocket = null;
+        DataOutputStream outToServer = null;
+        try {
+            clientSocket = new Socket(InetAddress.getLoopbackAddress(), 3100);
+            outToServer = new DataOutputStream(clientSocket.getOutputStream());
+            String data = "osc@"+InetAddress.getLoopbackAddress().getHostAddress()+":9999" + " /message/receiving abc 123 0.222\n";
+            outToServer.writeBytes(data);
         } finally {
             if (outToServer != null) {
                 outToServer.close();
@@ -87,9 +157,7 @@ public class TestOSCEvents extends TestCase {
             }
         }
 
-        receiver.stopListening();
-        if (!listener.isMessageReceived()) {
-            fail("Message was not received");
-        }
+        Thread.sleep(2000); // wait a bit
+        assertEquals(listener.getMessages().size(), 0);
     }
 }

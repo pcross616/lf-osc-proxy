@@ -25,25 +25,19 @@ import com.illposed.osc.OSCListener;
 import com.illposed.osc.OSCMessage;
 import org.junit.Ignore;
 
-import java.util.Date;
+import java.util.*;
 
 @Ignore
 public class TestOSCListener implements OSCListener {
 
-    private boolean messageReceived = false;
-    private Date receivedTimestamp = null;
+    private List<OSCMessage> messages = new ArrayList<OSCMessage>();
 
-    public Date getReceivedTimestamp() {
-        return receivedTimestamp;
-    }
-
-    public boolean isMessageReceived() {
-        return messageReceived;
+    public Collection<OSCMessage> getMessages() {
+        return Collections.unmodifiableCollection(messages);
     }
 
     @Override
     public void acceptMessage(Date time, OSCMessage message) {
-        messageReceived = true;
-        receivedTimestamp = time;
+        messages.add(message);
     }
 }

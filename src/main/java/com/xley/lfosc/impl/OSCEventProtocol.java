@@ -19,10 +19,11 @@
  * under the License.
  */
 
-package com.xley.lfosc;
+package com.xley.lfosc.impl;
 
 import com.illposed.osc.OSCMessage;
 import com.illposed.osc.OSCPortOut;
+import com.xley.lfosc.OSCProxy;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
