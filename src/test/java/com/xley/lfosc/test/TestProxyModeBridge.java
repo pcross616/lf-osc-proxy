@@ -84,6 +84,7 @@ public class TestProxyModeBridge extends TestCase {
             //String data = "osc@"+InetAddress.getLoopbackAddress().getHostAddress()+":" + OSCPort.defaultSCOSCPort() + " /message/receiving testoscproxy 123 0.222\n";
             String data = "osc@"+InetAddress.getLoopbackAddress().getHostAddress()+":" + OSCPort.defaultSCOSCPort() + " /message/receiving testoscproxy 123 0.222 bar\n";
             outToServer.writeBytes(data);
+            clientSocket.shutdownOutput();
         } finally {
             if (outToServer != null) {
                 outToServer.close();
@@ -92,7 +93,7 @@ public class TestProxyModeBridge extends TestCase {
                 clientSocket.close();
             }
         }
-        Thread.sleep(2000); // wait a bit
+        Thread.sleep(3000); // wait a bit
         assertEquals(listener.getMessages().size(), 1);
         assertEquals(((OSCMessage)listener.getMessages().toArray()[0]).getArguments().get(0), "testoscproxy");
     }
