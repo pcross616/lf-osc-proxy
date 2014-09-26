@@ -18,17 +18,25 @@
  *  under the License.
  */
 
-package com.xley.lfosc.impl;
+package com.xley.lfosc.test.support;
 
-import com.illposed.osc.OSCMessage;
 
-import java.util.Date;
+import com.xley.lfosc.OSCProxy;
 
-public class OSCBridgeListener implements com.illposed.osc.OSCListener {
+import java.io.IOException;
+
+public class ProxyServerRunner implements Runnable {
+    private String mode = "both";
+    public ProxyServerRunner(String mode) {
+        this.mode=mode;
+    }
 
     @Override
-    public void acceptMessage(Date time, OSCMessage message) {
-        OSCEventProtocol eventProtocol = new OSCEventProtocol();
-        eventProtocol.processOSCEvent(message);
+    public void run() {
+        try {
+            OSCProxy.main(new String[]{"-d", "TRACE", "-m", mode});
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

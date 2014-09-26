@@ -18,17 +18,25 @@
  *  under the License.
  */
 
-package com.xley.lfosc.impl;
+package com.xley.lfosc.test.support;
 
+import com.illposed.osc.OSCListener;
 import com.illposed.osc.OSCMessage;
+import org.junit.Ignore;
 
-import java.util.Date;
+import java.util.*;
 
-public class OSCBridgeListener implements com.illposed.osc.OSCListener {
+@Ignore
+public class MockOSCListener implements OSCListener {
+
+    private List<OSCMessage> messages = new ArrayList<OSCMessage>();
+
+    public Collection<OSCMessage> getMessages() {
+        return Collections.unmodifiableCollection(messages);
+    }
 
     @Override
     public void acceptMessage(Date time, OSCMessage message) {
-        OSCEventProtocol eventProtocol = new OSCEventProtocol();
-        eventProtocol.processOSCEvent(message);
+        messages.add(message);
     }
 }
