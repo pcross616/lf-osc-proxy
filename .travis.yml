@@ -3,7 +3,7 @@ language: java
 before_install:
 - sudo apt-get -qq update
 - if [ `uname -m` = x86_64 ]; then sudo apt-get install -qq --force-yes libgd2-xpm
-  ia32-libs ia32-libs-multiarch > /dev/null; fi
+  ia32-libs ia32-libs-multiarch graphviz > /dev/null; fi
 
 script: mvn test -Djava.net.preferIPv4Stack=true
 

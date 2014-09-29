@@ -22,21 +22,25 @@ package com.xley.lfosc.test.support;
 
 
 import com.xley.lfosc.OSCProxy;
-
-import java.io.IOException;
+import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.PatternLayout;
 
 public class ProxyServerRunner implements Runnable {
+    static {
+        OSCProxy.logger.removeAllAppenders();
+        PatternLayout layout = new PatternLayout();
+        layout.setConversionPattern("[%p] (%t) %c[%M] - %m%n");
+        OSCProxy.logger.addAppender(new ConsoleAppender(layout));
+    }
+
     private String mode = "both";
+
     public ProxyServerRunner(String mode) {
-        this.mode=mode;
+        this.mode = mode;
     }
 
     @Override
     public void run() {
-        try {
-            OSCProxy.main(new String[]{"-d", "TRACE", "-m", mode});
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        new OSCProxy().execute(new String[]{"-d", "TRACE", "-m", mode});
     }
 }

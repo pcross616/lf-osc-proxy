@@ -20,30 +20,29 @@
 
 package com.xley.lfosc.test;
 
+import com.xley.lfosc.OSCProxy;
 import com.xley.lfosc.test.support.MockLightFactoryServer;
 import com.xley.lfosc.test.support.ProxyServerRunner;
-import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.DataOutputStream;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-/**
- * Created with IntelliJ IDEA.
- * User: crossleyp
- * Date: 4/24/14
- * Time: 11:19 PM
- * To change this template use File | Settings | File Templates.
- */
-public class TestProxyModeBoth extends TestCase {
+import static org.junit.Assert.assertEquals;
+
+
+public class TestProxyModeBoth {
     private Thread server = null;
     private ServerSocket receiver = null;
     private MockLightFactoryServer mockServer = null;
     private Thread mockThread = null;
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+
+    @Before
+    public void setUp() throws Exception {
         server = new Thread(new ProxyServerRunner("both"), "TestProxyMode - Both");
         server.start();
 
@@ -56,8 +55,8 @@ public class TestProxyModeBoth extends TestCase {
         Thread.sleep(5000);
     }
 
-    @Override
-    protected void tearDown() throws Exception {
+    @After
+    public void tearDown() throws Exception {
 
         mockThread.interrupt();
         mockServer.shutdown();
@@ -73,16 +72,16 @@ public class TestProxyModeBoth extends TestCase {
         receiver = null;
 
         System.gc();
-        super.tearDown();
     }
 
+    @Test
     public void testLoopback() throws Exception {
         Socket clientSocket = null;
         DataOutputStream outToServer = null;
         try {
             clientSocket = new Socket(InetAddress.getLoopbackAddress(), 3100);
             outToServer = new DataOutputStream(clientSocket.getOutputStream());
-            String data = "osc@"+InetAddress.getLoopbackAddress().getHostAddress()+":3200 /lf/"+InetAddress.getLoopbackAddress().getHostAddress()+":3300/loopback test\n";
+            String data = "osc@" + InetAddress.getLoopbackAddress().getHostAddress() + ":3200 /lf/" + InetAddress.getLoopbackAddress().getHostAddress() + ":3300/loopback test\n";
             outToServer.writeBytes(data);
         } finally {
             if (outToServer != null) {
@@ -94,5 +93,20 @@ public class TestProxyModeBoth extends TestCase {
         }
         Thread.sleep(2000); // wait a bit
         assertEquals("loopback test", mockServer.getLastValue());
+    }
+
+    @Test
+    public void testAlreadyRunning() throws Exception {
+        assertEquals(new OSCProxy().execute(new String[]{"-d", "TRACE"}), 2);
+    }
+
+    @Test
+    public void testHelpOptions() throws Exception {
+        assertEquals(new OSCProxy().execute(new String[]{"-?", "-d", "TRACE"}), 0);
+    }
+
+    @Test
+    public void testInvalidMode() throws Exception {
+        assertEquals(new OSCProxy().execute(new String[]{"-m", "foobar", "-d", "TRACE"}), 1);
     }
 }

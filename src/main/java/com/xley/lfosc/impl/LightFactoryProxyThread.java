@@ -25,19 +25,43 @@ import com.xley.lfosc.OSCProxy;
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.Charset;
+import java.text.MessageFormat;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class OSCProxyThread extends Thread {
-    private final static AtomicInteger count = new AtomicInteger();
+/**
+ * The main OSC proxy thread.
+ */
+public class LightFactoryProxyThread extends Thread {
+    /**
+     * The constant Resources.
+     */
+    public static final ResourceBundle resources = ResourceBundle.getBundle(LightFactoryProxyThread.class.
+                                                                            getSimpleName(), Locale.getDefault());
+    /**
+     * An atomic id for each thread instance.
+     */
+    private static final AtomicInteger count = new AtomicInteger();
+
+    /**
+     * Socket for this thread.
+     */
     private final Socket socket;
 
-    public OSCProxyThread(Socket socket) {
-        super("OSCProxyThread - " + count.incrementAndGet());
-        this.socket = socket;
+    /**
+     * Instantiates a new OSC proxy thread.
+     *
+     * @param connection the socket
+     */
+    public LightFactoryProxyThread(final Socket connection) {
+        super("LightFactoryProxyThread - " + count.incrementAndGet());
+        this.socket = connection;
     }
 
-    public void run() {
-        OSCProxy.logger.info("OSC connection established. Remote Address: " + socket.getInetAddress().getHostAddress());
+    public final void run() {
+        OSCProxy.logger.info(MessageFormat.format(resources.getString("osc.connection.established"),
+                                                                      socket.getInetAddress().getHostAddress()));
         try (
                 PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(),
                         Charset.defaultCharset()), true);
@@ -46,23 +70,25 @@ public class OSCProxyThread extends Thread {
                                 socket.getInputStream(), Charset.defaultCharset()))
         ) {
             String inputLine, outputLine;
-            OSCProxyProtocol opp = new OSCProxyProtocol();
+            LightFactoryProtocol opp = new LightFactoryProtocol();
             while (socket.isConnected() && in.ready() && (inputLine = in.readLine()) != null) {
                 inputLine = inputLine.trim();
                 OSCProxy.logger.trace(">> " + inputLine);
-                outputLine = opp.processLFRemoteCommand(inputLine);
+                outputLine = opp.process(inputLine);
                 out.println(outputLine);
                 OSCProxy.logger.trace("<< " + outputLine);
             }
         } catch (IOException e) {
-            OSCProxy.logger.error("OSC Connection Error:", e);
+            OSCProxy.logger.error(resources.getString("osc.connection.error"), e);
         } finally {
             try {
                 socket.close();
             } catch (IOException e) {
                 //do nothing
+                OSCProxy.logger.trace(e);
             }
-            OSCProxy.logger.info("OSC connection disconnected. Remote Address: " + socket.getInetAddress().getHostAddress());
+            OSCProxy.logger.info(MessageFormat.format(resources.getString("osc.connection.disconnected"),
+                                                                           socket.getInetAddress().getHostAddress()));
         }
     }
 }

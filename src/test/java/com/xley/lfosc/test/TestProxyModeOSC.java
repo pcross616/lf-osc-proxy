@@ -24,26 +24,24 @@ import com.illposed.osc.OSCMessage;
 import com.illposed.osc.OSCPortOut;
 import com.xley.lfosc.test.support.MockLightFactoryServer;
 import com.xley.lfosc.test.support.ProxyServerRunner;
-import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
-import java.net.*;
+import java.net.InetAddress;
+import java.net.ServerSocket;
 import java.util.Arrays;
 
-/**
- * Created with IntelliJ IDEA.
- * User: crossleyp
- * Date: 4/24/14
- * Time: 11:19 PM
- * To change this template use File | Settings | File Templates.
- */
-public class TestProxyModeOSC extends TestCase {
+import static org.junit.Assert.assertEquals;
+
+public class TestProxyModeOSC {
     private Thread server = null;
     private ServerSocket receiver = null;
     private MockLightFactoryServer mockServer = null;
     private Thread mockThread = null;
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+
+    @Before
+    public void setUp() throws Exception {
         server = new Thread(new ProxyServerRunner("osc"), "TestProxyMode - OSC");
         server.start();
 
@@ -56,8 +54,8 @@ public class TestProxyModeOSC extends TestCase {
         Thread.sleep(5000);
     }
 
-    @Override
-    protected void tearDown() throws Exception {
+    @After
+    public void tearDown() throws Exception {
 
         mockThread.interrupt();
         mockServer.shutdown();
@@ -73,13 +71,13 @@ public class TestProxyModeOSC extends TestCase {
         receiver = null;
 
         System.gc();
-        super.tearDown();
     }
 
+    @Test
     public void testOSCtoLFCommand() throws Exception {
         OSCPortOut oscPortOut = new OSCPortOut(InetAddress.getLoopbackAddress(), 3200);
-        String[] args = {"bar","1234"};
-        OSCMessage msg = new OSCMessage("/lf/localhost:3300/foo", Arrays.asList((Object[])args));
+        String[] args = {"bar", "1234"};
+        OSCMessage msg = new OSCMessage("/lf/localhost:3300/foo", Arrays.asList((Object[]) args));
         oscPortOut.send(msg);
         oscPortOut.close();
         Thread.sleep(5000);

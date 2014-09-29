@@ -23,9 +23,12 @@ package com.xley.lfosc.test;
 import com.illposed.osc.OSCMessage;
 import com.illposed.osc.OSCPort;
 import com.illposed.osc.OSCPortIn;
+import com.xley.lfosc.impl.LightFactoryProtocol;
 import com.xley.lfosc.test.support.MockOSCListener;
 import com.xley.lfosc.test.support.ProxyServerRunner;
-import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -35,18 +38,21 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
-public class TestProxyModeBridge extends TestCase {
+import static org.junit.Assert.assertEquals;
+
+public class TestProxyModeBridge {
     private Thread server = null;
     private OSCPortIn receiver = null;
     private MockOSCListener listener = null;
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-        server = new Thread(new ProxyServerRunner("bridge"), "TestProxyMode - Bridge");
+    @Before
+    public void setUp() throws Exception {
+        server = new Thread(new ProxyServerRunner("bridge"),
+                "TestProxyMode - Bridge");
         server.start();
         receiver = new OSCPortIn(new DatagramSocket(
-                                 new InetSocketAddress(InetAddress.getLoopbackAddress(),OSCPort.defaultSCOSCPort())));
+                new InetSocketAddress(InetAddress.getLoopbackAddress(),
+                        OSCPort.defaultSCOSCPort())));
 
         listener = new MockOSCListener();
         receiver.addListener("/message/receiving", listener);
@@ -56,8 +62,8 @@ public class TestProxyModeBridge extends TestCase {
         Thread.sleep(5000);
     }
 
-    @Override
-    protected void tearDown() throws Exception {
+    @After
+    public void tearDown() throws Exception {
 
         server.interrupt();
         if (receiver != null) {
@@ -71,9 +77,10 @@ public class TestProxyModeBridge extends TestCase {
         listener = null;
 
         System.gc();
-        super.tearDown();
     }
 
+
+    @Test
     public void testLFtoOSC() throws Exception {
         Socket clientSocket = null;
         DataOutputStream outToServer = null;
@@ -82,7 +89,9 @@ public class TestProxyModeBridge extends TestCase {
             outToServer = new DataOutputStream(clientSocket.getOutputStream());
             // *** TODO: Once https://github.com/hoijui/JavaOSC/pull/14 is resolved this above test OSC message will work
             //String data = "osc@"+InetAddress.getLoopbackAddress().getHostAddress()+":" + OSCPort.defaultSCOSCPort() + " /message/receiving testoscproxy 123 0.222\n";
-            String data = "osc@"+InetAddress.getLoopbackAddress().getHostAddress()+":" + OSCPort.defaultSCOSCPort() + " /message/receiving testoscproxy 123 0.222 bar\n";
+            String data = "osc@" + InetAddress.getLoopbackAddress().getHostAddress()
+                    + ":" + OSCPort.defaultSCOSCPort()
+                    + " /message/receiving testoscproxy 123 0.222 bar\n";
             outToServer.writeBytes(data);
             clientSocket.shutdownOutput();
         } finally {
@@ -95,9 +104,12 @@ public class TestProxyModeBridge extends TestCase {
         }
         Thread.sleep(3000); // wait a bit
         assertEquals(listener.getMessages().size(), 1);
-        assertEquals(((OSCMessage)listener.getMessages().toArray()[0]).getArguments().get(0), "testoscproxy");
+        assertEquals(((OSCMessage) listener.getMessages().toArray()[0])
+                .getArguments()
+                .get(0), "testoscproxy");
     }
 
+    @Test
     public void testInvalidFormatLFtoOSC() throws Exception {
         Socket clientSocket = null;
         DataOutputStream outToServer = null;
@@ -106,7 +118,8 @@ public class TestProxyModeBridge extends TestCase {
             clientSocket = new Socket(InetAddress.getLoopbackAddress(), 3100);
             outToServer = new DataOutputStream(clientSocket.getOutputStream());
             inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            String data = "osc@"+InetAddress.getLoopbackAddress().getHostAddress()+":" + OSCPort.defaultSCOSCPort();
+            String data = "osc@" + InetAddress.getLoopbackAddress().getHostAddress()
+                    + ":" + OSCPort.defaultSCOSCPort();
             outToServer.writeBytes(data);
             outToServer.flush();
             clientSocket.shutdownOutput();
@@ -115,7 +128,8 @@ public class TestProxyModeBridge extends TestCase {
             Thread.sleep(1000);
 
             //did we get the error?
-            assertEquals(inFromServer.readLine(), "OSC Event Invalid! Syntax 'osc@address:port /container data'");
+            assertEquals(inFromServer.readLine(),
+                    LightFactoryProtocol.resources.getString("lf.osc.error.invalid"));
 
         } finally {
             if (inFromServer != null) {
@@ -133,13 +147,15 @@ public class TestProxyModeBridge extends TestCase {
         assertEquals(listener.getMessages().size(), 0);
     }
 
+    @Test
     public void testLFtoOSCBadEndpoint() throws Exception {
         Socket clientSocket = null;
         DataOutputStream outToServer = null;
         try {
             clientSocket = new Socket(InetAddress.getLoopbackAddress(), 3100);
             outToServer = new DataOutputStream(clientSocket.getOutputStream());
-            String data = "osc@"+InetAddress.getLoopbackAddress().getHostAddress()+":9999" + " /message/receiving abc 123 0.222\n";
+            String data = "osc@" + InetAddress.getLoopbackAddress().getHostAddress()
+                    + ":9999" + " /message/receiving abc 123 0.222\n";
             outToServer.writeBytes(data);
         } finally {
             if (outToServer != null) {

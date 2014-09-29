@@ -23,16 +23,39 @@ package com.xley.lfosc.impl;
 import com.illposed.osc.OSCMessage;
 import com.xley.lfosc.OSCProxy;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.Socket;
 import java.nio.charset.Charset;
+import java.text.MessageFormat;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
-public class OSCEventProtocol {
+/**
+ * The type OSC event protocol.
+ */
+public class OSCProtocol {
+    /**
+     * The constant Resources.
+     */
+    public static final ResourceBundle Resources = ResourceBundle.getBundle(OSCProtocol.class.getSimpleName(),
+                                                                            Locale.getDefault());
 
-    public void processOSCEvent(OSCMessage message) {
+    /**
+     * The address part of the osc event.
+     */
+    private static final int PART_ADDRESS = 2;
+    /**
+     * The command part of the osc event.
+     */
+    private static final int PART_CMD = 3;
+
+    /**
+     * Process an incoming OSC event.
+     * <br><b>Example OSC message:</b> <i>/lf/&lt;ipaddress:port&gt;/&lt;cmd&gt; arguments</i>
+     *
+     * @param message the message to be processed
+     */
+    protected final void process(final OSCMessage message) {
         /**
          * 1. parse message syntax
          *   /lf/<ipaddress:port/<cmd> arguments
@@ -40,19 +63,17 @@ public class OSCEventProtocol {
 
         try {
             String[] parts = message.getAddress().split("/");
-            String[] address = parts[2].split(":");
-            String cmd = parts[3];
+            String[] address = parts[PART_ADDRESS].split(":");
+            String cmd = parts[PART_CMD];
 
             Socket clientSocket = null;
             try {
+                OSCProxy.logger.debug(MessageFormat.format(Resources.getString("osc.lf.port.connect"), address[1]));
                 clientSocket = new Socket(address[0], Integer.parseInt(address[1]));
-                OSCProxy.logger.debug("Opened, OSC Event Bridge port out send to LF -> " + clientSocket.toString());
                 DataOutputStream outToLF = new DataOutputStream(clientSocket.getOutputStream());
-                BufferedReader inFromLF = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(), Charset.defaultCharset()));
+                BufferedReader inFromLF = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(),
+                                                                                    Charset.defaultCharset()));
 
-                if (inFromLF.ready()) {
-                    OSCProxy.logger.debug(" << [" + clientSocket.toString() + "] - " + inFromLF.readLine());
-                }
                 StringBuilder send = new StringBuilder(cmd);
                 for (Object arg : message.getArguments()) {
                     send.append(" ").append(arg);
@@ -61,24 +82,26 @@ public class OSCEventProtocol {
                 outToLF.writeBytes(send + "\n");
                 //we are done writing
                 clientSocket.shutdownOutput();
-
                 while (inFromLF.ready()) {
                     OSCProxy.logger.trace(" << [" + clientSocket.toString() + "] - " + inFromLF.readLine());
                 }
+                clientSocket.shutdownInput();
+
             } catch (IOException e) {
-                OSCProxy.logger.error("OSC Event Bridge Error!", e);
+                OSCProxy.logger.error(Resources.getString("osc.lf.error"), e);
             } finally {
                 if (clientSocket != null) {
                     try {
-                        OSCProxy.logger.debug("Closed, OSC Event Bridge port out send to LF -> " + clientSocket.toString());
+                        OSCProxy.logger.debug(MessageFormat.format(Resources.getString("osc.lf.port.close"),
+                                                                   address[1]));
                         clientSocket.close();
                     } catch (IOException e) {
-                        //do nothing
+                        OSCProxy.logger.trace(e);
                     }
                 }
             }
         } catch (Throwable throwable) {
-            OSCProxy.logger.error("OSC Event Protocol Error!", throwable);
+            OSCProxy.logger.error(Resources.getString("osc.lf.error"), throwable);
         }
     }
 }

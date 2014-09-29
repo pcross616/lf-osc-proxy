@@ -28,10 +28,23 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
+/**
+ * The primary OSC proxy class.
+ */
 public class OSCProxy {
 
+    /**
+     * The constant logger.
+     */
     public static final Logger logger = Logger.getLogger(OSCProxy.class);
+    /**
+     * The constant Resources.
+     */
+    public static final ResourceBundle resources = ResourceBundle.getBundle(OSCProxy.class.getSimpleName(),
+                                                                            Locale.getDefault());
 
     static {
         PatternLayout layout = new PatternLayout();
@@ -39,34 +52,66 @@ public class OSCProxy {
         logger.addAppender(new ConsoleAppender(layout));
     }
 
-    public static void main(String[] args) throws IOException {
+    /**
+     * Instantiates a new OSC proxy.
+     */
+    public OSCProxy() {
+    }
+
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
+    public static void main(final String[] args) {
+        System.exit(new OSCProxy().execute(args));
+    }
+
+    /**
+     * Execution workflow for LightFactory-OSC Proxy.
+     *
+     * @param args the args normally from the command line
+     * @return the error code of the exiting process
+     */
+    public final int execute(final String[] args) {
         OptionParser parser = new OptionParser() {
             {
                 accepts("p").withOptionalArg().ofType(Integer.class)
-                        .describedAs("bind port").defaultsTo(3100);
+                        .describedAs(resources.getString("option.lf.port.desc"))
+                        .defaultsTo(Integer.parseInt(resources.getString("option.lf.port.default")));
                 accepts("l").withOptionalArg().ofType(Integer.class)
-                        .describedAs("osc bind port").defaultsTo(3200);
+                        .describedAs(resources.getString("option.osc.port.desc"))
+                        .defaultsTo(Integer.parseInt(resources.getString("option.osc.port.default")));
                 accepts("m").withOptionalArg().ofType(String.class)
-                        .describedAs("Proxy mode (osc | bridge | both)").defaultsTo("both");
+                        .describedAs(resources.getString("option.mode.desc"))
+                        .defaultsTo(resources.getString("option.mode.default"));
                 accepts("b").withOptionalArg().ofType(String.class)
-                        .describedAs("bind address").defaultsTo("127.0.0.1");
+                        .describedAs(resources.getString("option.bind.address.desc"))
+                        .defaultsTo(resources.getString("option.bind.address.default"));
                 accepts("t").withOptionalArg().ofType(Integer.class)
-                        .describedAs("max number of socket threads").defaultsTo(100);
-                accepts("d").withOptionalArg().ofType(String.class).describedAs("FATAL|ERROR|WARN|INFO|DEBUG|TRACE");
-                accepts("?").withOptionalArg().describedAs("This help message");
+                        .describedAs(resources.getString("option.socket.threads.desc"))
+                        .defaultsTo(Integer.parseInt(resources.getString("option.socket.threads.default")));
+                accepts("d").withOptionalArg().ofType(String.class)
+                        .describedAs(resources.getString("option.verbosity.desc"));
+                accepts("?").withOptionalArg().describedAs(resources.getString("option.help.desc"));
             }
         };
         OptionSet options = parser.parse(args);
         if (options.has("?")) {
-            System.out.println("LightFactory OSC Proxy Service");
-            parser.printHelpOn(System.out);
-            System.exit(0);
+            System.out.println(resources.getString("console.header.1"));
+            try {
+                parser.printHelpOn(System.out);
+            } catch (IOException e) {
+                logger.error(e);
+            }
+            return 0;
         }
 
-        System.out.println("LightFactory-OSC Proxy Service, Copyright 2014 - Peter Crossley (xley.com)\nUse CTRL-C to shutdown the service or for more help use -?\n");
+        System.out.println(resources.getString("console.header.1"));
+        System.out.println(resources.getString("console.header.2"));
 
         if (options.has("d")) {
-            logger.setLevel(Level.toLevel((String) options.valueOf("d")));
+            logger.setLevel(Level.toLevel(((String) options.valueOf("d")).toUpperCase()));
         }
 
         //start the main thread
@@ -75,13 +120,15 @@ public class OSCProxy {
         mainThread.setDaemon(true);
         mainThread.start();
 
-        while (true) {
+        while (mainThread.isAlive()) {
             if (Thread.interrupted()) {
                 daemon.shutdown();
                 break;
             }
         }
 
-        logger.info("Shutdown Complete.");
+        logger.info(resources.getString("shutdown.complete"));
+        return daemon.errorcode();
     }
+
 }
