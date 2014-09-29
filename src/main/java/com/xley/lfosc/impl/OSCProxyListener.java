@@ -24,11 +24,14 @@ import com.illposed.osc.OSCMessage;
 
 import java.util.Date;
 
-public class OSCBridgeListener implements com.illposed.osc.OSCListener {
+/**
+ * The type OSC bridge listener.
+ */
+public class OSCProxyListener implements com.illposed.osc.OSCListener {
 
     @Override
-    public void acceptMessage(Date time, OSCMessage message) {
-        OSCEventProtocol eventProtocol = new OSCEventProtocol();
-        eventProtocol.processOSCEvent(message);
+    public final void acceptMessage(final Date time, final OSCMessage message) {
+        OSCProtocol eventProtocol = new OSCProtocol();
+        eventProtocol.process(message);
     }
 }

@@ -29,9 +29,10 @@ import java.net.Socket;
 public class MockLightFactoryThread extends Thread {
     protected volatile String lastValue;
     private Socket socket;
+
     public MockLightFactoryThread(Socket socket) {
         super();
-        this.socket=socket;
+        this.socket = socket;
     }
 
     @Override
@@ -44,17 +45,23 @@ public class MockLightFactoryThread extends Thread {
                         new InputStreamReader(
                                 socket.getInputStream()))
         ) {
-            String inputLine;
+            long timeout=System.currentTimeMillis();
             outToClient.writeBytes("Mock LightFactory Server: CONNECT\n");
-            while (socket.isConnected() && (inputLine = in.readLine()) != null) {
-                lastValue = inputLine.trim();
-                outToClient.writeBytes("OK I got - " + lastValue + "\n");
+            while (socket.isConnected() && System.currentTimeMillis() - timeout <= 5000 && lastValue == null) {
+                while (in.ready()) {
+                    String inputLine = in.readLine();
+                    if (inputLine != null) {
+                        lastValue = inputLine.trim();
+                        outToClient.writeBytes("OK I got - " + lastValue + "\n");
+                    }
+                    lastValue = inputLine;
+                    timeout=System.currentTimeMillis();
+                }
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             try {
                 socket.close();
                 socket = null;

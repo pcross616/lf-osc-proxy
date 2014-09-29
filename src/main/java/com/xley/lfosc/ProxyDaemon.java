@@ -21,37 +21,75 @@
 package com.xley.lfosc;
 
 import com.illposed.osc.OSCPortIn;
-import com.xley.lfosc.impl.OSCBridgeListener;
-import com.xley.lfosc.impl.OSCProxyThread;
+import com.xley.lfosc.impl.LightFactoryProxyThread;
+import com.xley.lfosc.impl.OSCProxyListener;
 import joptsimple.OptionSet;
 
 import java.io.IOException;
 import java.net.*;
+import java.text.MessageFormat;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import static com.xley.lfosc.OSCProxy.logger;
 
-public class ProxyDaemon implements Runnable {
-    //configuration
-    private OptionSet options;
 
+/**
+ * The type Proxy daemon.
+ */
+public class ProxyDaemon implements Runnable {
+
+    /**
+     * The constant Resources.
+     */
+    public static final ResourceBundle resources = ResourceBundle.getBundle(ProxyDaemon.class.getSimpleName(),
+                                                                            Locale.getDefault());
+    private final Object monitor = true;
+
+    //configuration
+    private final OptionSet options;
     //daemon vars
     private Boolean shutdown = false;
     private Thread runner;
+    private int errorcode = 0;
 
     //connections
     private ServerSocket serverSocket;
     private OSCPortIn receiver = null;
 
 
-    ProxyDaemon(OptionSet options) {
-        this.options = options;
+    /**
+     * Instantiates a new Proxy daemon.
+     *
+     * @param optionSet the options from the command line
+     */
+    protected ProxyDaemon(final OptionSet optionSet) {
+        this.options = optionSet;
     }
 
-    public void shutdown() {
-        logger.info("Shutting down...");
+    /**
+     * Get the current error code.
+     *
+     * @return the error code
+     */
+    public final int errorcode() {
+        return this.errorcode;
+    }
+
+    /**
+     * Shutdown the OSC proxy.
+     */
+    public final void shutdown() {
+        synchronized (monitor) {
+            if (shutdown) {
+                return;
+            }
+        }
         shutdown = true;
+        logger.info(resources.getString("shutdown.inprogress"));
         runner.interrupt();
         if (receiver != null) {
+            receiver.stopListening();
             receiver.close();
         }
         if (serverSocket != null) {
@@ -65,7 +103,7 @@ public class ProxyDaemon implements Runnable {
     }
 
     @Override
-    public void run() {
+    public final void run() {
         runner = Thread.currentThread();
 
         int portNumber = (int) options.valueOf("p");
@@ -86,7 +124,8 @@ public class ProxyDaemon implements Runnable {
             case "both":
                 break;
             default:
-                logger.error("LightFactory-OSC Proxy mode invalid.  Use -? for more help.");
+                logger.error(resources.getString("options.mode.invalid"));
+                errorcode = 1;
                 shutdown();
                 return;
         }
@@ -95,15 +134,15 @@ public class ProxyDaemon implements Runnable {
 
         try {
             //bindings
-            OSCBridgeListener listener;
+            OSCProxyListener listener;
             InetSocketAddress binding = new InetSocketAddress(InetAddress.getByName(host), portNumber);
             InetSocketAddress oscBinding = new InetSocketAddress(InetAddress.getByName(host), oscPortNumber);
 
             if (oscEnabled) {
-                logger.info("Listening for OSC Events on " + host + ":" + oscPortNumber);
+                logger.info(MessageFormat.format(resources.getString("osc.listener.on"), host, oscPortNumber));
                 receiver = new OSCPortIn(new DatagramSocket(oscBinding));
-                listener = new OSCBridgeListener();
-                receiver.addListener("/lf/*/*", listener);
+                listener = new OSCProxyListener();
+                receiver.addListener(resources.getString("osc.listener.binding"), listener);
                 receiver.startListening();
 
                 //check to see if we are the only listener to run.
@@ -119,24 +158,28 @@ public class ProxyDaemon implements Runnable {
             if (lfBridgeEnabled) {
                 try {
                     serverSocket = new ServerSocket(binding.getPort(), threads, binding.getAddress());
-                    logger.info("Listening for LightFactory connection on " + host + ":" + portNumber);
+                    logger.info(MessageFormat.format(resources.getString("lf.listener.on"), host, portNumber));
                     while (!shutdown && !Thread.currentThread().isInterrupted()) {
-                        new OSCProxyThread(serverSocket.accept()).start();
+                        new LightFactoryProxyThread(serverSocket.accept()).start();
                     }
                 } catch (IOException e) {
                     if (!shutdown) {
-                        logger.fatal("Could not listen for LightFactory on " + host + ":" + portNumber, e);
+                        logger.fatal(MessageFormat.format(resources.getString("lf.listener.on.error"),
+                                                                              host, portNumber), e);
+                        errorcode = 2;
                     }
                 }
             }
 
         } catch (UnknownHostException e) {
-            logger.fatal("LightFactory - OSC Proxy unable to bind to host [" + host + "]", e);
+            logger.fatal(MessageFormat.format(resources.getString("daemon.error.unknown.host"), host), e);
+            errorcode = 2;
         } catch (SocketException e) {
-            logger.fatal("LightFactory - OSC Proxy unable to bind to socket.", e);
+            logger.fatal(MessageFormat.format(resources.getString("daemon.error.socket"), host), e);
+            logger.fatal("", e);
+            errorcode = 2;
         } finally {
-            if (receiver != null)
-                receiver.stopListening();
+            shutdown();
         }
     }
 }
