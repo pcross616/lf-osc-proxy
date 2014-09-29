@@ -83,6 +83,7 @@ public class TestProxyModeBoth {
             outToServer = new DataOutputStream(clientSocket.getOutputStream());
             String data = "osc@" + InetAddress.getLoopbackAddress().getHostAddress() + ":3200 /lf/" + InetAddress.getLoopbackAddress().getHostAddress() + ":3300/loopback test\n";
             outToServer.writeBytes(data);
+            Thread.sleep(2000); // wait a bit
         } finally {
             if (outToServer != null) {
                 outToServer.close();
@@ -91,7 +92,6 @@ public class TestProxyModeBoth {
                 clientSocket.close();
             }
         }
-        Thread.sleep(2000); // wait a bit
         assertEquals("loopback test", mockServer.getLastValue());
     }
 
