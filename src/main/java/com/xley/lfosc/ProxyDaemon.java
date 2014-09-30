@@ -40,7 +40,7 @@ import static com.xley.lfosc.OSCProxy.logger;
 public class ProxyDaemon implements Runnable {
 
     /**
-     * The constant Resources.
+     * The constant resources.
      */
     public static final ResourceBundle resources = ResourceBundle.getBundle(ProxyDaemon.class.getSimpleName(),
                                                                             Locale.getDefault());

@@ -46,16 +46,23 @@ public class MockLightFactoryThread extends Thread {
                                 socket.getInputStream()))
         ) {
             long timeout=System.currentTimeMillis();
-            outToClient.writeBytes("Mock LightFactory Server: CONNECT\n");
-            while (socket.isConnected() && System.currentTimeMillis() - timeout <= 5000 && lastValue == null) {
-                while (in.ready()) {
-                    String inputLine = in.readLine();
-                    if (inputLine != null) {
-                        lastValue = inputLine.trim();
-                        outToClient.writeBytes("OK I got - " + lastValue + "\n");
+            if (socket.isConnected()) {
+                outToClient.writeBytes("LightFactory remote command interface on MOCK-SERVER\n" +
+                        "\n" +
+                        ".\n" +
+                        "LightFactory Telnet Server\n" +
+                        "\n" +
+                        ">\n");
+                while (socket.isConnected() && System.currentTimeMillis() - timeout <= 5000 && lastValue == null) {
+                    while (in.ready()) {
+                        String inputLine = in.readLine();
+                        if (inputLine != null) {
+                            lastValue = inputLine.trim();
+                            outToClient.writeBytes(">" + lastValue + " : Success\n>\n");
+                        }
+                        lastValue = inputLine;
+                        timeout = System.currentTimeMillis();
                     }
-                    lastValue = inputLine;
-                    timeout=System.currentTimeMillis();
                 }
             }
 

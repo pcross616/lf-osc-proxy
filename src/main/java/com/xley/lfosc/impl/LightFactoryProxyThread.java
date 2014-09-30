@@ -35,7 +35,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class LightFactoryProxyThread extends Thread {
     /**
-     * The constant Resources.
+     * The constant resources.
      */
     public static final ResourceBundle resources = ResourceBundle.getBundle(LightFactoryProxyThread.class.
                                                                             getSimpleName(), Locale.getDefault());
@@ -61,7 +61,7 @@ public class LightFactoryProxyThread extends Thread {
 
     public final void run() {
         OSCProxy.logger.info(MessageFormat.format(resources.getString("osc.connection.established"),
-                                                                      socket.getInetAddress().getHostAddress()));
+                                                                      socket.getInetAddress()));
         try (
                 PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(),
                         Charset.defaultCharset()), true);
@@ -71,7 +71,7 @@ public class LightFactoryProxyThread extends Thread {
         ) {
             String inputLine, outputLine;
             LightFactoryProtocol opp = new LightFactoryProtocol();
-            while (socket.isConnected() && in.ready() && (inputLine = in.readLine()) != null) {
+            while (socket.isConnected() && (inputLine = in.readLine()) != null) {
                 inputLine = inputLine.trim();
                 OSCProxy.logger.trace(">> " + inputLine);
                 outputLine = opp.process(inputLine);

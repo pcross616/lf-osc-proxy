@@ -41,7 +41,7 @@ import java.util.regex.Pattern;
  */
 public class LightFactoryProtocol {
     /**
-     * The constant Resources.
+     * The constant resources.
      */
     public static final ResourceBundle resources = ResourceBundle.getBundle(LightFactoryProtocol.class.getSimpleName(),
             Locale.getDefault());
@@ -106,7 +106,6 @@ public class LightFactoryProtocol {
                     OSCProxy.logger.debug(MessageFormat.format(resources.getString("lf.osc.port.connect"),
                             address, port));
 
-                    oscPortOut = new OSCPortOut(InetAddress.getByName(address), port);
                     OSCMessage message = new OSCMessage(container);
 
                     if (data != null && data.length() > 0) {
@@ -115,9 +114,13 @@ public class LightFactoryProtocol {
                             message.addArgument(convertToOSCType(dataMatches.group(2)));
                         }
                     }
+
                     OSCProxy.logger.debug(MessageFormat.format(resources.getString("lf.osc.port.send"),
                             message.getAddress(), String.valueOf(message.getArguments()),
                             address, port));
+
+                    //send the packet
+                    oscPortOut = new OSCPortOut(InetAddress.getByName(address), port);
                     oscPortOut.send(message);
                     sent = true;
                 } finally {
