@@ -45,7 +45,7 @@
 <a class="jxr_linenumber" name="35" href="#35">35</a>  <em class="jxr_javadoccomment"> */</em>
 <a class="jxr_linenumber" name="36" href="#36">36</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../com/xley/lfosc/impl/LightFactoryProxyThread.html">LightFactoryProxyThread</a> <strong class="jxr_keyword">extends</strong> Thread {
 <a class="jxr_linenumber" name="37" href="#37">37</a>      <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="38" href="#38">38</a>  <em class="jxr_javadoccomment">     * The constant Resources.</em>
+<a class="jxr_linenumber" name="38" href="#38">38</a>  <em class="jxr_javadoccomment">     * The constant resources.</em>
 <a class="jxr_linenumber" name="39" href="#39">39</a>  <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="40" href="#40">40</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> ResourceBundle resources = ResourceBundle.getBundle(LightFactoryProxyThread.<strong class="jxr_keyword">class</strong>.
 <a class="jxr_linenumber" name="41" href="#41">41</a>                                                                              getSimpleName(), Locale.getDefault());
@@ -71,7 +71,7 @@
 <a class="jxr_linenumber" name="61" href="#61">61</a>  
 <a class="jxr_linenumber" name="62" href="#62">62</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">void</strong> run() {
 <a class="jxr_linenumber" name="63" href="#63">63</a>          OSCProxy.logger.info(MessageFormat.format(resources.getString(<span class="jxr_string">"osc.connection.established"</span>),
-<a class="jxr_linenumber" name="64" href="#64">64</a>                                                                        socket.getInetAddress().getHostAddress()));
+<a class="jxr_linenumber" name="64" href="#64">64</a>                                                                        socket.getInetAddress()));
 <a class="jxr_linenumber" name="65" href="#65">65</a>          <strong class="jxr_keyword">try</strong> (
 <a class="jxr_linenumber" name="66" href="#66">66</a>                  PrintWriter out = <strong class="jxr_keyword">new</strong> PrintWriter(<strong class="jxr_keyword">new</strong> OutputStreamWriter(socket.getOutputStream(),
 <a class="jxr_linenumber" name="67" href="#67">67</a>                          Charset.defaultCharset()), <strong class="jxr_keyword">true</strong>);
@@ -81,7 +81,7 @@
 <a class="jxr_linenumber" name="71" href="#71">71</a>          ) {
 <a class="jxr_linenumber" name="72" href="#72">72</a>              String inputLine, outputLine;
 <a class="jxr_linenumber" name="73" href="#73">73</a>              <a href="../../../../com/xley/lfosc/impl/LightFactoryProtocol.html">LightFactoryProtocol</a> opp = <strong class="jxr_keyword">new</strong> <a href="../../../../com/xley/lfosc/impl/LightFactoryProtocol.html">LightFactoryProtocol</a>();
-<a class="jxr_linenumber" name="74" href="#74">74</a>              <strong class="jxr_keyword">while</strong> (socket.isConnected() &amp;&amp; in.ready() &amp;&amp; (inputLine = in.readLine()) != <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="74" href="#74">74</a>              <strong class="jxr_keyword">while</strong> (socket.isConnected() &amp;&amp; (inputLine = in.readLine()) != <strong class="jxr_keyword">null</strong>) {
 <a class="jxr_linenumber" name="75" href="#75">75</a>                  inputLine = inputLine.trim();
 <a class="jxr_linenumber" name="76" href="#76">76</a>                  OSCProxy.logger.trace(<span class="jxr_string">"&gt;&gt; "</span> + inputLine);
 <a class="jxr_linenumber" name="77" href="#77">77</a>                  outputLine = opp.process(inputLine);
