@@ -41,7 +41,7 @@ public class OSCProxy {
      */
     public static final Logger logger = Logger.getLogger(OSCProxy.class);
     /**
-     * The constant Resources.
+     * The constant resources.
      */
     public static final ResourceBundle resources = ResourceBundle.getBundle(OSCProxy.class.getSimpleName(),
                                                                             Locale.getDefault());
