@@ -46,7 +46,7 @@ under the License.
           <tbody>
                           <tr>
                 <td>
-                  <a href="https://github.com/pcross616/lf-osc-proxy#readme/checkstyle.html#ProxyDaemon_en.properties">ProxyDaemon_en.properties</a>
+                  <a href="https://github.com/pcross616/lf-osc-proxy#readme/checkstyle.html#OSCProxy_en.properties">OSCProxy_en.properties</a>
                 </td>
                 <td>
                   0
@@ -60,7 +60,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/pcross616/lf-osc-proxy#readme/checkstyle.html#OSCProxy_en.properties">OSCProxy_en.properties</a>
+                  <a href="https://github.com/pcross616/lf-osc-proxy#readme/checkstyle.html#ProxyDaemon_en.properties">ProxyDaemon_en.properties</a>
                 </td>
                 <td>
                   0
@@ -102,7 +102,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/pcross616/lf-osc-proxy#readme/checkstyle.html#com.xley.lfosc.impl.OSCProtocol.java">com/xley/lfosc/impl/OSCProtocol.java</a>
+                  <a href="https://github.com/pcross616/lf-osc-proxy#readme/checkstyle.html#com.xley.lfosc.ProxyDaemon.java">com/xley/lfosc/ProxyDaemon.java</a>
                 </td>
                 <td>
                   0
@@ -111,7 +111,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  2
+                  9
                 </td>
               </tr>
                           <tr>
@@ -130,7 +130,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/pcross616/lf-osc-proxy#readme/checkstyle.html#com.xley.lfosc.ProxyDaemon.java">com/xley/lfosc/ProxyDaemon.java</a>
+                  <a href="https://github.com/pcross616/lf-osc-proxy#readme/checkstyle.html#com.xley.lfosc.impl.OSCProtocol.java">com/xley/lfosc/impl/OSCProtocol.java</a>
                 </td>
                 <td>
                   0
@@ -139,7 +139,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  10
+                  2
                 </td>
               </tr>
                           <tr>
@@ -153,7 +153,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  2
+                  3
                 </td>
               </tr>
                           <tr>
@@ -181,7 +181,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  5
+                  6
                 </td>
               </tr>
                           <tr>
@@ -195,7 +195,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  5
+                  4
                 </td>
               </tr>
                       </tbody>

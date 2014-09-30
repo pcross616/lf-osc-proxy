@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// com.xley.lfosc.impl.OSCProxyListener
-	c50 [label=<<table title="com.xley.lfosc.impl.OSCProxyListener" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./OSCProxyListener.html">
+	c51 [label=<<table title="com.xley.lfosc.impl.OSCProxyListener" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./OSCProxyListener.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> OSCProxyListener </td></tr>
 		</table></td></tr>
@@ -23,7 +23,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="./OSCProxyListener.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.xley.lfosc.impl.OSCProxyListener implements com.illposed.osc.OSCListener
-	c52:p -> c50:p [dir=back,arrowtail=empty,style=dashed];
+	c52:p -> c51:p [dir=back,arrowtail=empty,style=dashed];
 	// com.illposed.osc.OSCListener
 	c52 [label=<<table title="com.illposed.osc.OSCListener" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/com/illposed/osc/OSCListener.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
