@@ -27,12 +27,13 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 
 public class MockLightFactoryThread extends Thread {
-    protected volatile String lastValue;
+    protected MockLightFactoryServer server;
     private Socket socket;
 
-    public MockLightFactoryThread(Socket socket) {
+    public MockLightFactoryThread(Socket socket, MockLightFactoryServer server) {
         super();
         this.socket = socket;
+        this.server = server;
     }
 
     @Override
@@ -41,10 +42,9 @@ public class MockLightFactoryThread extends Thread {
 
         try (
                 DataOutputStream outToClient = new DataOutputStream(socket.getOutputStream());
-                BufferedReader in = new BufferedReader(
-                        new InputStreamReader(
-                                socket.getInputStream()))
-        ) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))
+        )
+        {
             long timeout=System.currentTimeMillis();
             if (socket.isConnected()) {
                 outToClient.writeBytes("LightFactory remote command interface on MOCK-SERVER\n" +
@@ -53,14 +53,14 @@ public class MockLightFactoryThread extends Thread {
                         "LightFactory Telnet Server\n" +
                         "\n" +
                         ">\n");
-                while (socket.isConnected() && System.currentTimeMillis() - timeout <= 5000 && lastValue == null) {
+                while (socket.isConnected() && System.currentTimeMillis() - timeout <= 5000 && server.lastValue == null) {
                     while (in.ready()) {
                         String inputLine = in.readLine();
                         if (inputLine != null) {
-                            lastValue = inputLine.trim();
-                            outToClient.writeBytes(">" + lastValue + " : Success\n>\n");
+                            inputLine = inputLine.trim();
+                            outToClient.writeBytes("> " +inputLine + " : Success\n>\n");
+                            server.lastValue = inputLine;
                         }
-                        lastValue = inputLine;
                         timeout = System.currentTimeMillis();
                     }
                 }

@@ -20,7 +20,7 @@
 
 package com.xley.lfosc.impl;
 
-import com.xley.lfosc.OSCProxy;
+import com.xley.lfosc.util.LogUtil;
 
 import java.io.*;
 import java.net.Socket;
@@ -38,7 +38,7 @@ public class LightFactoryProxyThread extends Thread {
      * The constant resources.
      */
     public static final ResourceBundle resources = ResourceBundle.getBundle(LightFactoryProxyThread.class.
-                                                                            getSimpleName(), Locale.getDefault());
+            getSimpleName(), Locale.getDefault());
     /**
      * An atomic id for each thread instance.
      */
@@ -60,8 +60,8 @@ public class LightFactoryProxyThread extends Thread {
     }
 
     public final void run() {
-        OSCProxy.logger.info(MessageFormat.format(resources.getString("osc.connection.established"),
-                                                                      socket.getInetAddress()));
+        LogUtil.info(this.getClass(), MessageFormat.format(resources.getString("osc.connection.established"),
+                socket.getInetAddress()));
         try (
                 PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(),
                         Charset.defaultCharset()), true);
@@ -71,24 +71,24 @@ public class LightFactoryProxyThread extends Thread {
         ) {
             String inputLine, outputLine;
             LightFactoryProtocol opp = new LightFactoryProtocol();
-            while (socket.isConnected() && (inputLine = in.readLine()) != null) {
+            if (socket.isConnected() && (inputLine = in.readLine()) != null) {
                 inputLine = inputLine.trim();
-                OSCProxy.logger.trace(">> " + inputLine);
+                LogUtil.trace(this.getClass(), ">> " + inputLine);
                 outputLine = opp.process(inputLine);
                 out.println(outputLine);
-                OSCProxy.logger.trace("<< " + outputLine);
+                LogUtil.trace(this.getClass(), "<< " + outputLine);
             }
         } catch (IOException e) {
-            OSCProxy.logger.error(resources.getString("osc.connection.error"), e);
+            LogUtil.error(this.getClass(), resources.getString("osc.connection.error"), e);
         } finally {
             try {
                 socket.close();
             } catch (IOException e) {
                 //do nothing
-                OSCProxy.logger.trace(e);
+                LogUtil.trace(this.getClass(), e);
             }
-            OSCProxy.logger.info(MessageFormat.format(resources.getString("osc.connection.disconnected"),
-                                                                           socket.getInetAddress().getHostAddress()));
+            LogUtil.info(this.getClass(), MessageFormat.format(resources.getString("osc.connection.disconnected"),
+                    socket.getInetAddress().getHostAddress()));
         }
     }
 }
