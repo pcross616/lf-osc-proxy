@@ -43,9 +43,8 @@ public class MockLightFactoryThread extends Thread {
         try (
                 DataOutputStream outToClient = new DataOutputStream(socket.getOutputStream());
                 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))
-        )
-        {
-            long timeout=System.currentTimeMillis();
+        ) {
+            long timeout = System.currentTimeMillis();
             if (socket.isConnected()) {
                 outToClient.writeBytes("LightFactory remote command interface on MOCK-SERVER\n" +
                         "\n" +
@@ -58,7 +57,7 @@ public class MockLightFactoryThread extends Thread {
                         String inputLine = in.readLine();
                         if (inputLine != null) {
                             inputLine = inputLine.trim();
-                            outToClient.writeBytes("> " +inputLine + " : Success\n>\n");
+                            outToClient.writeBytes("> " + inputLine + " : Success\n>\n");
                             server.lastValue = inputLine;
                         }
                         timeout = System.currentTimeMillis();

@@ -22,7 +22,6 @@ package com.xley.lfosc.impl;
 
 import com.illposed.osc.OSCMessage;
 import com.xley.lfosc.util.LogUtil;
-import sun.rmi.runtime.Log;
 
 import java.util.Date;
 import java.util.concurrent.ExecutorService;
