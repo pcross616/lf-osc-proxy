@@ -22,8 +22,6 @@ package com.xley.lfosc.test.support;
 
 
 import com.xley.lfosc.OSCProxy;
-import org.apache.log4j.ConsoleAppender;
-import org.apache.log4j.PatternLayout;
 
 public class ProxyServerRunner implements Runnable {
     private String mode = "both";

@@ -22,10 +22,8 @@
 package com.xley.lfosc.util;
 
 import com.xley.lfosc.OSCProxy;
-import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -105,19 +103,17 @@ public class LogUtil {
 
     private static Logger getLogger(Class clazz) {
         Logger log = Logger.getLogger(clazz);
-        if (!loggerMap.containsKey(clazz)) {
-            if (level != null) {
-                log.setLevel(level);
-            }
+        if (level != null && !loggerMap.containsKey(clazz)) {
+            log.setLevel(level);
         }
         loggerMap.put(clazz, log);
         return log;
     }
 
-    public static void setLevel(Level d) {
-        level = d;
+    public static void setLevel(Level logLevel) {
+        level = logLevel;
         for (Logger log : loggerMap.values()) {
-            log.setLevel(d);
+            log.setLevel(level);
         }
     }
 }

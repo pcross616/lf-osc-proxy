@@ -46,15 +46,14 @@ public class ProxyDaemon implements Runnable {
 
     //configuration
     private final OptionSet options;
+    OSCProxyListener listener = new OSCProxyListener();
     //daemon vars
     private Boolean shutdown = false;
     private Thread runner;
     private int errorcode = 0;
-
     //connections
     private ServerSocket serverSocket;
     private OSCPortIn receiver = null;
-    OSCProxyListener listener = new OSCProxyListener();
 
 
     /**
