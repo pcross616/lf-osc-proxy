@@ -25,8 +25,8 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2014 XLEY.com</copyright>
     <item>
-      <title>File: 11,
-             Errors: 30,
+      <title>File: 13,
+             Errors: 95,
              Warnings: 0,
              Infos: 0
       </title>
@@ -44,20 +44,6 @@ under the License.
             </tr>
           </thead>
           <tbody>
-                          <tr>
-                <td>
-                  <a href="https://github.com/pcross616/lf-osc-proxy#readme/checkstyle.html#OSCProxy_en.properties">OSCProxy_en.properties</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
                           <tr>
                 <td>
                   <a href="https://github.com/pcross616/lf-osc-proxy#readme/checkstyle.html#ProxyDaemon_en.properties">ProxyDaemon_en.properties</a>
@@ -111,21 +97,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  10
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/pcross616/lf-osc-proxy#readme/checkstyle.html#com.xley.lfosc.impl.OSCProtocol.java">com/xley/lfosc/impl/OSCProtocol.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  8
+                  15
                 </td>
               </tr>
                           <tr>
@@ -139,7 +111,21 @@ under the License.
                   0
                 </td>
                 <td>
-                  1
+                  5
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/pcross616/lf-osc-proxy#readme/checkstyle.html#com.xley.lfosc.util.LogUtil.java">com/xley/lfosc/util/LogUtil.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  54
                 </td>
               </tr>
                           <tr>
@@ -153,7 +139,63 @@ under the License.
                   0
                 </td>
                 <td>
-                  2
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/pcross616/lf-osc-proxy#readme/checkstyle.html#OSCProxy_en.properties">OSCProxy_en.properties</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/pcross616/lf-osc-proxy#readme/checkstyle.html#com.xley.lfosc.impl.OSCProtocol.java">com/xley/lfosc/impl/OSCProtocol.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  9
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/pcross616/lf-osc-proxy#readme/checkstyle.html#log4j.properties">log4j.properties</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/pcross616/lf-osc-proxy#readme/checkstyle.html#com.xley.lfosc.impl.LightFactoryProxyThread.java">com/xley/lfosc/impl/LightFactoryProxyThread.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  6
                 </td>
               </tr>
                           <tr>
@@ -168,20 +210,6 @@ under the License.
                 </td>
                 <td>
                   0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/pcross616/lf-osc-proxy#readme/checkstyle.html#com.xley.lfosc.impl.LightFactoryProxyThread.java">com/xley/lfosc/impl/LightFactoryProxyThread.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  5
                 </td>
               </tr>
                           <tr>

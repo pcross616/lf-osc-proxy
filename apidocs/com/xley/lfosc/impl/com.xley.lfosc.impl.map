@@ -1,10 +1,10 @@
 <map id="G" name="G">
-<area shape="rect" id="c0" href="./OSCProxyListener.html" title="com.xley.lfosc.impl.OSCProxyListener" alt="" coords="15,27,369,117"/>
-<area shape="rect" id="node1" href="./OSCProxyListener.html" title="&lt;TABLE&gt;" alt="" coords="5,22,379,122"/>
-<area shape="rect" id="c1" href="./OSCProtocol.html" title="com.xley.lfosc.impl.OSCProtocol" alt="" coords="413,27,646,117"/>
-<area shape="rect" id="node2" href="./OSCProtocol.html" title="&lt;TABLE&gt;" alt="" coords="403,22,656,122"/>
-<area shape="rect" id="c2" href="./LightFactoryProxyThread.html" title="com.xley.lfosc.impl.LightFactoryProxyThread" alt="" coords="690,27,993,117"/>
-<area shape="rect" id="node3" href="./LightFactoryProxyThread.html" title="&lt;TABLE&gt;" alt="" coords="680,22,1003,122"/>
-<area shape="rect" id="c3" href="./LightFactoryProtocol.html" title="com.xley.lfosc.impl.LightFactoryProtocol" alt="" coords="1037,11,1240,133"/>
-<area shape="rect" id="node4" href="./LightFactoryProtocol.html" title="&lt;TABLE&gt;" alt="" coords="1027,6,1251,138"/>
+<area shape="rect" id="c9" href="./LightFactoryProxyThread.html" title="com.xley.lfosc.impl.LightFactoryProxyThread" alt="" coords="15,27,318,117"/>
+<area shape="rect" id="node1" href="./LightFactoryProxyThread.html" title="&lt;TABLE&gt;" alt="" coords="5,22,328,122"/>
+<area shape="rect" id="c10" href="./LightFactoryProtocol.html" title="com.xley.lfosc.impl.LightFactoryProtocol" alt="" coords="363,11,565,133"/>
+<area shape="rect" id="node2" href="./LightFactoryProtocol.html" title="&lt;TABLE&gt;" alt="" coords="352,6,576,138"/>
+<area shape="rect" id="c11" href="./OSCProxyListener.html" title="com.xley.lfosc.impl.OSCProxyListener" alt="" coords="610,19,963,125"/>
+<area shape="rect" id="node3" href="./OSCProxyListener.html" title="&lt;TABLE&gt;" alt="" coords="600,14,973,130"/>
+<area shape="rect" id="c12" href="./OSCProtocol.html" title="com.xley.lfosc.impl.OSCProtocol" alt="" coords="1007,27,1273,117"/>
+<area shape="rect" id="node4" href="./OSCProtocol.html" title="&lt;TABLE&gt;" alt="" coords="997,22,1283,122"/>
 </map>
