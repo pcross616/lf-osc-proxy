@@ -47,7 +47,7 @@
                                                                                                                                                                                                   <li class="collapsed">
                           <a href="project-info.html" title="Project Information">Project Information</a>
                   </li>
-                                                                                                                                                                                                                                                <li class="expanded">
+                                                                                                                                                                                                                              <li class="expanded">
                           <a href="project-reports.html" title="Project Reports">Project Reports</a>
                     <ul>
                       <li class="none">
@@ -70,9 +70,6 @@
             </li>
                       <li class="none">
                           <a href="checkstyle.html" title="Checkstyle">Checkstyle</a>
-            </li>
-                      <li class="none">
-                          <a href="pmd.html" title="PMD">PMD</a>
             </li>
                       <li class="none">
                           <a href="changelog.html" title="Change Log">Change Log</a>
@@ -128,7 +125,7 @@ function toggleDisplay(elementId) {
 <td>0</td>
 <td>0</td>
 <td>100%</td>
-<td>55.295</td></tr></table><br />
+<td>55.284</td></tr></table><br />
 <p>Note: failures are anticipated and checked for with assertions while errors are unanticipated.</p><br /></div>
 <div class="section">
 <h2>Package List<a name="Package_List"></a></h2><a name="Package_List"></a>
@@ -149,7 +146,7 @@ function toggleDisplay(elementId) {
 <td>0</td>
 <td>0</td>
 <td>100%</td>
-<td>55.295</td></tr></table><br />
+<td>55.284</td></tr></table><br />
 <p>Note: package statistics are not computed recursively, they only sum up all of its testsuites numbers.</p>
 <div class="section">
 <h3>com.xley.lfosc.test<a name="com.xley.lfosc.test"></a></h3><a name="com.xley.lfosc.test"></a>
@@ -164,15 +161,6 @@ function toggleDisplay(elementId) {
 <th>Success Rate</th>
 <th>Time</th></tr>
 <tr class="b">
-<td><a href="#com.xley.lfosc.testTestProxyModeOSC"><img src="images/icon_success_sml.gif" alt="" /></a></td>
-<td><a href="#com.xley.lfosc.testTestProxyModeOSC">TestProxyModeOSC</a></td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>100%</td>
-<td>10.021</td></tr>
-<tr class="a">
 <td><a href="#com.xley.lfosc.testTestProxyModeBridge"><img src="images/icon_success_sml.gif" alt="" /></a></td>
 <td><a href="#com.xley.lfosc.testTestProxyModeBridge">TestProxyModeBridge</a></td>
 <td>3</td>
@@ -180,7 +168,16 @@ function toggleDisplay(elementId) {
 <td>0</td>
 <td>0</td>
 <td>100%</td>
-<td>23.086</td></tr>
+<td>23.072</td></tr>
+<tr class="a">
+<td><a href="#com.xley.lfosc.testTestProxyModeOSC"><img src="images/icon_success_sml.gif" alt="" /></a></td>
+<td><a href="#com.xley.lfosc.testTestProxyModeOSC">TestProxyModeOSC</a></td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>10.023</td></tr>
 <tr class="b">
 <td><a href="#com.xley.lfosc.testTestProxyModeBoth"><img src="images/icon_success_sml.gif" alt="" /></a></td>
 <td><a href="#com.xley.lfosc.testTestProxyModeBoth">TestProxyModeBoth</a></td>
@@ -189,51 +186,51 @@ function toggleDisplay(elementId) {
 <td>0</td>
 <td>0</td>
 <td>100%</td>
-<td>22.188</td></tr></table></div><br /></div>
+<td>22.189</td></tr></table></div><br /></div>
 <div class="section">
 <h2>Test Cases<a name="Test_Cases"></a></h2><a name="Test_Cases"></a>
 <p>[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</p>
+<div class="section">
+<h3>TestProxyModeBridge<a name="TestProxyModeBridge"></a></h3><a name="com.xley.lfosc.testTestProxyModeBridge"></a>
+<table border="1" class="bodyTable">
+<tr class="a">
+<td><img src="images/icon_success_sml.gif" alt="" /></td>
+<td>testLFtoOSC</td>
+<td>8.026</td></tr>
+<tr class="b">
+<td><img src="images/icon_success_sml.gif" alt="" /></td>
+<td>testInvalidFormatLFtoOSC</td>
+<td>8.026</td></tr>
+<tr class="a">
+<td><img src="images/icon_success_sml.gif" alt="" /></td>
+<td>testLFtoOSCBadEndpoint</td>
+<td>7.02</td></tr></table></div>
 <div class="section">
 <h3>TestProxyModeOSC<a name="TestProxyModeOSC"></a></h3><a name="com.xley.lfosc.testTestProxyModeOSC"></a>
 <table border="1" class="bodyTable">
 <tr class="a">
 <td><img src="images/icon_success_sml.gif" alt="" /></td>
 <td>testOSCtoLFCommand</td>
-<td>10.021</td></tr></table></div>
-<div class="section">
-<h3>TestProxyModeBridge<a name="TestProxyModeBridge"></a></h3><a name="com.xley.lfosc.testTestProxyModeBridge"></a>
-<table border="1" class="bodyTable">
-<tr class="a">
-<td><img src="images/icon_success_sml.gif" alt="" /></td>
-<td>testLFtoOSCBadEndpoint</td>
-<td>7.033</td></tr>
-<tr class="b">
-<td><img src="images/icon_success_sml.gif" alt="" /></td>
-<td>testInvalidFormatLFtoOSC</td>
-<td>8.027</td></tr>
-<tr class="a">
-<td><img src="images/icon_success_sml.gif" alt="" /></td>
-<td>testLFtoOSC</td>
-<td>8.026</td></tr></table></div>
+<td>10.023</td></tr></table></div>
 <div class="section">
 <h3>TestProxyModeBoth<a name="TestProxyModeBoth"></a></h3><a name="com.xley.lfosc.testTestProxyModeBoth"></a>
 <table border="1" class="bodyTable">
 <tr class="a">
 <td><img src="images/icon_success_sml.gif" alt="" /></td>
 <td>testLoopback</td>
-<td>7.055</td></tr>
+<td>7.052</td></tr>
 <tr class="b">
 <td><img src="images/icon_success_sml.gif" alt="" /></td>
 <td>testAlreadyRunning</td>
-<td>5.045</td></tr>
+<td>5.059</td></tr>
 <tr class="a">
 <td><img src="images/icon_success_sml.gif" alt="" /></td>
 <td>testHelpOptions</td>
-<td>5.058</td></tr>
+<td>5.05</td></tr>
 <tr class="b">
 <td><img src="images/icon_success_sml.gif" alt="" /></td>
 <td>testInvalidMode</td>
-<td>5.03</td></tr></table></div><br /></div>
+<td>5.028</td></tr></table></div><br /></div>
       </div>
     </div>
     <div class="clear">
