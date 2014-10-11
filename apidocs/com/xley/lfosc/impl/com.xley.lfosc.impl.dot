@@ -9,21 +9,8 @@ digraph G {
 	node [fontname="Helvetica",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
-	// com.xley.lfosc.impl.OSCProtocol
-	c0 [label=<<table title="com.xley.lfosc.impl.OSCProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./OSCProtocol.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> OSCProtocol </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + resources : ResourceBundle </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + OSCProtocol(message : OSCMessage) </td></tr>
-<tr><td align="left" balign="left"> + run() </td></tr>
-		</table></td></tr>
-		</table>>, URL="./OSCProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.impl.LightFactoryProtocol
-	c1 [label=<<table title="com.xley.lfosc.impl.LightFactoryProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LightFactoryProtocol.html">
+	c17 [label=<<table title="com.xley.lfosc.impl.LightFactoryProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LightFactoryProtocol.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> LightFactoryProtocol </td></tr>
 		</table></td></tr>
@@ -37,8 +24,21 @@ digraph G {
 <tr><td align="left" balign="left"> # process(cmd : String) : String </td></tr>
 		</table></td></tr>
 		</table>>, URL="./LightFactoryProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.xley.lfosc.impl.OSCProtocol
+	c18 [label=<<table title="com.xley.lfosc.impl.OSCProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./OSCProtocol.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> OSCProtocol </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + resources : ResourceBundle </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + OSCProtocol(message : OSCMessage) </td></tr>
+<tr><td align="left" balign="left"> + run() </td></tr>
+		</table></td></tr>
+		</table>>, URL="./OSCProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.impl.OSCProxyListener
-	c2 [label=<<table title="com.xley.lfosc.impl.OSCProxyListener" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./OSCProxyListener.html">
+	c19 [label=<<table title="com.xley.lfosc.impl.OSCProxyListener" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./OSCProxyListener.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> OSCProxyListener </td></tr>
 		</table></td></tr>
@@ -52,7 +52,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="./OSCProxyListener.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.impl.LightFactoryProxyThread
-	c3 [label=<<table title="com.xley.lfosc.impl.LightFactoryProxyThread" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LightFactoryProxyThread.html">
+	c20 [label=<<table title="com.xley.lfosc.impl.LightFactoryProxyThread" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LightFactoryProxyThread.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> LightFactoryProxyThread </td></tr>
 		</table></td></tr>

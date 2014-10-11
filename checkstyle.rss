@@ -26,7 +26,7 @@ under the License.
     <copyright>&#169;2014 XLEY.com</copyright>
     <item>
       <title>File: 13,
-             Errors: 91,
+             Errors: 90,
              Warnings: 0,
              Infos: 0
       </title>
@@ -74,6 +74,20 @@ under the License.
               </tr>
                           <tr>
                 <td>
+                  <a href="https://github.com/pcross616/lf-osc-proxy#readme/checkstyle.html#com.xley.lfosc.ProxyDaemon.java">com/xley/lfosc/ProxyDaemon.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  15
+                </td>
+              </tr>
+                          <tr>
+                <td>
                   <a href="https://github.com/pcross616/lf-osc-proxy#readme/checkstyle.html#com.xley.lfosc.impl.OSCProxyListener.java">com/xley/lfosc/impl/OSCProxyListener.java</a>
                 </td>
                 <td>
@@ -84,20 +98,6 @@ under the License.
                 </td>
                 <td>
                   3
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/pcross616/lf-osc-proxy#readme/checkstyle.html#com.xley.lfosc.ProxyDaemon.java">com/xley/lfosc/ProxyDaemon.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  14
                 </td>
               </tr>
                           <tr>
@@ -139,7 +139,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  2
+                  1
                 </td>
               </tr>
                           <tr>
@@ -167,7 +167,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  9
+                  10
                 </td>
               </tr>
                           <tr>
@@ -181,21 +181,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  1
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/pcross616/lf-osc-proxy#readme/checkstyle.html#com.xley.lfosc.impl.LightFactoryProxyThread.java">com/xley/lfosc/impl/LightFactoryProxyThread.java</a>
-                </td>
-                <td>
                   0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  5
                 </td>
               </tr>
                           <tr>
@@ -214,7 +200,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/pcross616/lf-osc-proxy#readme/checkstyle.html#com.xley.lfosc.impl.LightFactoryProtocol.java">com/xley/lfosc/impl/LightFactoryProtocol.java</a>
+                  <a href="https://github.com/pcross616/lf-osc-proxy#readme/checkstyle.html#com.xley.lfosc.impl.LightFactoryProxyThread.java">com/xley/lfosc/impl/LightFactoryProxyThread.java</a>
                 </td>
                 <td>
                   0
@@ -224,6 +210,20 @@ under the License.
                 </td>
                 <td>
                   5
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/pcross616/lf-osc-proxy#readme/checkstyle.html#com.xley.lfosc.impl.LightFactoryProtocol.java">com/xley/lfosc/impl/LightFactoryProtocol.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  4
                 </td>
               </tr>
                       </tbody>
