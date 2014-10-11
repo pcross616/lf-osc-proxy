@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 
 public class MockLightFactoryServer implements Runnable {
-    private MockLightFactoryThread mockServer;
+    protected volatile String lastValue;
     private ServerSocket serverSocket;
     private int port;
 
@@ -34,7 +34,7 @@ public class MockLightFactoryServer implements Runnable {
 
 
     public String getLastValue() {
-        return mockServer.lastValue;
+        return lastValue;
     }
 
     public void shutdown() {
@@ -52,8 +52,7 @@ public class MockLightFactoryServer implements Runnable {
         try {
             serverSocket = new ServerSocket(port);
             while (!Thread.interrupted()) {
-                mockServer = new MockLightFactoryThread(serverSocket.accept());
-                mockServer.start();
+                new MockLightFactoryThread(serverSocket.accept(), this).start();
             }
 
         } catch (IOException e) {

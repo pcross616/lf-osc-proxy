@@ -19,7 +19,7 @@
   ~  under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -34,7 +34,9 @@
     </properties>
 
     <name>LightFactory-OSC Proxy</name>
-    <description>LightFactory-OSC Proxy Service, enables Open Sound Control messages to be sent from LightFactory using the built in CONNECT and SEND functions. In addition to control LightFactory from a OSC enabled application.</description>
+    <description>LightFactory-OSC Proxy Service, enables Open Sound Control messages to be sent from LightFactory using
+        the built in CONNECT and SEND functions. In addition to control LightFactory from a OSC enabled application.
+    </description>
     <url>https://github.com/pcross616/lf-osc-proxy#readme</url>
     <organization>
         <name>XLEY.com</name>
@@ -141,7 +143,8 @@
                     <shadedArtifactAttached>true</shadedArtifactAttached>
                     <shadedClassifierName>shaded</shadedClassifierName>
                     <transformers>
-                        <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                        <transformer
+                                implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                             <mainClass>${project.mainClass}</mainClass>
                         </transformer>
                     </transformers>
@@ -287,15 +290,15 @@
                             <report>javadoc</report>
                         </reports>
                     </reportSet>
-<!--
-                    <reportSet>&lt;!&ndash; aggregate reportSet, to define in poms having modules &ndash;&gt;
-                        <id>aggregate</id>
-                        <inherited>false</inherited>&lt;!&ndash; don't run aggregate in child modules &ndash;&gt;
-                        <reports>
-                            <report>aggregate</report>
-                        </reports>
-                    </reportSet>
--->
+                    <!--
+                                        <reportSet>&lt;!&ndash; aggregate reportSet, to define in poms having modules &ndash;&gt;
+                                            <id>aggregate</id>
+                                            <inherited>false</inherited>&lt;!&ndash; don't run aggregate in child modules &ndash;&gt;
+                                            <reports>
+                                                <report>aggregate</report>
+                                            </reports>
+                                        </reportSet>
+                    -->
                 </reportSets>
                 <configuration>
                     <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>

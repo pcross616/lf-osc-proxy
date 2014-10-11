@@ -22,7 +22,7 @@ package com.xley.lfosc.impl;
 
 import com.illposed.osc.OSCMessage;
 import com.illposed.osc.OSCPortOut;
-import com.xley.lfosc.OSCProxy;
+import com.xley.lfosc.util.LogUtil;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -95,7 +95,7 @@ public class LightFactoryProtocol {
         try {
             //find the address and verify
             while (matches.find()) {
-                OSCProxy.logger.debug(resources.getString("lf.event.valid"));
+                LogUtil.debug(this.getClass(), resources.getString("lf.event.valid"));
                 String address = matches.group(PARTS_ADDRESS);
                 int port = Integer.parseInt(matches.group(PARTS_PORTS));
                 String container = matches.group(PARTS_CONTAINER);
@@ -103,7 +103,7 @@ public class LightFactoryProtocol {
                 OSCPortOut oscPortOut = null;
 
                 try {
-                    OSCProxy.logger.debug(MessageFormat.format(resources.getString("lf.osc.port.connect"),
+                    LogUtil.debug(this.getClass(), MessageFormat.format(resources.getString("lf.osc.port.connect"),
                             address, port));
 
                     OSCMessage message = new OSCMessage(container);
@@ -115,7 +115,7 @@ public class LightFactoryProtocol {
                         }
                     }
 
-                    OSCProxy.logger.debug(MessageFormat.format(resources.getString("lf.osc.port.send"),
+                    LogUtil.debug(this.getClass(), MessageFormat.format(resources.getString("lf.osc.port.send"),
                             message.getAddress(), String.valueOf(message.getArguments()),
                             address, port));
 
@@ -126,7 +126,7 @@ public class LightFactoryProtocol {
                 } finally {
                     if (oscPortOut != null) {
                         oscPortOut.close();
-                        OSCProxy.logger.debug(MessageFormat.format(resources.getString("lf.osc.port.close"),
+                        LogUtil.debug(this.getClass(), MessageFormat.format(resources.getString("lf.osc.port.close"),
                                 address, port));
                     }
                 }
@@ -161,18 +161,18 @@ public class LightFactoryProtocol {
                 ret = Integer.parseInt(data);
                 return ret;
             } catch (NumberFormatException nfe) {
-                OSCProxy.logger.trace(nfe);
+                LogUtil.trace(this.getClass(), nfe);
             }
 
             try {
                 return ret = Float.parseFloat(data);
             } catch (NumberFormatException nfe) {
-                OSCProxy.logger.trace(nfe);
+                LogUtil.trace(this.getClass(), nfe);
             }
 
             return ret;
         } finally {
-            OSCProxy.logger.trace(MessageFormat.format(resources.getString("lf.osc.type.convert"),
+            LogUtil.trace(this.getClass(), MessageFormat.format(resources.getString("lf.osc.type.convert"),
                     data, ret.getClass().getName()));
         }
     }

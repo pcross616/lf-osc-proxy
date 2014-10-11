@@ -23,6 +23,7 @@ package com.xley.lfosc;
 import com.illposed.osc.OSCPortIn;
 import com.xley.lfosc.impl.LightFactoryProxyThread;
 import com.xley.lfosc.impl.OSCProxyListener;
+import com.xley.lfosc.util.LogUtil;
 import joptsimple.OptionSet;
 
 import java.io.IOException;
@@ -30,9 +31,6 @@ import java.net.*;
 import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
-
-import static com.xley.lfosc.OSCProxy.logger;
-
 
 /**
  * The type Proxy daemon.
@@ -43,16 +41,16 @@ public class ProxyDaemon implements Runnable {
      * The constant resources.
      */
     public static final ResourceBundle resources = ResourceBundle.getBundle(ProxyDaemon.class.getSimpleName(),
-                                                                            Locale.getDefault());
+            Locale.getDefault());
     private final Object monitor = true;
 
     //configuration
     private final OptionSet options;
+    OSCProxyListener listener = new OSCProxyListener();
     //daemon vars
     private Boolean shutdown = false;
     private Thread runner;
     private int errorcode = 0;
-
     //connections
     private ServerSocket serverSocket;
     private OSCPortIn receiver = null;
@@ -86,18 +84,23 @@ public class ProxyDaemon implements Runnable {
             }
         }
         shutdown = true;
-        logger.info(resources.getString("shutdown.inprogress"));
+        LogUtil.info(this.getClass(), resources.getString("shutdown.inprogress"));
         runner.interrupt();
         if (receiver != null) {
             receiver.stopListening();
             receiver.close();
         }
+
+        if (listener != null) {
+            listener.shutdown();
+        }
+
         if (serverSocket != null) {
             try {
                 serverSocket.close();
                 serverSocket = null;
             } catch (Throwable e) {
-                logger.trace(e);
+                LogUtil.trace(e);
             }
         }
     }
@@ -124,24 +127,21 @@ public class ProxyDaemon implements Runnable {
             case "both":
                 break;
             default:
-                logger.error(resources.getString("options.mode.invalid"));
+                LogUtil.error(this.getClass(), resources.getString("options.mode.invalid"));
                 errorcode = 1;
                 shutdown();
                 return;
         }
 
         String host = String.valueOf(options.valueOf("b"));
-
         try {
             //bindings
-            OSCProxyListener listener;
             InetSocketAddress binding = new InetSocketAddress(InetAddress.getByName(host), portNumber);
             InetSocketAddress oscBinding = new InetSocketAddress(InetAddress.getByName(host), oscPortNumber);
 
             if (oscEnabled) {
-                logger.info(MessageFormat.format(resources.getString("osc.listener.on"), host, oscPortNumber));
+                LogUtil.info(this.getClass(), MessageFormat.format(resources.getString("osc.listener.on"), host, oscPortNumber));
                 receiver = new OSCPortIn(new DatagramSocket(oscBinding));
-                listener = new OSCProxyListener();
                 receiver.addListener(resources.getString("osc.listener.binding"), listener);
                 receiver.startListening();
 
@@ -158,25 +158,25 @@ public class ProxyDaemon implements Runnable {
             if (lfBridgeEnabled) {
                 try {
                     serverSocket = new ServerSocket(binding.getPort(), threads, binding.getAddress());
-                    logger.info(MessageFormat.format(resources.getString("lf.listener.on"), host, portNumber));
+                    LogUtil.info(this.getClass(), MessageFormat.format(resources.getString("lf.listener.on"), host, portNumber));
                     while (!shutdown && !Thread.currentThread().isInterrupted()) {
                         new LightFactoryProxyThread(serverSocket.accept()).start();
                     }
                 } catch (IOException e) {
                     if (!shutdown) {
-                        logger.fatal(MessageFormat.format(resources.getString("lf.listener.on.error"),
-                                                                              host, portNumber), e);
+                        LogUtil.fatal(this.getClass(), MessageFormat.format(resources.getString("lf.listener.on.error"),
+                                host, portNumber), e);
                         errorcode = 2;
                     }
                 }
             }
 
         } catch (UnknownHostException e) {
-            logger.fatal(MessageFormat.format(resources.getString("daemon.error.unknown.host"), host), e);
+            LogUtil.fatal(this.getClass(), MessageFormat.format(resources.getString("daemon.error.unknown.host"), host), e);
             errorcode = 2;
         } catch (SocketException e) {
-            logger.fatal(MessageFormat.format(resources.getString("daemon.error.socket"), host), e);
-            logger.fatal("", e);
+            LogUtil.fatal(this.getClass(), MessageFormat.format(resources.getString("daemon.error.socket"), host), e);
+            LogUtil.fatal(this.getClass(), "", e);
             errorcode = 2;
         } finally {
             shutdown();

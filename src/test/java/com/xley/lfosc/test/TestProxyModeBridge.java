@@ -128,8 +128,7 @@ public class TestProxyModeBridge {
             Thread.sleep(1000);
 
             //did we get the error?
-            assertEquals(inFromServer.readLine(),
-                    LightFactoryProtocol.resources.getString("lf.osc.error.invalid"));
+            assertEquals(LightFactoryProtocol.resources.getString("lf.osc.error.invalid"), inFromServer.readLine());
 
         } finally {
             if (inFromServer != null) {
