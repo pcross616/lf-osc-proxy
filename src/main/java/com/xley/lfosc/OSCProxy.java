@@ -20,12 +20,10 @@
 
 package com.xley.lfosc;
 
+import com.xley.lfosc.util.LogUtil;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
-import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -37,20 +35,10 @@ import java.util.ResourceBundle;
 public class OSCProxy {
 
     /**
-     * The constant logger.
-     */
-    public static final Logger logger = Logger.getLogger(OSCProxy.class);
-    /**
      * The constant resources.
      */
     public static final ResourceBundle resources = ResourceBundle.getBundle(OSCProxy.class.getSimpleName(),
-                                                                            Locale.getDefault());
-
-    static {
-        PatternLayout layout = new PatternLayout();
-        layout.setConversionPattern("[%p] %c - %m%n");
-        logger.addAppender(new ConsoleAppender(layout));
-    }
+            Locale.getDefault());
 
     /**
      * Instantiates a new OSC proxy.
@@ -102,7 +90,7 @@ public class OSCProxy {
             try {
                 parser.printHelpOn(System.out);
             } catch (IOException e) {
-                logger.error(e);
+                LogUtil.error(e);
             }
             return 0;
         }
@@ -111,7 +99,7 @@ public class OSCProxy {
         System.out.println(resources.getString("console.header.2"));
 
         if (options.has("d")) {
-            logger.setLevel(Level.toLevel(((String) options.valueOf("d")).toUpperCase()));
+            LogUtil.setLevel(Level.toLevel(((String) options.valueOf("d")).toUpperCase()));
         }
 
         //start the main thread
@@ -127,7 +115,7 @@ public class OSCProxy {
             }
         }
 
-        logger.info(resources.getString("shutdown.complete"));
+        LogUtil.info(resources.getString("shutdown.complete"));
         return daemon.errorcode();
     }
 

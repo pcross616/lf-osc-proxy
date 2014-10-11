@@ -26,13 +26,6 @@ import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.PatternLayout;
 
 public class ProxyServerRunner implements Runnable {
-    static {
-        OSCProxy.logger.removeAllAppenders();
-        PatternLayout layout = new PatternLayout();
-        layout.setConversionPattern("[%p] (%t) %c[%M] - %m%n");
-        OSCProxy.logger.addAppender(new ConsoleAppender(layout));
-    }
-
     private String mode = "both";
 
     public ProxyServerRunner(String mode) {
@@ -41,6 +34,6 @@ public class ProxyServerRunner implements Runnable {
 
     @Override
     public void run() {
-        new OSCProxy().execute(new String[]{"-d", "TRACE", "-m", mode});
+        new OSCProxy().execute(new String[]{"-d", "ALL", "-m", mode});
     }
 }

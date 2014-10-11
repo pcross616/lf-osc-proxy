@@ -21,9 +21,12 @@
 package com.xley.lfosc.impl;
 
 import com.illposed.osc.OSCMessage;
-import com.xley.lfosc.OSCProxy;
+import com.xley.lfosc.util.LogUtil;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.Socket;
 import java.nio.charset.Charset;
 import java.text.MessageFormat;
@@ -33,12 +36,12 @@ import java.util.ResourceBundle;
 /**
  * The type OSC event protocol.
  */
-public class OSCProtocol {
+public class OSCProtocol implements Runnable {
     /**
      * The constant resources.
      */
     public static final ResourceBundle resources = ResourceBundle.getBundle(OSCProtocol.class.getSimpleName(),
-                                                                            Locale.getDefault());
+            Locale.getDefault());
 
     /**
      * The address part of the osc event.
@@ -49,13 +52,28 @@ public class OSCProtocol {
      */
     private static final int PART_CMD = 3;
 
+
+    /**
+     * THe message to process
+     */
+    private OSCMessage message;
+
+    public OSCProtocol(OSCMessage message) {
+        this.message = message;
+    }
+
+    @Override
+    public void run() {
+        process(this.message);
+    }
+
     /**
      * Process an incoming OSC event.
      * <br><b>Example OSC message:</b> <i>/lf/&lt;ipaddress:port&gt;/&lt;cmd&gt; arguments</i>
      *
      * @param message the message to be processed
      */
-    protected final void process(final OSCMessage message) {
+    private void process(final OSCMessage message) {
         /**
          * 1. parse message syntax
          *   /lf/<ipaddress:port/<cmd> arguments
@@ -68,49 +86,50 @@ public class OSCProtocol {
 
             Socket clientSocket = null;
             try {
-                OSCProxy.logger.debug(MessageFormat.format(resources.getString("osc.lf.port.connect"), address[0],
+                LogUtil.debug(this.getClass(), MessageFormat.format(resources.getString("osc.lf.port.connect"), address[0],
                         address[1]));
                 clientSocket = new Socket(address[0], Integer.parseInt(address[1]));
                 DataOutputStream outToLF = new DataOutputStream(clientSocket.getOutputStream());
                 BufferedReader inFromLF = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(),
-                                                                                    Charset.defaultCharset()));
+                        Charset.defaultCharset()));
 
                 StringBuilder send = new StringBuilder(cmd);
                 for (Object arg : message.getArguments()) {
                     send.append(" ").append(arg);
                 }
 
-                if (clientSocket.isConnected() && inFromLF.ready()) {
-                    String inputLine;
-                    while (inFromLF.ready() && (inputLine=inFromLF.readLine()) != null && !inputLine.equals(">")) {
-                        OSCProxy.logger.trace(" << [" + clientSocket.toString() + "] - " + inputLine);
+                String inputLine = null;
+                if (clientSocket.isConnected()) {
+                    while ((inputLine = inFromLF.readLine()) != null && !inputLine.equals(">")) {
+                        LogUtil.trace(this.getClass(), " << [" + clientSocket.toString() + "] - " + inputLine);
                     }
 
-                    OSCProxy.logger.trace(" >> [" + clientSocket.toString() + "] - " + send);
-                    outToLF.writeBytes(send + "\n");
-
-                    while (inFromLF.ready() && (inputLine=inFromLF.readLine()) != null && !inputLine.equals(">")) {
-                        OSCProxy.logger.trace(" << [" + clientSocket.toString() + "] - " + inputLine);
+                    if (inputLine != null && inputLine.equals(">")) {
+                        LogUtil.trace(this.getClass(), " << [" + clientSocket.toString() + "] - " + inputLine);
+                        LogUtil.trace(this.getClass(), " >> [" + clientSocket.toString() + "] - " + send);
+                        outToLF.writeBytes(send + "\n");
                     }
-                } else {
-                    OSCProxy.logger.warn(resources.getString("osc.lf.error"));
+
+                    while ((inputLine = inFromLF.readLine()) != null) {
+                        LogUtil.trace(this.getClass(), " << [" + clientSocket.toString() + "] - " + inputLine);
+                    }
                 }
 
             } catch (IOException e) {
-                OSCProxy.logger.error(resources.getString("osc.lf.error"), e);
+                LogUtil.error(this.getClass(), resources.getString("osc.lf.error"), e);
             } finally {
                 if (clientSocket != null) {
                     try {
-                        OSCProxy.logger.debug(MessageFormat.format(resources.getString("osc.lf.port.close"),
+                        LogUtil.debug(this.getClass(), MessageFormat.format(resources.getString("osc.lf.port.close"),
                                 address[0], address[1]));
                         clientSocket.close();
                     } catch (IOException e) {
-                        OSCProxy.logger.trace(e);
+                        LogUtil.trace(this.getClass(), e);
                     }
                 }
             }
         } catch (Throwable throwable) {
-            OSCProxy.logger.error(resources.getString("osc.lf.error"), throwable);
+            LogUtil.error(this.getClass(), resources.getString("osc.lf.error"), throwable);
         }
     }
 }
