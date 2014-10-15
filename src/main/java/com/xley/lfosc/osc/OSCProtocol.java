@@ -18,7 +18,7 @@
  *  under the License.
  */
 
-package com.xley.lfosc.impl;
+package com.xley.lfosc.osc;
 
 import com.illposed.osc.OSCMessage;
 import com.xley.lfosc.util.LogUtil;
@@ -36,7 +36,7 @@ import java.util.ResourceBundle;
 /**
  * The type OSC event protocol.
  */
-public class OSCProtocol implements Runnable {
+public abstract class OSCProtocol {
     /**
      * The constant resources.
      */
@@ -54,26 +54,12 @@ public class OSCProtocol implements Runnable {
 
 
     /**
-     * THe message to process
-     */
-    private OSCMessage message;
-
-    public OSCProtocol(OSCMessage message) {
-        this.message = message;
-    }
-
-    @Override
-    public void run() {
-        process(this.message);
-    }
-
-    /**
      * Process an incoming OSC event.
      * <br><b>Example OSC message:</b> <i>/lf/&lt;ipaddress:port&gt;/&lt;cmd&gt; arguments</i>
      *
      * @param message the message to be processed
      */
-    private void process(final OSCMessage message) {
+    public static void process(final OSCMessage message) {
         /**
          * 1. parse message syntax
          *   /lf/<ipaddress:port/<cmd> arguments
@@ -86,7 +72,7 @@ public class OSCProtocol implements Runnable {
 
             Socket clientSocket = null;
             try {
-                LogUtil.debug(this.getClass(), MessageFormat.format(resources.getString("osc.lf.port.connect"), address[0],
+                LogUtil.debug(OSCProtocol.class, MessageFormat.format(resources.getString("osc.lf.port.connect"), address[0],
                         address[1]));
                 clientSocket = new Socket(address[0], Integer.parseInt(address[1]));
                 DataOutputStream outToLF = new DataOutputStream(clientSocket.getOutputStream());
@@ -98,38 +84,38 @@ public class OSCProtocol implements Runnable {
                     send.append(" ").append(arg);
                 }
 
-                String inputLine = null;
+                String inputLine;
                 if (clientSocket.isConnected()) {
                     while ((inputLine = inFromLF.readLine()) != null && !inputLine.equals(">")) {
-                        LogUtil.trace(this.getClass(), " << [" + clientSocket.toString() + "] - " + inputLine);
+                        LogUtil.trace(OSCProtocol.class, " << [" + clientSocket.toString() + "] - " + inputLine);
                     }
 
                     if (inputLine != null && inputLine.equals(">")) {
-                        LogUtil.trace(this.getClass(), " << [" + clientSocket.toString() + "] - " + inputLine);
-                        LogUtil.trace(this.getClass(), " >> [" + clientSocket.toString() + "] - " + send);
+                        LogUtil.trace(OSCProtocol.class, " << [" + clientSocket.toString() + "] - " + inputLine);
+                        LogUtil.trace(OSCProtocol.class, " >> [" + clientSocket.toString() + "] - " + send);
                         outToLF.writeBytes(send + "\n");
                     }
 
                     while ((inputLine = inFromLF.readLine()) != null) {
-                        LogUtil.trace(this.getClass(), " << [" + clientSocket.toString() + "] - " + inputLine);
+                        LogUtil.trace(OSCProtocol.class, " << [" + clientSocket.toString() + "] - " + inputLine);
                     }
                 }
 
             } catch (IOException e) {
-                LogUtil.error(this.getClass(), resources.getString("osc.lf.error"), e);
+                LogUtil.error(OSCProtocol.class, resources.getString("osc.lf.error"), e);
             } finally {
                 if (clientSocket != null) {
                     try {
-                        LogUtil.debug(this.getClass(), MessageFormat.format(resources.getString("osc.lf.port.close"),
+                        LogUtil.debug(OSCProtocol.class, MessageFormat.format(resources.getString("osc.lf.port.close"),
                                 address[0], address[1]));
                         clientSocket.close();
                     } catch (IOException e) {
-                        LogUtil.trace(this.getClass(), e);
+                        LogUtil.trace(OSCProtocol.class, e);
                     }
                 }
             }
         } catch (Throwable throwable) {
-            LogUtil.error(this.getClass(), resources.getString("osc.lf.error"), throwable);
+            LogUtil.error(OSCProtocol.class, resources.getString("osc.lf.error"), throwable);
         }
     }
 }

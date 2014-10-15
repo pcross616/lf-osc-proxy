@@ -28,7 +28,7 @@ import org.apache.log4j.Logger;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class LogUtil {
+public abstract class LogUtil {
 
     /**
      * The constant LogUtil.
@@ -85,7 +85,7 @@ public class LogUtil {
         getLogger(clazz).warn(message);
     }
 
-    public static void error(Class clazz, Object message) {
+    public static void error(Class clazz, String message) {
         getLogger(clazz).error(message);
     }
 
@@ -93,7 +93,7 @@ public class LogUtil {
         getLogger(clazz).error(message, throwable);
     }
 
-    public static void fatal(Class clazz, Object message) {
+    public static void fatal(Class clazz, String message) {
         getLogger(clazz).fatal(message);
     }
 
@@ -110,8 +110,13 @@ public class LogUtil {
         return log;
     }
 
+    public static Level getLevel() {
+        return level;
+    }
+
     public static void setLevel(Level logLevel) {
         level = logLevel;
+        Logger.getRootLogger().setLevel(level);
         for (Logger log : loggerMap.values()) {
             log.setLevel(level);
         }

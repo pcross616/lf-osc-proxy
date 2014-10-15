@@ -20,7 +20,9 @@
 
 package com.xley.lfosc;
 
+import com.xley.lfosc.impl.ProxyDaemon;
 import com.xley.lfosc.util.LogUtil;
+import joptsimple.OptionException;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import org.apache.log4j.Level;
@@ -40,11 +42,11 @@ public class OSCProxy {
     public static final ResourceBundle resources = ResourceBundle.getBundle(OSCProxy.class.getSimpleName(),
             Locale.getDefault());
 
+
     /**
-     * Instantiates a new OSC proxy.
+     * The daemon thread for the services.
      */
-    public OSCProxy() {
-    }
+    private ProxyDaemon daemon;
 
     /**
      * The entry point of application.
@@ -67,43 +69,53 @@ public class OSCProxy {
                 accepts("p").withOptionalArg().ofType(Integer.class)
                         .describedAs(resources.getString("option.lf.port.desc"))
                         .defaultsTo(Integer.parseInt(resources.getString("option.lf.port.default")));
+                accepts("w").withOptionalArg().ofType(Integer.class)
+                        .describedAs(resources.getString("option.http.port.desc"))
+                        .defaultsTo(Integer.parseInt(resources.getString("option.http.port.default")));
                 accepts("l").withOptionalArg().ofType(Integer.class)
                         .describedAs(resources.getString("option.osc.port.desc"))
                         .defaultsTo(Integer.parseInt(resources.getString("option.osc.port.default")));
                 accepts("m").withOptionalArg().ofType(String.class)
                         .describedAs(resources.getString("option.mode.desc"))
-                        .defaultsTo(resources.getString("option.mode.default"));
+                        .defaultsTo(resources.getString("option.mode.default").split(","));
                 accepts("b").withOptionalArg().ofType(String.class)
                         .describedAs(resources.getString("option.bind.address.desc"))
                         .defaultsTo(resources.getString("option.bind.address.default"));
                 accepts("t").withOptionalArg().ofType(Integer.class)
                         .describedAs(resources.getString("option.socket.threads.desc"))
                         .defaultsTo(Integer.parseInt(resources.getString("option.socket.threads.default")));
-                accepts("d").withOptionalArg().ofType(String.class)
+                accepts("v").withOptionalArg().ofType(String.class)
                         .describedAs(resources.getString("option.verbosity.desc"));
                 accepts("?").withOptionalArg().describedAs(resources.getString("option.help.desc"));
             }
         };
-        OptionSet options = parser.parse(args);
-        if (options.has("?")) {
+
+        OptionSet options = null;
+        boolean needHelp=false;
+        try {
+           options = parser.parse(args);
+        } catch (OptionException e) {
+            needHelp=true;
+        }
+        if (needHelp || options.has("?")) {
             System.out.println(resources.getString("console.header.1"));
             try {
                 parser.printHelpOn(System.out);
             } catch (IOException e) {
                 LogUtil.error(e);
             }
-            return 0;
+            return needHelp ? 1 : 0;
         }
 
         System.out.println(resources.getString("console.header.1"));
         System.out.println(resources.getString("console.header.2"));
 
-        if (options.has("d")) {
-            LogUtil.setLevel(Level.toLevel(((String) options.valueOf("d")).toUpperCase()));
+        if (options.has("v")) {
+            LogUtil.setLevel(Level.toLevel(((String) options.valueOf("v")).toUpperCase()));
         }
 
         //start the main thread
-        ProxyDaemon daemon = new ProxyDaemon(options);
+        daemon = new ProxyDaemon(options);
         Thread mainThread = new Thread(daemon, "OSCProxy - Daemon");
         mainThread.setDaemon(true);
         mainThread.start();
