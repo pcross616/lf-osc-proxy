@@ -43,7 +43,7 @@ public class TestProxyModeBoth {
 
     @Before
     public void setUp() throws Exception {
-        server = new Thread(new ProxyServerRunner("both"), "TestProxyMode - Both");
+        server = new Thread(new ProxyServerRunner(new String[] {"osc", "lf"}), "TestProxyMode - Both");
         server.start();
 
         mockServer = new MockLightFactoryServer(3300);
@@ -97,16 +97,16 @@ public class TestProxyModeBoth {
 
     @Test
     public void testAlreadyRunning() throws Exception {
-        assertEquals(new OSCProxy().execute(new String[]{"-d", "TRACE"}), 2);
+        assertEquals(2, new OSCProxy().execute(new String[]{"-v", "TRACE"}));
     }
 
     @Test
     public void testHelpOptions() throws Exception {
-        assertEquals(new OSCProxy().execute(new String[]{"-?", "-d", "TRACE"}), 0);
+        assertEquals(0,new OSCProxy().execute(new String[]{"-?", "-v", "TRACE"}));
     }
 
     @Test
     public void testInvalidMode() throws Exception {
-        assertEquals(new OSCProxy().execute(new String[]{"-m", "foobar", "-d", "TRACE"}), 1);
+        assertEquals(1, new OSCProxy().execute(new String[]{"-m", "foobar", "-v", "TRACE"}));
     }
 }

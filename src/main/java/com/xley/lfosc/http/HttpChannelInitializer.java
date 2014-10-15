@@ -18,34 +18,19 @@
  *  under the License.
  */
 
-package com.xley.lfosc.test.support;
+package com.xley.lfosc.http;
+
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelPipeline;
+import io.netty.channel.socket.SocketChannel;
+import io.netty.handler.codec.http.HttpServerCodec;
 
 
-import com.xley.lfosc.OSCProxy;
-
-import java.util.ArrayList;
-import java.util.List;
-
-public class ProxyServerRunner implements Runnable {
-    private final String[] args;
-
-    public ProxyServerRunner(String[] modes) {
-        List<String> argList = new ArrayList<String>();
-        argList.add("-v");
-        argList.add("ALL");
-        for (String mode:modes) {
-            argList.add("-m");
-            argList.add(mode);
-        }
-        this.args = argList.toArray(new String[argList.size()]);
-    }
-
-    public ProxyServerRunner(String mode) {
-        this(new String[] {mode});
-    }
-
+public class HttpChannelInitializer extends ChannelInitializer<SocketChannel> {
     @Override
-    public void run() {
-        new OSCProxy().execute(args);
+    protected void initChannel(SocketChannel socketChannel) throws Exception {
+        ChannelPipeline p = socketChannel.pipeline();
+        p.addLast(new HttpServerCodec());
+        p.addLast(new HttpServerHandler());
     }
 }

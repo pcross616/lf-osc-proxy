@@ -18,7 +18,7 @@
  *  under the License.
  */
 
-package com.xley.lfosc.impl;
+package com.xley.lfosc.lightfactory;
 
 import com.illposed.osc.OSCMessage;
 import com.illposed.osc.OSCPortOut;
@@ -83,7 +83,7 @@ public class LightFactoryProtocol {
      * @param cmd the the input from LightFactory
      * @return the string
      */
-    protected final String process(final String cmd) {
+    public static final String process(final String cmd) {
 
         /**
          * 1. parse input syntax
@@ -95,7 +95,7 @@ public class LightFactoryProtocol {
         try {
             //find the address and verify
             while (matches.find()) {
-                LogUtil.debug(this.getClass(), resources.getString("lf.event.valid"));
+                LogUtil.debug(LightFactoryProtocol.class, resources.getString("lf.event.valid"));
                 String address = matches.group(PARTS_ADDRESS);
                 int port = Integer.parseInt(matches.group(PARTS_PORTS));
                 String container = matches.group(PARTS_CONTAINER);
@@ -103,7 +103,7 @@ public class LightFactoryProtocol {
                 OSCPortOut oscPortOut = null;
 
                 try {
-                    LogUtil.debug(this.getClass(), MessageFormat.format(resources.getString("lf.osc.port.connect"),
+                    LogUtil.debug(LightFactoryProtocol.class, MessageFormat.format(resources.getString("lf.osc.port.connect"),
                             address, port));
 
                     OSCMessage message = new OSCMessage(container);
@@ -111,11 +111,11 @@ public class LightFactoryProtocol {
                     if (data != null && data.length() > 0) {
                         Matcher dataMatches = dataPattern.matcher(data);
                         while (dataMatches.find()) {
-                            message.addArgument(convertToOSCType(dataMatches.group(2)));
+                            message.addArgument(_convertToOSCType(dataMatches.group(2)));
                         }
                     }
 
-                    LogUtil.debug(this.getClass(), MessageFormat.format(resources.getString("lf.osc.port.send"),
+                    LogUtil.debug(LightFactoryProtocol.class, MessageFormat.format(resources.getString("lf.osc.port.send"),
                             message.getAddress(), String.valueOf(message.getArguments()),
                             address, port));
 
@@ -126,7 +126,7 @@ public class LightFactoryProtocol {
                 } finally {
                     if (oscPortOut != null) {
                         oscPortOut.close();
-                        LogUtil.debug(this.getClass(), MessageFormat.format(resources.getString("lf.osc.port.close"),
+                        LogUtil.debug(LightFactoryProtocol.class, MessageFormat.format(resources.getString("lf.osc.port.close"),
                                 address, port));
                     }
                 }
@@ -154,25 +154,25 @@ public class LightFactoryProtocol {
      * @return the object
      * @throws UnsupportedEncodingException the unsupported encoding exception
      */
-    private Object convertToOSCType(final String data) throws UnsupportedEncodingException {
+    private static Object _convertToOSCType(final String data) throws UnsupportedEncodingException {
         Object ret = new String(data.getBytes("UTF-8"), Charset.defaultCharset());
         try {
             try {
                 ret = Integer.parseInt(data);
                 return ret;
             } catch (NumberFormatException nfe) {
-                LogUtil.trace(this.getClass(), nfe);
+                LogUtil.trace(LightFactoryProtocol.class, nfe);
             }
 
             try {
                 return ret = Float.parseFloat(data);
             } catch (NumberFormatException nfe) {
-                LogUtil.trace(this.getClass(), nfe);
+                LogUtil.trace(LightFactoryProtocol.class, nfe);
             }
 
             return ret;
         } finally {
-            LogUtil.trace(this.getClass(), MessageFormat.format(resources.getString("lf.osc.type.convert"),
+            LogUtil.trace(LightFactoryProtocol.class, MessageFormat.format(resources.getString("lf.osc.type.convert"),
                     data, ret.getClass().getName()));
         }
     }

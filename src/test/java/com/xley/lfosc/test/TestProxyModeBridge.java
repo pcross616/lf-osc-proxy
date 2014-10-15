@@ -23,12 +23,13 @@ package com.xley.lfosc.test;
 import com.illposed.osc.OSCMessage;
 import com.illposed.osc.OSCPort;
 import com.illposed.osc.OSCPortIn;
-import com.xley.lfosc.impl.LightFactoryProtocol;
+import com.xley.lfosc.lightfactory.LightFactoryProtocol;
 import com.xley.lfosc.test.support.MockOSCListener;
 import com.xley.lfosc.test.support.ProxyServerRunner;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import sun.misc.IOUtils;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -47,7 +48,7 @@ public class TestProxyModeBridge {
 
     @Before
     public void setUp() throws Exception {
-        server = new Thread(new ProxyServerRunner("bridge"),
+        server = new Thread(new ProxyServerRunner("lf"),
                 "TestProxyMode - Bridge");
         server.start();
         receiver = new OSCPortIn(new DatagramSocket(
@@ -118,11 +119,22 @@ public class TestProxyModeBridge {
             clientSocket = new Socket(InetAddress.getLoopbackAddress(), 3100);
             outToServer = new DataOutputStream(clientSocket.getOutputStream());
             inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+
+/*
+            int line;
+            while ((line=inFromServer.read()) != -1) {
+                if (line == '>') {
+                    inFromServer.mark(0);
+                    break;
+                }
+            }
+*/
+
             String data = "osc@" + InetAddress.getLoopbackAddress().getHostAddress()
                     + ":" + OSCPort.defaultSCOSCPort();
             outToServer.writeBytes(data);
             outToServer.flush();
-            clientSocket.shutdownOutput();
+            //clientSocket.shutdownOutput();
 
             //wait
             Thread.sleep(1000);
