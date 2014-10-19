@@ -1,3 +1,8 @@
 com.xley.lfosc
+com.xley.lfosc.http
 com.xley.lfosc.impl
+com.xley.lfosc.lightfactory.client
+com.xley.lfosc.lightfactory.server
+com.xley.lfosc.osc.client
+com.xley.lfosc.osc.server
 com.xley.lfosc.util

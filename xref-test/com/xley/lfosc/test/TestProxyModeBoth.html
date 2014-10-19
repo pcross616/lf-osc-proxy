@@ -53,7 +53,7 @@
 <a class="jxr_linenumber" name="43" href="#43">43</a>  
 <a class="jxr_linenumber" name="44" href="#44">44</a>      @Before
 <a class="jxr_linenumber" name="45" href="#45">45</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> setUp() <strong class="jxr_keyword">throws</strong> Exception {
-<a class="jxr_linenumber" name="46" href="#46">46</a>          server = <strong class="jxr_keyword">new</strong> Thread(<strong class="jxr_keyword">new</strong> <a href="../../../../com/xley/lfosc/test/support/ProxyServerRunner.html">ProxyServerRunner</a>(<span class="jxr_string">"both"</span>), <span class="jxr_string">"TestProxyMode - Both"</span>);
+<a class="jxr_linenumber" name="46" href="#46">46</a>          server = <strong class="jxr_keyword">new</strong> Thread(<strong class="jxr_keyword">new</strong> <a href="../../../../com/xley/lfosc/test/support/ProxyServerRunner.html">ProxyServerRunner</a>(<strong class="jxr_keyword">new</strong> String[] {<span class="jxr_string">"osc"</span>, <span class="jxr_string">"lf"</span>}), <span class="jxr_string">"TestProxyMode - Both"</span>);
 <a class="jxr_linenumber" name="47" href="#47">47</a>          server.start();
 <a class="jxr_linenumber" name="48" href="#48">48</a>  
 <a class="jxr_linenumber" name="49" href="#49">49</a>          mockServer = <strong class="jxr_keyword">new</strong> <a href="../../../../com/xley/lfosc/test/support/MockLightFactoryServer.html">MockLightFactoryServer</a>(3300);
@@ -107,17 +107,17 @@
 <a class="jxr_linenumber" name="97" href="#97">97</a>  
 <a class="jxr_linenumber" name="98" href="#98">98</a>      @Test
 <a class="jxr_linenumber" name="99" href="#99">99</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testAlreadyRunning() <strong class="jxr_keyword">throws</strong> Exception {
-<a class="jxr_linenumber" name="100" href="#100">100</a>         assertEquals(<strong class="jxr_keyword">new</strong> OSCProxy().execute(<strong class="jxr_keyword">new</strong> String[]{<span class="jxr_string">"-d"</span>, <span class="jxr_string">"TRACE"</span>}), 2);
+<a class="jxr_linenumber" name="100" href="#100">100</a>         assertEquals(2, <strong class="jxr_keyword">new</strong> OSCProxy().execute(<strong class="jxr_keyword">new</strong> String[]{<span class="jxr_string">"-v"</span>, <span class="jxr_string">"TRACE"</span>}));
 <a class="jxr_linenumber" name="101" href="#101">101</a>     }
 <a class="jxr_linenumber" name="102" href="#102">102</a> 
 <a class="jxr_linenumber" name="103" href="#103">103</a>     @Test
 <a class="jxr_linenumber" name="104" href="#104">104</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testHelpOptions() <strong class="jxr_keyword">throws</strong> Exception {
-<a class="jxr_linenumber" name="105" href="#105">105</a>         assertEquals(<strong class="jxr_keyword">new</strong> OSCProxy().execute(<strong class="jxr_keyword">new</strong> String[]{<span class="jxr_string">"-?"</span>, <span class="jxr_string">"-d"</span>, <span class="jxr_string">"TRACE"</span>}), 0);
+<a class="jxr_linenumber" name="105" href="#105">105</a>         assertEquals(0,<strong class="jxr_keyword">new</strong> OSCProxy().execute(<strong class="jxr_keyword">new</strong> String[]{<span class="jxr_string">"-?"</span>, <span class="jxr_string">"-v"</span>, <span class="jxr_string">"TRACE"</span>}));
 <a class="jxr_linenumber" name="106" href="#106">106</a>     }
 <a class="jxr_linenumber" name="107" href="#107">107</a> 
 <a class="jxr_linenumber" name="108" href="#108">108</a>     @Test
 <a class="jxr_linenumber" name="109" href="#109">109</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testInvalidMode() <strong class="jxr_keyword">throws</strong> Exception {
-<a class="jxr_linenumber" name="110" href="#110">110</a>         assertEquals(<strong class="jxr_keyword">new</strong> OSCProxy().execute(<strong class="jxr_keyword">new</strong> String[]{<span class="jxr_string">"-m"</span>, <span class="jxr_string">"foobar"</span>, <span class="jxr_string">"-d"</span>, <span class="jxr_string">"TRACE"</span>}), 1);
+<a class="jxr_linenumber" name="110" href="#110">110</a>         assertEquals(1, <strong class="jxr_keyword">new</strong> OSCProxy().execute(<strong class="jxr_keyword">new</strong> String[]{<span class="jxr_string">"-m"</span>, <span class="jxr_string">"foobar"</span>, <span class="jxr_string">"-v"</span>, <span class="jxr_string">"TRACE"</span>}));
 <a class="jxr_linenumber" name="111" href="#111">111</a>     }
 <a class="jxr_linenumber" name="112" href="#112">112</a> }
 </pre>

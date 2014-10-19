@@ -1,10 +1,6 @@
 <map id="G" name="G">
-<area shape="rect" id="c17" href="./LightFactoryProtocol.html" title="com.xley.lfosc.impl.LightFactoryProtocol" alt="" coords="16,11,219,133"/>
-<area shape="rect" id="node1" href="./LightFactoryProtocol.html" title="&lt;TABLE&gt;" alt="" coords="5,6,229,138"/>
-<area shape="rect" id="c18" href="./OSCProtocol.html" title="com.xley.lfosc.impl.OSCProtocol" alt="" coords="263,27,529,117"/>
-<area shape="rect" id="node2" href="./OSCProtocol.html" title="&lt;TABLE&gt;" alt="" coords="253,22,539,122"/>
-<area shape="rect" id="c19" href="./OSCProxyListener.html" title="com.xley.lfosc.impl.OSCProxyListener" alt="" coords="573,19,926,125"/>
-<area shape="rect" id="node3" href="./OSCProxyListener.html" title="&lt;TABLE&gt;" alt="" coords="563,14,936,130"/>
-<area shape="rect" id="c20" href="./LightFactoryProxyThread.html" title="com.xley.lfosc.impl.LightFactoryProxyThread" alt="" coords="970,27,1273,117"/>
-<area shape="rect" id="node4" href="./LightFactoryProxyThread.html" title="&lt;TABLE&gt;" alt="" coords="960,22,1283,122"/>
+<area shape="rect" id="c0" href="./ResultData.html" title="com.xley.lfosc.impl.ResultData" alt="" coords="15,35,177,141"/>
+<area shape="rect" id="node1" href="./ResultData.html" title="&lt;TABLE&gt;" alt="" coords="5,30,187,146"/>
+<area shape="rect" id="c1" href="./ProxyDaemon.html" title="com.xley.lfosc.impl.ProxyDaemon" alt="" coords="221,11,470,165"/>
+<area shape="rect" id="node2" href="./ProxyDaemon.html" title="&lt;TABLE&gt;" alt="" coords="211,6,480,170"/>
 </map>

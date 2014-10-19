@@ -9,23 +9,8 @@ digraph G {
 	node [fontname="Helvetica",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
-	// com.xley.lfosc.ProxyDaemon
-	c8 [label=<<table title="com.xley.lfosc.ProxyDaemon" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProxyDaemon.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ProxyDaemon </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + resources : ResourceBundle </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> # ProxyDaemon(optionSet : OptionSet) </td></tr>
-<tr><td align="left" balign="left"> + errorcode() : int </td></tr>
-<tr><td align="left" balign="left"> + shutdown() </td></tr>
-<tr><td align="left" balign="left"> + run() </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ProxyDaemon.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.OSCProxy
-	c9 [label=<<table title="com.xley.lfosc.OSCProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./OSCProxy.html">
+	c84 [label=<<table title="com.xley.lfosc.OSCProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./OSCProxy.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> OSCProxy </td></tr>
 		</table></td></tr>
