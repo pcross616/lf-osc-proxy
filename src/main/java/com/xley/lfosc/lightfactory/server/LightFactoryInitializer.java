@@ -18,7 +18,7 @@
  *  under the License.
  */
 
-package com.xley.lfosc.lightfactory;
+package com.xley.lfosc.lightfactory.server;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;

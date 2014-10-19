@@ -22,6 +22,7 @@ package com.xley.lfosc.test;
 
 import com.illposed.osc.OSCMessage;
 import com.illposed.osc.OSCPortOut;
+import com.xley.lfosc.osc.client.OSCClient;
 import com.xley.lfosc.test.support.MockLightFactoryServer;
 import com.xley.lfosc.test.support.ProxyServerRunner;
 import org.junit.After;
@@ -29,10 +30,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class TestProxyModeOSC {
     private Thread server = null;
@@ -75,11 +78,10 @@ public class TestProxyModeOSC {
 
     @Test
     public void testOSCtoLFCommand() throws Exception {
-        OSCPortOut oscPortOut = new OSCPortOut(InetAddress.getLoopbackAddress(), 3200);
         String[] args = {"bar", "1234"};
         OSCMessage msg = new OSCMessage("/lf/localhost:3300/foo", Arrays.asList((Object[]) args));
-        oscPortOut.send(msg);
-        oscPortOut.close();
+        Object response = OSCClient.send(new InetSocketAddress(InetAddress.getLoopbackAddress(),3200), msg);
+        assertNull(response);
         Thread.sleep(5000);
         assertEquals("foo bar 1234", mockServer.getLastValue());
     }

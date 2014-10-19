@@ -18,7 +18,7 @@
  *  under the License.
  */
 
-package com.xley.lfosc.lightfactory;
+package com.xley.lfosc.lightfactory.server;
 
 import com.xley.lfosc.util.LogUtil;
 import io.netty.channel.ChannelFuture;
@@ -57,13 +57,14 @@ public class LightFactoryHandler extends SimpleChannelInboundHandler<String> {
         } else {
             response = LightFactoryProtocol.process(request) + "\r\n>";
         }
+        //log the transaction
+        LogUtil.trace(getClass(), " << [" + ctx.channel().remoteAddress() + "] - " + response);
 
         // We do not need to write a ChannelBuffer here.
         // We know the encoder inserted at PipelineFactory will do the conversion.
         ChannelFuture future = ctx.write(response);
 
-        // Close the connection after sending 'Have a good day!'
-        // if the client has sent 'bye'.
+        // Close the connection
         if (close) {
             future.addListener(ChannelFutureListener.CLOSE);
         }

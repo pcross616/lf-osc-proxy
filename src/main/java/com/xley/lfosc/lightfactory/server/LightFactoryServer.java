@@ -18,40 +18,40 @@
  *  under the License.
  */
 
-package com.xley.lfosc.osc;
+package com.xley.lfosc.lightfactory.server;
 
-import com.xley.lfosc.OSCProxy;
 import com.xley.lfosc.impl.ProxyDaemon;
 import com.xley.lfosc.util.LogUtil;
-import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.ChannelOption;
+import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.EventLoopGroup;
-import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.nio.NioDatagramChannel;
+import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.logging.LoggingHandler;
 
 import java.net.InetSocketAddress;
 
-public class OSCServer implements Runnable {
+public class LightFactoryServer implements Runnable {
+
     private final InetSocketAddress binding;
-    private final Bootstrap bootstrap;
+    private final ServerBootstrap bootstrap;
     private final ProxyDaemon daemon;
 
-    public OSCServer(ProxyDaemon daemon, InetSocketAddress binding, EventLoopGroup workerGroup) {
+    public LightFactoryServer(ProxyDaemon daemon, InetSocketAddress binding,
+                              EventLoopGroup bossGroup, EventLoopGroup workerGroup) {
         this.daemon = daemon;
         this.binding = binding;
-        bootstrap = new Bootstrap();
-        bootstrap.group(workerGroup);
+        bootstrap = new ServerBootstrap();
+        bootstrap.group(bossGroup, workerGroup);
     }
 
     @Override
     public void run() {
         while (!daemon.isShutdown()) {
             try {
-                bootstrap.channel(NioDatagramChannel.class)
-                        .option(ChannelOption.SO_BROADCAST, true)
-                        .handler(new OSCServerHandler());
+                bootstrap.channel(NioServerSocketChannel.class)
+                        .handler(new LoggingHandler(this.getClass().getName()))
+                        .childHandler(new LightFactoryInitializer());
 
-                bootstrap.bind(binding).sync().channel().closeFuture().await();
+                bootstrap.bind(binding).sync().channel().closeFuture().sync();
             } catch (InterruptedException e) {
                 if (!daemon.isShutdown()) {
                     LogUtil.error(getClass(), e);

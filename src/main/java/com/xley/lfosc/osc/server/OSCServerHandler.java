@@ -18,7 +18,7 @@
  *  under the License.
  */
 
-package com.xley.lfosc.osc;
+package com.xley.lfosc.osc.server;
 
 import com.illposed.osc.OSCBundle;
 import com.illposed.osc.OSCMessage;

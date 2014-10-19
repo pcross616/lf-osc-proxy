@@ -20,7 +20,6 @@
 
 package com.xley.lfosc.http;
 
-import com.xley.lfosc.OSCProxy;
 import com.xley.lfosc.impl.ProxyDaemon;
 import com.xley.lfosc.util.LogUtil;
 import io.netty.bootstrap.ServerBootstrap;

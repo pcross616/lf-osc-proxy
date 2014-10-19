@@ -20,6 +20,8 @@
 
 package com.xley.lfosc.http;
 
+import com.xley.lfosc.lightfactory.server.LightFactoryProtocol;
+import com.xley.lfosc.osc.server.OSCProtocol;
 import com.xley.lfosc.util.LogUtil;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
@@ -29,6 +31,9 @@ import io.netty.handler.codec.http.DefaultFullHttpResponse;
 import io.netty.handler.codec.http.FullHttpResponse;
 import io.netty.handler.codec.http.HttpHeaders;
 import io.netty.handler.codec.http.HttpRequest;
+
+import java.net.URLDecoder;
+import java.nio.charset.Charset;
 
 import static io.netty.handler.codec.http.HttpHeaders.Names.*;
 import static io.netty.handler.codec.http.HttpResponseStatus.CONTINUE;
@@ -50,7 +55,23 @@ public class HttpServerHandler extends ChannelInboundHandlerAdapter {
                 ctx.write(new DefaultFullHttpResponse(HTTP_1_1, CONTINUE));
             }
             boolean keepAlive = HttpHeaders.isKeepAlive(req);
-            FullHttpResponse response = new DefaultFullHttpResponse(HTTP_1_1, OK, Unpooled.wrappedBuffer("Data here".getBytes()));
+            String uri = req.getUri();
+            String result = "Error: unknown path or invalid format.";
+
+            String[] uriParts = uri.split("/");
+            if (uriParts.length >= 4) {
+                String[] address = uriParts[2].split(":");
+                if (uri.startsWith("/lightfactory/") && address.length == 2) {
+                    result = String.valueOf(OSCProtocol.process(address[0], Integer.parseInt(address[1]),
+                            URLDecoder.decode(uriParts[3])));
+
+                } else if (uri.startsWith("/osc/") && address.length == 2) {
+                    result = String.valueOf(LightFactoryProtocol.process(address[0], Integer.parseInt(address[1]),
+                            uriParts[3], uriParts.length >= 5 ? URLDecoder.decode(uriParts[4]) : null));
+                }
+            }
+
+            FullHttpResponse response = new DefaultFullHttpResponse(HTTP_1_1, OK, Unpooled.wrappedBuffer(result.getBytes()));
             response.headers().set(CONTENT_TYPE, "text/plain");
             response.headers().set(CONTENT_LENGTH, response.content().readableBytes());
             if (!keepAlive) {

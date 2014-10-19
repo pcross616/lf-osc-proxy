@@ -23,13 +23,13 @@ package com.xley.lfosc.test;
 import com.illposed.osc.OSCMessage;
 import com.illposed.osc.OSCPort;
 import com.illposed.osc.OSCPortIn;
-import com.xley.lfosc.lightfactory.LightFactoryProtocol;
+import com.xley.lfosc.lightfactory.client.LightFactoryClient;
+import com.xley.lfosc.lightfactory.server.LightFactoryProtocol;
 import com.xley.lfosc.test.support.MockOSCListener;
 import com.xley.lfosc.test.support.ProxyServerRunner;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import sun.misc.IOUtils;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -112,71 +112,25 @@ public class TestProxyModeBridge {
 
     @Test
     public void testInvalidFormatLFtoOSC() throws Exception {
-        Socket clientSocket = null;
-        DataOutputStream outToServer = null;
-        BufferedReader inFromServer = null;
-        try {
-            clientSocket = new Socket(InetAddress.getLoopbackAddress(), 3100);
-            outToServer = new DataOutputStream(clientSocket.getOutputStream());
-            inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-/*
-            int line;
-            while ((line=inFromServer.read()) != -1) {
-                if (line == '>') {
-                    inFromServer.mark(0);
-                    break;
-                }
-            }
-*/
+        String data = "osc@" + InetAddress.getLoopbackAddress().getHostAddress()
+                + ":" + OSCPort.defaultSCOSCPort();
+        Object response = LightFactoryClient.send(new InetSocketAddress(InetAddress.getLoopbackAddress(),3100), data);
 
-            String data = "osc@" + InetAddress.getLoopbackAddress().getHostAddress()
-                    + ":" + OSCPort.defaultSCOSCPort();
-            outToServer.writeBytes(data);
-            outToServer.flush();
-            //clientSocket.shutdownOutput();
+        //wait
+        Thread.sleep(1000);
 
-            //wait
-            Thread.sleep(1000);
-
-            //did we get the error?
-            assertEquals(LightFactoryProtocol.resources.getString("lf.osc.error.invalid"), inFromServer.readLine());
-
-        } finally {
-            if (inFromServer != null) {
-                inFromServer.close();
-            }
-            if (outToServer != null) {
-                outToServer.close();
-            }
-            if (clientSocket != null) {
-                clientSocket.close();
-            }
-        }
-
+        //did we get the error?
+        assertEquals(">"+LightFactoryProtocol.resources.getString("lf.osc.error.invalid"), response);
         Thread.sleep(2000); // wait a bit
         assertEquals(listener.getMessages().size(), 0);
     }
 
     @Test
     public void testLFtoOSCBadEndpoint() throws Exception {
-        Socket clientSocket = null;
-        DataOutputStream outToServer = null;
-        try {
-            clientSocket = new Socket(InetAddress.getLoopbackAddress(), 3100);
-            outToServer = new DataOutputStream(clientSocket.getOutputStream());
-            String data = "osc@" + InetAddress.getLoopbackAddress().getHostAddress()
-                    + ":9999" + " /message/receiving abc 123 0.222\n";
-            outToServer.writeBytes(data);
-        } finally {
-            if (outToServer != null) {
-                outToServer.close();
-            }
-            if (clientSocket != null) {
-                clientSocket.close();
-            }
-        }
-
+        String data = "osc@" + InetAddress.getLoopbackAddress().getHostAddress()
+                + ":9999" + " /message/receiving abc 123 0.222\n";
+        Object response = LightFactoryClient.send(new InetSocketAddress(InetAddress.getLoopbackAddress(),3100), data);
         Thread.sleep(2000); // wait a bit
         assertEquals(listener.getMessages().size(), 0);
     }

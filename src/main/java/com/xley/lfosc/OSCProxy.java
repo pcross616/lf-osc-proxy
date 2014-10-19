@@ -91,11 +91,11 @@ public class OSCProxy {
         };
 
         OptionSet options = null;
-        boolean needHelp=false;
+        boolean needHelp = false;
         try {
-           options = parser.parse(args);
+            options = parser.parse(args);
         } catch (OptionException e) {
-            needHelp=true;
+            needHelp = true;
         }
         if (needHelp || options.has("?")) {
             System.out.println(resources.getString("console.header.1"));

@@ -18,41 +18,39 @@
  *  under the License.
  */
 
-package com.xley.lfosc.lightfactory;
+package com.xley.lfosc.osc.server;
 
-import com.xley.lfosc.OSCProxy;
 import com.xley.lfosc.impl.ProxyDaemon;
 import com.xley.lfosc.util.LogUtil;
-import io.netty.bootstrap.ServerBootstrap;
+import io.netty.bootstrap.Bootstrap;
+import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
-import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.logging.LoggingHandler;
+import io.netty.channel.socket.nio.NioDatagramChannel;
 
+import java.awt.*;
 import java.net.InetSocketAddress;
 
-public class LightFactoryServer implements Runnable {
-
+public class OSCServer implements Runnable {
     private final InetSocketAddress binding;
-    private final ServerBootstrap bootstrap;
+    private final Bootstrap bootstrap;
     private final ProxyDaemon daemon;
 
-    public LightFactoryServer(ProxyDaemon daemon, InetSocketAddress binding,
-                              EventLoopGroup bossGroup, EventLoopGroup workerGroup) {
+    public OSCServer(ProxyDaemon daemon, InetSocketAddress binding, EventLoopGroup workerGroup) {
         this.daemon = daemon;
         this.binding = binding;
-        bootstrap = new ServerBootstrap();
-        bootstrap.group(bossGroup, workerGroup);
+        bootstrap = new Bootstrap();
+        bootstrap.group(workerGroup);
     }
 
     @Override
     public void run() {
         while (!daemon.isShutdown()) {
             try {
-                bootstrap.channel(NioServerSocketChannel.class)
-                        .handler(new LoggingHandler(this.getClass().getName()))
-                        .childHandler(new LightFactoryInitializer());
+                bootstrap.channel(NioDatagramChannel.class)
+                        .option(ChannelOption.SO_BROADCAST, true)
+                        .handler(new OSCServerHandler());
 
-                bootstrap.bind(binding).sync().channel().closeFuture().sync();
+                bootstrap.bind(binding).sync().channel().closeFuture().await();
             } catch (InterruptedException e) {
                 if (!daemon.isShutdown()) {
                     LogUtil.error(getClass(), e);

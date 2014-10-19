@@ -18,15 +18,15 @@
  *  under the License.
  */
 
-package com.xley.lfosc.lightfactory;
+package com.xley.lfosc.lightfactory.server;
 
 import com.illposed.osc.OSCMessage;
-import com.illposed.osc.OSCPortOut;
+import com.xley.lfosc.osc.client.OSCClient;
 import com.xley.lfosc.util.LogUtil;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
@@ -83,54 +83,47 @@ public class LightFactoryProtocol {
      * @param cmd the the input from LightFactory
      * @return the string
      */
-    public static final String process(final String cmd) {
+    public static Object process(final String cmd) {
 
         /**
          * 1. parse input syntax
          *   osc@address:port /first/this/one data
          */
         final String command = cmd.toLowerCase();
-        boolean sent = false;
         Matcher matches = oscPattern.matcher(command);
+        //find the address and verify
+        if (matches.find()) {
+            LogUtil.debug(LightFactoryProtocol.class, resources.getString("lf.event.valid"));
+            String address = matches.group(PARTS_ADDRESS);
+            int port = Integer.parseInt(matches.group(PARTS_PORTS));
+            String container = matches.group(PARTS_CONTAINER);
+            String data = matches.group(PARTS_DATA);
+            return process(address, port, container, data);
+        }
+        return resources.getString("lf.osc.error.invalid");
+    }
+
+    public static Object process(String address, int port, String container, String data) {
         try {
-            //find the address and verify
-            while (matches.find()) {
-                LogUtil.debug(LightFactoryProtocol.class, resources.getString("lf.event.valid"));
-                String address = matches.group(PARTS_ADDRESS);
-                int port = Integer.parseInt(matches.group(PARTS_PORTS));
-                String container = matches.group(PARTS_CONTAINER);
-                String data = matches.group(PARTS_DATA);
-                OSCPortOut oscPortOut = null;
+            LogUtil.debug(LightFactoryProtocol.class, MessageFormat.format(resources.getString("lf.osc.port.connect"),
+                    address, port));
 
-                try {
-                    LogUtil.debug(LightFactoryProtocol.class, MessageFormat.format(resources.getString("lf.osc.port.connect"),
-                            address, port));
+            OSCMessage message = new OSCMessage(container);
 
-                    OSCMessage message = new OSCMessage(container);
-
-                    if (data != null && data.length() > 0) {
-                        Matcher dataMatches = dataPattern.matcher(data);
-                        while (dataMatches.find()) {
-                            message.addArgument(_convertToOSCType(dataMatches.group(2)));
-                        }
-                    }
-
-                    LogUtil.debug(LightFactoryProtocol.class, MessageFormat.format(resources.getString("lf.osc.port.send"),
-                            message.getAddress(), String.valueOf(message.getArguments()),
-                            address, port));
-
-                    //send the packet
-                    oscPortOut = new OSCPortOut(InetAddress.getByName(address), port);
-                    oscPortOut.send(message);
-                    sent = true;
-                } finally {
-                    if (oscPortOut != null) {
-                        oscPortOut.close();
-                        LogUtil.debug(LightFactoryProtocol.class, MessageFormat.format(resources.getString("lf.osc.port.close"),
-                                address, port));
-                    }
+            if (data != null && data.length() > 0) {
+                Matcher dataMatches = dataPattern.matcher(data);
+                while (dataMatches.find()) {
+                    message.addArgument(_convertToOSCType(dataMatches.group(2)));
                 }
             }
+
+            LogUtil.debug(LightFactoryProtocol.class, MessageFormat.format(resources.getString("lf.osc.port.send"),
+                    message.getAddress(), String.valueOf(message.getArguments()),
+                    address, port));
+
+            //send the packet
+            Object response = OSCClient.send(new InetSocketAddress(InetAddress.getByName(address), port), message);
+            return MessageFormat.format(resources.getString("lf.osc.success"), response);
 
         } catch (UnknownHostException e) {
             return MessageFormat.format(resources.getString("lf.osc.error.unknownhost"), e.getMessage());
@@ -138,13 +131,12 @@ public class LightFactoryProtocol {
             return MessageFormat.format(resources.getString("lf.osc.error.encoding"), e.getMessage());
         } catch (SocketException e) {
             return MessageFormat.format(resources.getString("lf.osc.error.socket"), e.getMessage());
-        } catch (IOException e) {
+        } catch (Exception e) {
             return MessageFormat.format(resources.getString("lf.osc.error.io"), e.getMessage());
+        } finally {
+            LogUtil.debug(LightFactoryProtocol.class, MessageFormat.format(resources.getString("lf.osc.port.close"),
+                    address, port));
         }
-        if (sent) {
-            return resources.getString("lf.osc.success");
-        }
-        return resources.getString("lf.osc.error.invalid");
     }
 
     /**
