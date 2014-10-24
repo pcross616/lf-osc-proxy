@@ -18,7 +18,7 @@
  *  under the License.
  */
 
-package com.xley.lfosc.http;
+package com.xley.lfosc.http.server;
 
 import com.xley.lfosc.impl.ProxyDaemon;
 import com.xley.lfosc.util.LogUtil;

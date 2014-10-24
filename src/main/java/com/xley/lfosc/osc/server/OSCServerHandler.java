@@ -21,16 +21,18 @@
 package com.xley.lfosc.osc.server;
 
 import com.illposed.osc.OSCBundle;
-import com.illposed.osc.OSCMessage;
 import com.illposed.osc.OSCPacket;
 import com.illposed.osc.utility.OSCByteArrayToJavaConverter;
+import com.xley.lfosc.IProtocolData;
+import com.xley.lfosc.ProtocolException;
+import com.xley.lfosc.ProtocolManager;
+import com.xley.lfosc.UnknownProtocolException;
 import com.xley.lfosc.util.LogUtil;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.socket.DatagramPacket;
 
 import java.nio.ByteBuffer;
-import java.util.List;
 
 public class OSCServerHandler extends SimpleChannelInboundHandler<DatagramPacket> {
     private final OSCByteArrayToJavaConverter converter = new OSCByteArrayToJavaConverter();
@@ -46,6 +48,26 @@ public class OSCServerHandler extends SimpleChannelInboundHandler<DatagramPacket
         processPacket(packet);
     }
 
+    /**
+     * Process the incomming OSC packet using Netty worker pool.
+     *
+     * @param bundle the bundle to process
+     */
+    private void processPacket(OSCPacket bundle) throws ProtocolException {
+        if (bundle instanceof OSCBundle) {
+            for (OSCPacket packet : ((OSCBundle) bundle).getPackets()) {
+                processPacket(packet);
+            }
+        } else {
+            IProtocolData data = ProtocolManager.resolve(bundle);
+            if (data == null) {
+                throw new UnknownProtocolException("Unknown OSC packet protocol");
+            }
+            data.getProtocol().process(data);
+        }
+    }
+
+
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) {
         ctx.flush();
@@ -54,22 +76,6 @@ public class OSCServerHandler extends SimpleChannelInboundHandler<DatagramPacket
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         LogUtil.error(getClass(), cause);
-    }
-
-    /**
-     * Process the incomming OSC packet using Netty worker pool.
-     *
-     * @param bundle the bundle to process
-     */
-    private void processPacket(OSCPacket bundle) {
-        if (bundle instanceof OSCBundle) {
-            List<OSCPacket> packets = ((OSCBundle) bundle).getPackets();
-            for (OSCPacket packet : packets) {
-                processPacket(packet);
-            }
-        } else {
-            OSCProtocol.process((OSCMessage) bundle);
-        }
     }
 
 }

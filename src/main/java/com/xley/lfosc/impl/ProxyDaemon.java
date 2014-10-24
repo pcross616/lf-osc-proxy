@@ -20,7 +20,7 @@
 
 package com.xley.lfosc.impl;
 
-import com.xley.lfosc.http.HttpServer;
+import com.xley.lfosc.http.server.HttpServer;
 import com.xley.lfosc.lightfactory.server.LightFactoryServer;
 import com.xley.lfosc.osc.server.OSCServer;
 import com.xley.lfosc.util.LogUtil;

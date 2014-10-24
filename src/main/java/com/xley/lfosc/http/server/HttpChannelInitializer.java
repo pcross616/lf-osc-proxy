@@ -18,7 +18,7 @@
  *  under the License.
  */
 
-package com.xley.lfosc.http;
+package com.xley.lfosc.http.server;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;

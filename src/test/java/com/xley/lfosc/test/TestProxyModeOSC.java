@@ -21,7 +21,6 @@
 package com.xley.lfosc.test;
 
 import com.illposed.osc.OSCMessage;
-import com.illposed.osc.OSCPortOut;
 import com.xley.lfosc.osc.client.OSCClient;
 import com.xley.lfosc.test.support.MockLightFactoryServer;
 import com.xley.lfosc.test.support.ProxyServerRunner;
@@ -80,7 +79,7 @@ public class TestProxyModeOSC {
     public void testOSCtoLFCommand() throws Exception {
         String[] args = {"bar", "1234"};
         OSCMessage msg = new OSCMessage("/lf/localhost:3300/foo", Arrays.asList((Object[]) args));
-        Object response = OSCClient.send(new InetSocketAddress(InetAddress.getLoopbackAddress(),3200), msg);
+        Object response = OSCClient.send(new InetSocketAddress(InetAddress.getLoopbackAddress(), 3200), msg);
         assertNull(response);
         Thread.sleep(5000);
         assertEquals("foo bar 1234", mockServer.getLastValue());

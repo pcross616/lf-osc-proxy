@@ -20,6 +20,11 @@
 
 package com.xley.lfosc.lightfactory.server;
 
+import com.xley.lfosc.IProtocolData;
+import com.xley.lfosc.ProtocolException;
+import com.xley.lfosc.ProtocolManager;
+import com.xley.lfosc.UnknownProtocolException;
+import com.xley.lfosc.lightfactory.LightFactoryProtocol;
 import com.xley.lfosc.util.LogUtil;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
@@ -28,6 +33,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
 import java.net.InetAddress;
+import java.text.MessageFormat;
 
 @Sharable
 public class LightFactoryHandler extends SimpleChannelInboundHandler<String> {
@@ -55,7 +61,18 @@ public class LightFactoryHandler extends SimpleChannelInboundHandler<String> {
             response = "Closing connection";
             close = true;
         } else {
-            response = LightFactoryProtocol.process(request) + "\r\n>";
+            IProtocolData data = ProtocolManager.resolve(request);
+
+            try {
+                if (data == null) {
+                    throw new UnknownProtocolException(LightFactoryProtocol.resources.getString("lf.error.invalid"));
+                }
+                response = MessageFormat.format(LightFactoryProtocol.resources.getString("lf.command.success"),
+                        data.getProtocol().process(data));
+            } catch (ProtocolException e) {
+                response = MessageFormat.format(LightFactoryProtocol.resources.getString("lf.command.failed"),
+                        e.getMessage());
+            }
         }
         //log the transaction
         LogUtil.trace(getClass(), " << [" + ctx.channel().remoteAddress() + "] - " + response);

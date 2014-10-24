@@ -24,22 +24,22 @@ import com.illposed.osc.OSCMessage;
 import com.illposed.osc.OSCPort;
 import com.illposed.osc.OSCPortIn;
 import com.xley.lfosc.lightfactory.client.LightFactoryClient;
-import com.xley.lfosc.lightfactory.server.LightFactoryProtocol;
+import com.xley.lfosc.lightfactory.LightFactoryProtocol;
 import com.xley.lfosc.test.support.MockOSCListener;
 import com.xley.lfosc.test.support.ProxyServerRunner;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.BufferedReader;
 import java.io.DataOutputStream;
-import java.io.InputStreamReader;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.text.MessageFormat;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class TestProxyModeBridge {
     private Thread server = null;
@@ -83,31 +83,21 @@ public class TestProxyModeBridge {
 
     @Test
     public void testLFtoOSC() throws Exception {
-        Socket clientSocket = null;
-        DataOutputStream outToServer = null;
-        try {
-            clientSocket = new Socket(InetAddress.getLoopbackAddress(), 3100);
-            outToServer = new DataOutputStream(clientSocket.getOutputStream());
-            // *** TODO: Once https://github.com/hoijui/JavaOSC/pull/14 is resolved this above test OSC message will work
-            //String data = "osc@"+InetAddress.getLoopbackAddress().getHostAddress()+":" + OSCPort.defaultSCOSCPort() + " /message/receiving testoscproxy 123 0.222\n";
-            String data = "osc@" + InetAddress.getLoopbackAddress().getHostAddress()
-                    + ":" + OSCPort.defaultSCOSCPort()
-                    + " /message/receiving testoscproxy 123 0.222 bar\n";
-            outToServer.writeBytes(data);
-            clientSocket.shutdownOutput();
-        } finally {
-            if (outToServer != null) {
-                outToServer.close();
-            }
-            if (clientSocket != null) {
-                clientSocket.close();
-            }
-        }
+
+        // *** TODO: Once https://github.com/hoijui/JavaOSC/pull/14 is resolved this above test OSC message will work
+        //String data = "osc@"+InetAddress.getLoopbackAddress().getHostAddress()+":" + OSCPort.defaultSCOSCPort() + " /message/receiving testoscproxy 123 0.222\n";
+        String data = "osc@" + InetAddress.getLoopbackAddress().getHostAddress()
+                + ":" + OSCPort.defaultSCOSCPort()
+                + " /message/receiving testoscproxy 123 0.222 bar\n";
+        Object response = LightFactoryClient.send(new InetSocketAddress(InetAddress.getLoopbackAddress(), 3100), data);
+
         Thread.sleep(3000); // wait a bit
-        assertEquals(listener.getMessages().size(), 1);
-        assertEquals(((OSCMessage) listener.getMessages().toArray()[0])
+
+        assertEquals(">",response);
+        assertEquals(1,listener.getMessages().size());
+        assertEquals("testoscproxy", ((OSCMessage) listener.getMessages().toArray()[0])
                 .getArguments()
-                .get(0), "testoscproxy");
+                .get(0));
     }
 
     @Test
@@ -115,13 +105,14 @@ public class TestProxyModeBridge {
 
         String data = "osc@" + InetAddress.getLoopbackAddress().getHostAddress()
                 + ":" + OSCPort.defaultSCOSCPort();
-        Object response = LightFactoryClient.send(new InetSocketAddress(InetAddress.getLoopbackAddress(),3100), data);
+        Object response = LightFactoryClient.send(new InetSocketAddress(InetAddress.getLoopbackAddress(), 3100), data);
 
         //wait
         Thread.sleep(1000);
 
         //did we get the error?
-        assertEquals(">"+LightFactoryProtocol.resources.getString("lf.osc.error.invalid"), response);
+        assertEquals(">" + MessageFormat.format(LightFactoryProtocol.resources.getString("lf.command.failed"),
+                                                LightFactoryProtocol.resources.getString("lf.error.invalid")), response + "\r\n>");
         Thread.sleep(2000); // wait a bit
         assertEquals(listener.getMessages().size(), 0);
     }
@@ -130,8 +121,10 @@ public class TestProxyModeBridge {
     public void testLFtoOSCBadEndpoint() throws Exception {
         String data = "osc@" + InetAddress.getLoopbackAddress().getHostAddress()
                 + ":9999" + " /message/receiving abc 123 0.222\n";
-        Object response = LightFactoryClient.send(new InetSocketAddress(InetAddress.getLoopbackAddress(),3100), data);
+        Object response = LightFactoryClient.send(new InetSocketAddress(InetAddress.getLoopbackAddress(), 3100), data);
+
         Thread.sleep(2000); // wait a bit
+        assertEquals(">",response);
         assertEquals(listener.getMessages().size(), 0);
     }
 }

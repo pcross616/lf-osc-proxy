@@ -1,4 +1,3 @@
-
 /*
  * Copyright (c) 2014. Peter Crossley
  *
@@ -41,6 +40,7 @@ public final class OSCClient {
 
     /**
      * Send an OSC event to a remote endpoint
+     *
      * @param remote the endpoint to send the event to
      * @param packet the event
      * @return any resulting data may be null
@@ -58,8 +58,9 @@ public final class OSCClient {
 
     /**
      * Send an OSC event to a remote endpoint
+     *
      * @param remote the endpoint to send the event to
-     * @param group event pool
+     * @param group  event pool
      * @param packet the event
      * @return any resulting data may be null
      * @throws Exception

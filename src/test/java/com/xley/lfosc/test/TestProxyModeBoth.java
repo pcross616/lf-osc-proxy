@@ -21,6 +21,7 @@
 package com.xley.lfosc.test;
 
 import com.xley.lfosc.OSCProxy;
+import com.xley.lfosc.lightfactory.client.LightFactoryClient;
 import com.xley.lfosc.test.support.MockLightFactoryServer;
 import com.xley.lfosc.test.support.ProxyServerRunner;
 import org.junit.After;
@@ -29,6 +30,7 @@ import org.junit.Test;
 
 import java.io.DataOutputStream;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -43,7 +45,7 @@ public class TestProxyModeBoth {
 
     @Before
     public void setUp() throws Exception {
-        server = new Thread(new ProxyServerRunner(new String[] {"osc", "lf"}), "TestProxyMode - Both");
+        server = new Thread(new ProxyServerRunner(new String[]{"osc", "lf"}), "TestProxyMode - Both");
         server.start();
 
         mockServer = new MockLightFactoryServer(3300);
@@ -76,22 +78,11 @@ public class TestProxyModeBoth {
 
     @Test
     public void testLoopback() throws Exception {
-        Socket clientSocket = null;
-        DataOutputStream outToServer = null;
-        try {
-            clientSocket = new Socket(InetAddress.getLoopbackAddress(), 3100);
-            outToServer = new DataOutputStream(clientSocket.getOutputStream());
-            String data = "osc@" + InetAddress.getLoopbackAddress().getHostAddress() + ":3200 /lf/" + InetAddress.getLoopbackAddress().getHostAddress() + ":3300/loopback test\n";
-            outToServer.writeBytes(data);
-            Thread.sleep(2000); // wait a bit
-        } finally {
-            if (outToServer != null) {
-                outToServer.close();
-            }
-            if (clientSocket != null) {
-                clientSocket.close();
-            }
-        }
+        String data = "osc@" + InetAddress.getLoopbackAddress().getHostAddress() +
+                ":3200 /lf/" + InetAddress.getLoopbackAddress().getHostAddress() +
+                ":3300/loopback test\n";
+
+        LightFactoryClient.send(new InetSocketAddress(InetAddress.getLoopbackAddress(), 3100), data);
         assertEquals("loopback test", mockServer.getLastValue());
     }
 
@@ -102,7 +93,7 @@ public class TestProxyModeBoth {
 
     @Test
     public void testHelpOptions() throws Exception {
-        assertEquals(0,new OSCProxy().execute(new String[]{"-?", "-v", "TRACE"}));
+        assertEquals(0, new OSCProxy().execute(new String[]{"-?", "-v", "TRACE"}));
     }
 
     @Test

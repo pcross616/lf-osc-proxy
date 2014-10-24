@@ -37,7 +37,8 @@ public final class LightFactoryClient {
 
     /**
      * Send command to a remote LightFactory
-     * @param remote address for LightFactor
+     *
+     * @param remote  address for LightFactor
      * @param command the command to run
      * @return any result text
      * @throws Exception may throw a socket or io error
@@ -45,7 +46,7 @@ public final class LightFactoryClient {
     public static Object send(final SocketAddress remote, final CharSequence command) throws Exception {
         NioEventLoopGroup group = new NioEventLoopGroup();
         try {
-            return send(remote, group , command);
+            return send(remote, group, command);
         } finally {
             group.shutdownGracefully();
         }
@@ -53,8 +54,9 @@ public final class LightFactoryClient {
 
     /**
      * Send command to a remote LightFactory
-     * @param remote address for LightFactory
-     * @param group the event worker group for NIO sockets
+     *
+     * @param remote  address for LightFactory
+     * @param group   the event worker group for NIO sockets
      * @param command the command to run
      * @return any result text
      * @throws Exception may throw a socket or io error

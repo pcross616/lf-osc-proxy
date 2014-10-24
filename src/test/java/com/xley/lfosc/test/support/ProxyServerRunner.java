@@ -33,7 +33,7 @@ public class ProxyServerRunner implements Runnable {
         List<String> argList = new ArrayList<String>();
         argList.add("-v");
         argList.add("ALL");
-        for (String mode:modes) {
+        for (String mode : modes) {
             argList.add("-m");
             argList.add(mode);
         }
@@ -41,7 +41,7 @@ public class ProxyServerRunner implements Runnable {
     }
 
     public ProxyServerRunner(String mode) {
-        this(new String[] {mode});
+        this(new String[]{mode});
     }
 
     @Override
