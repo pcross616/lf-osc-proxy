@@ -34,22 +34,22 @@
 <a class="jxr_linenumber" name="24" href="#24">24</a>  <strong class="jxr_keyword">import</strong> com.illposed.osc.OSCPort;
 <a class="jxr_linenumber" name="25" href="#25">25</a>  <strong class="jxr_keyword">import</strong> com.illposed.osc.OSCPortIn;
 <a class="jxr_linenumber" name="26" href="#26">26</a>  <strong class="jxr_keyword">import</strong> com.xley.lfosc.lightfactory.client.LightFactoryClient;
-<a class="jxr_linenumber" name="27" href="#27">27</a>  <strong class="jxr_keyword">import</strong> com.xley.lfosc.lightfactory.server.LightFactoryProtocol;
+<a class="jxr_linenumber" name="27" href="#27">27</a>  <strong class="jxr_keyword">import</strong> com.xley.lfosc.lightfactory.LightFactoryProtocol;
 <a class="jxr_linenumber" name="28" href="#28">28</a>  <strong class="jxr_keyword">import</strong> com.xley.lfosc.test.support.MockOSCListener;
 <a class="jxr_linenumber" name="29" href="#29">29</a>  <strong class="jxr_keyword">import</strong> com.xley.lfosc.test.support.ProxyServerRunner;
 <a class="jxr_linenumber" name="30" href="#30">30</a>  <strong class="jxr_keyword">import</strong> org.junit.After;
 <a class="jxr_linenumber" name="31" href="#31">31</a>  <strong class="jxr_keyword">import</strong> org.junit.Before;
 <a class="jxr_linenumber" name="32" href="#32">32</a>  <strong class="jxr_keyword">import</strong> org.junit.Test;
 <a class="jxr_linenumber" name="33" href="#33">33</a>  
-<a class="jxr_linenumber" name="34" href="#34">34</a>  <strong class="jxr_keyword">import</strong> java.io.BufferedReader;
-<a class="jxr_linenumber" name="35" href="#35">35</a>  <strong class="jxr_keyword">import</strong> java.io.DataOutputStream;
-<a class="jxr_linenumber" name="36" href="#36">36</a>  <strong class="jxr_keyword">import</strong> java.io.InputStreamReader;
-<a class="jxr_linenumber" name="37" href="#37">37</a>  <strong class="jxr_keyword">import</strong> java.net.DatagramSocket;
-<a class="jxr_linenumber" name="38" href="#38">38</a>  <strong class="jxr_keyword">import</strong> java.net.InetAddress;
-<a class="jxr_linenumber" name="39" href="#39">39</a>  <strong class="jxr_keyword">import</strong> java.net.InetSocketAddress;
-<a class="jxr_linenumber" name="40" href="#40">40</a>  <strong class="jxr_keyword">import</strong> java.net.Socket;
-<a class="jxr_linenumber" name="41" href="#41">41</a>  
-<a class="jxr_linenumber" name="42" href="#42">42</a>  <strong class="jxr_keyword">import</strong> <strong class="jxr_keyword">static</strong> org.junit.Assert.assertEquals;
+<a class="jxr_linenumber" name="34" href="#34">34</a>  <strong class="jxr_keyword">import</strong> java.io.DataOutputStream;
+<a class="jxr_linenumber" name="35" href="#35">35</a>  <strong class="jxr_keyword">import</strong> java.net.DatagramSocket;
+<a class="jxr_linenumber" name="36" href="#36">36</a>  <strong class="jxr_keyword">import</strong> java.net.InetAddress;
+<a class="jxr_linenumber" name="37" href="#37">37</a>  <strong class="jxr_keyword">import</strong> java.net.InetSocketAddress;
+<a class="jxr_linenumber" name="38" href="#38">38</a>  <strong class="jxr_keyword">import</strong> java.net.Socket;
+<a class="jxr_linenumber" name="39" href="#39">39</a>  <strong class="jxr_keyword">import</strong> java.text.MessageFormat;
+<a class="jxr_linenumber" name="40" href="#40">40</a>  
+<a class="jxr_linenumber" name="41" href="#41">41</a>  <strong class="jxr_keyword">import</strong> <strong class="jxr_keyword">static</strong> org.junit.Assert.assertEquals;
+<a class="jxr_linenumber" name="42" href="#42">42</a>  <strong class="jxr_keyword">import</strong> <strong class="jxr_keyword">static</strong> org.junit.Assert.assertNull;
 <a class="jxr_linenumber" name="43" href="#43">43</a>  
 <a class="jxr_linenumber" name="44" href="#44">44</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../com/xley/lfosc/test/TestProxyModeBridge.html">TestProxyModeBridge</a> {
 <a class="jxr_linenumber" name="45" href="#45">45</a>      <strong class="jxr_keyword">private</strong> Thread server = <strong class="jxr_keyword">null</strong>;
@@ -93,58 +93,51 @@
 <a class="jxr_linenumber" name="83" href="#83">83</a>  
 <a class="jxr_linenumber" name="84" href="#84">84</a>      @Test
 <a class="jxr_linenumber" name="85" href="#85">85</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testLFtoOSC() <strong class="jxr_keyword">throws</strong> Exception {
-<a class="jxr_linenumber" name="86" href="#86">86</a>          Socket clientSocket = <strong class="jxr_keyword">null</strong>;
-<a class="jxr_linenumber" name="87" href="#87">87</a>          DataOutputStream outToServer = <strong class="jxr_keyword">null</strong>;
-<a class="jxr_linenumber" name="88" href="#88">88</a>          <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="89" href="#89">89</a>              clientSocket = <strong class="jxr_keyword">new</strong> Socket(InetAddress.getLoopbackAddress(), 3100);
-<a class="jxr_linenumber" name="90" href="#90">90</a>              outToServer = <strong class="jxr_keyword">new</strong> DataOutputStream(clientSocket.getOutputStream());
-<a class="jxr_linenumber" name="91" href="#91">91</a>              <em class="jxr_comment">// *** TODO: Once https://github.com/hoijui/JavaOSC/pull/14 is resolved this above test OSC message will work</em>
-<a class="jxr_linenumber" name="92" href="#92">92</a>              <em class="jxr_comment">//String data = "osc@"+InetAddress.getLoopbackAddress().getHostAddress()+":" + OSCPort.defaultSCOSCPort() + " /message/receiving testoscproxy 123 0.222\n";</em>
-<a class="jxr_linenumber" name="93" href="#93">93</a>              String data = <span class="jxr_string">"osc@"</span> + InetAddress.getLoopbackAddress().getHostAddress()
-<a class="jxr_linenumber" name="94" href="#94">94</a>                      + <span class="jxr_string">":"</span> + OSCPort.defaultSCOSCPort()
-<a class="jxr_linenumber" name="95" href="#95">95</a>                      + <span class="jxr_string">" /message/receiving testoscproxy 123 0.222 bar\n"</span>;
-<a class="jxr_linenumber" name="96" href="#96">96</a>              outToServer.writeBytes(data);
-<a class="jxr_linenumber" name="97" href="#97">97</a>              clientSocket.shutdownOutput();
-<a class="jxr_linenumber" name="98" href="#98">98</a>          } <strong class="jxr_keyword">finally</strong> {
-<a class="jxr_linenumber" name="99" href="#99">99</a>              <strong class="jxr_keyword">if</strong> (outToServer != <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="100" href="#100">100</a>                 outToServer.close();
-<a class="jxr_linenumber" name="101" href="#101">101</a>             }
-<a class="jxr_linenumber" name="102" href="#102">102</a>             <strong class="jxr_keyword">if</strong> (clientSocket != <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="103" href="#103">103</a>                 clientSocket.close();
-<a class="jxr_linenumber" name="104" href="#104">104</a>             }
-<a class="jxr_linenumber" name="105" href="#105">105</a>         }
-<a class="jxr_linenumber" name="106" href="#106">106</a>         Thread.sleep(3000); <em class="jxr_comment">// wait a bit</em>
-<a class="jxr_linenumber" name="107" href="#107">107</a>         assertEquals(listener.getMessages().size(), 1);
-<a class="jxr_linenumber" name="108" href="#108">108</a>         assertEquals(((OSCMessage) listener.getMessages().toArray()[0])
-<a class="jxr_linenumber" name="109" href="#109">109</a>                 .getArguments()
-<a class="jxr_linenumber" name="110" href="#110">110</a>                 .get(0), <span class="jxr_string">"testoscproxy"</span>);
-<a class="jxr_linenumber" name="111" href="#111">111</a>     }
+<a class="jxr_linenumber" name="86" href="#86">86</a>  
+<a class="jxr_linenumber" name="87" href="#87">87</a>          <em class="jxr_comment">// *** TODO: Once https://github.com/hoijui/JavaOSC/pull/14 is resolved this above test OSC message will work</em>
+<a class="jxr_linenumber" name="88" href="#88">88</a>          <em class="jxr_comment">//String data = "osc@"+InetAddress.getLoopbackAddress().getHostAddress()+":" + OSCPort.defaultSCOSCPort() + " /message/receiving testoscproxy 123 0.222\n";</em>
+<a class="jxr_linenumber" name="89" href="#89">89</a>          String data = <span class="jxr_string">"osc@"</span> + InetAddress.getLoopbackAddress().getHostAddress()
+<a class="jxr_linenumber" name="90" href="#90">90</a>                  + <span class="jxr_string">":"</span> + OSCPort.defaultSCOSCPort()
+<a class="jxr_linenumber" name="91" href="#91">91</a>                  + <span class="jxr_string">" /message/receiving testoscproxy 123 0.222 bar\n"</span>;
+<a class="jxr_linenumber" name="92" href="#92">92</a>          Object response = LightFactoryClient.send(<strong class="jxr_keyword">new</strong> InetSocketAddress(InetAddress.getLoopbackAddress(), 3100), data);
+<a class="jxr_linenumber" name="93" href="#93">93</a>  
+<a class="jxr_linenumber" name="94" href="#94">94</a>          Thread.sleep(3000); <em class="jxr_comment">// wait a bit</em>
+<a class="jxr_linenumber" name="95" href="#95">95</a>  
+<a class="jxr_linenumber" name="96" href="#96">96</a>          assertEquals(<span class="jxr_string">"&gt;"</span>,response);
+<a class="jxr_linenumber" name="97" href="#97">97</a>          assertEquals(1,listener.getMessages().size());
+<a class="jxr_linenumber" name="98" href="#98">98</a>          assertEquals(<span class="jxr_string">"testoscproxy"</span>, ((OSCMessage) listener.getMessages().toArray()[0])
+<a class="jxr_linenumber" name="99" href="#99">99</a>                  .getArguments()
+<a class="jxr_linenumber" name="100" href="#100">100</a>                 .get(0));
+<a class="jxr_linenumber" name="101" href="#101">101</a>     }
+<a class="jxr_linenumber" name="102" href="#102">102</a> 
+<a class="jxr_linenumber" name="103" href="#103">103</a>     @Test
+<a class="jxr_linenumber" name="104" href="#104">104</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testInvalidFormatLFtoOSC() <strong class="jxr_keyword">throws</strong> Exception {
+<a class="jxr_linenumber" name="105" href="#105">105</a> 
+<a class="jxr_linenumber" name="106" href="#106">106</a>         String data = <span class="jxr_string">"osc@"</span> + InetAddress.getLoopbackAddress().getHostAddress()
+<a class="jxr_linenumber" name="107" href="#107">107</a>                 + <span class="jxr_string">":"</span> + OSCPort.defaultSCOSCPort();
+<a class="jxr_linenumber" name="108" href="#108">108</a>         Object response = LightFactoryClient.send(<strong class="jxr_keyword">new</strong> InetSocketAddress(InetAddress.getLoopbackAddress(), 3100), data);
+<a class="jxr_linenumber" name="109" href="#109">109</a> 
+<a class="jxr_linenumber" name="110" href="#110">110</a>         <em class="jxr_comment">//wait</em>
+<a class="jxr_linenumber" name="111" href="#111">111</a>         Thread.sleep(1000);
 <a class="jxr_linenumber" name="112" href="#112">112</a> 
-<a class="jxr_linenumber" name="113" href="#113">113</a>     @Test
-<a class="jxr_linenumber" name="114" href="#114">114</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testInvalidFormatLFtoOSC() <strong class="jxr_keyword">throws</strong> Exception {
-<a class="jxr_linenumber" name="115" href="#115">115</a> 
-<a class="jxr_linenumber" name="116" href="#116">116</a>         String data = <span class="jxr_string">"osc@"</span> + InetAddress.getLoopbackAddress().getHostAddress()
-<a class="jxr_linenumber" name="117" href="#117">117</a>                 + <span class="jxr_string">":"</span> + OSCPort.defaultSCOSCPort();
-<a class="jxr_linenumber" name="118" href="#118">118</a>         Object response = LightFactoryClient.send(<strong class="jxr_keyword">new</strong> InetSocketAddress(InetAddress.getLoopbackAddress(),3100), data);
+<a class="jxr_linenumber" name="113" href="#113">113</a>         <em class="jxr_comment">//did we get the error?</em>
+<a class="jxr_linenumber" name="114" href="#114">114</a>         assertEquals(<span class="jxr_string">"&gt;"</span> + MessageFormat.format(LightFactoryProtocol.resources.getString(<span class="jxr_string">"lf.command.failed"</span>),
+<a class="jxr_linenumber" name="115" href="#115">115</a>                                                 LightFactoryProtocol.resources.getString(<span class="jxr_string">"lf.error.invalid"</span>)), response + <span class="jxr_string">"\r\n&gt;"</span>);
+<a class="jxr_linenumber" name="116" href="#116">116</a>         Thread.sleep(2000); <em class="jxr_comment">// wait a bit</em>
+<a class="jxr_linenumber" name="117" href="#117">117</a>         assertEquals(listener.getMessages().size(), 0);
+<a class="jxr_linenumber" name="118" href="#118">118</a>     }
 <a class="jxr_linenumber" name="119" href="#119">119</a> 
-<a class="jxr_linenumber" name="120" href="#120">120</a>         <em class="jxr_comment">//wait</em>
-<a class="jxr_linenumber" name="121" href="#121">121</a>         Thread.sleep(1000);
-<a class="jxr_linenumber" name="122" href="#122">122</a> 
-<a class="jxr_linenumber" name="123" href="#123">123</a>         <em class="jxr_comment">//did we get the error?</em>
-<a class="jxr_linenumber" name="124" href="#124">124</a>         assertEquals(<span class="jxr_string">"&gt;"</span>+LightFactoryProtocol.resources.getString(<span class="jxr_string">"lf.osc.error.invalid"</span>), response);
-<a class="jxr_linenumber" name="125" href="#125">125</a>         Thread.sleep(2000); <em class="jxr_comment">// wait a bit</em>
-<a class="jxr_linenumber" name="126" href="#126">126</a>         assertEquals(listener.getMessages().size(), 0);
-<a class="jxr_linenumber" name="127" href="#127">127</a>     }
-<a class="jxr_linenumber" name="128" href="#128">128</a> 
-<a class="jxr_linenumber" name="129" href="#129">129</a>     @Test
-<a class="jxr_linenumber" name="130" href="#130">130</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testLFtoOSCBadEndpoint() <strong class="jxr_keyword">throws</strong> Exception {
-<a class="jxr_linenumber" name="131" href="#131">131</a>         String data = <span class="jxr_string">"osc@"</span> + InetAddress.getLoopbackAddress().getHostAddress()
-<a class="jxr_linenumber" name="132" href="#132">132</a>                 + <span class="jxr_string">":9999"</span> + <span class="jxr_string">" /message/receiving abc 123 0.222\n"</span>;
-<a class="jxr_linenumber" name="133" href="#133">133</a>         Object response = LightFactoryClient.send(<strong class="jxr_keyword">new</strong> InetSocketAddress(InetAddress.getLoopbackAddress(),3100), data);
-<a class="jxr_linenumber" name="134" href="#134">134</a>         Thread.sleep(2000); <em class="jxr_comment">// wait a bit</em>
-<a class="jxr_linenumber" name="135" href="#135">135</a>         assertEquals(listener.getMessages().size(), 0);
-<a class="jxr_linenumber" name="136" href="#136">136</a>     }
-<a class="jxr_linenumber" name="137" href="#137">137</a> }
+<a class="jxr_linenumber" name="120" href="#120">120</a>     @Test
+<a class="jxr_linenumber" name="121" href="#121">121</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testLFtoOSCBadEndpoint() <strong class="jxr_keyword">throws</strong> Exception {
+<a class="jxr_linenumber" name="122" href="#122">122</a>         String data = <span class="jxr_string">"osc@"</span> + InetAddress.getLoopbackAddress().getHostAddress()
+<a class="jxr_linenumber" name="123" href="#123">123</a>                 + <span class="jxr_string">":9999"</span> + <span class="jxr_string">" /message/receiving abc 123 0.222\n"</span>;
+<a class="jxr_linenumber" name="124" href="#124">124</a>         Object response = LightFactoryClient.send(<strong class="jxr_keyword">new</strong> InetSocketAddress(InetAddress.getLoopbackAddress(), 3100), data);
+<a class="jxr_linenumber" name="125" href="#125">125</a> 
+<a class="jxr_linenumber" name="126" href="#126">126</a>         Thread.sleep(2000); <em class="jxr_comment">// wait a bit</em>
+<a class="jxr_linenumber" name="127" href="#127">127</a>         assertEquals(<span class="jxr_string">"&gt;"</span>,response);
+<a class="jxr_linenumber" name="128" href="#128">128</a>         assertEquals(listener.getMessages().size(), 0);
+<a class="jxr_linenumber" name="129" href="#129">129</a>     }
+<a class="jxr_linenumber" name="130" href="#130">130</a> }
 </pre>
 <hr/><div id="footer">This page was automatically generated by <a href="http://maven.apache.org/">Maven</a></div></body>
 </html>

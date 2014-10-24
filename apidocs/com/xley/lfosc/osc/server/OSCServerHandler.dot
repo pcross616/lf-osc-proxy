@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// com.xley.lfosc.osc.server.OSCServerHandler
-	c497 [label=<<table title="com.xley.lfosc.osc.server.OSCServerHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./OSCServerHandler.html">
+	c970 [label=<<table title="com.xley.lfosc.osc.server.OSCServerHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./OSCServerHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> OSCServerHandler </td></tr>
 		</table></td></tr>
@@ -25,9 +25,9 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="./OSCServerHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.xley.lfosc.osc.server.OSCServerHandler extends io.netty.channel.SimpleChannelInboundHandler<io.netty.channel.socket.DatagramPacket>
-	c510:p -> c497:p [dir=back,arrowtail=empty];
+	c997:p -> c970:p [dir=back,arrowtail=empty];
 	// io.netty.channel.SimpleChannelInboundHandler<I>
-	c510 [label=<<table title="io.netty.channel.SimpleChannelInboundHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/io/netty/channel/SimpleChannelInboundHandler.html">
+	c997 [label=<<table title="io.netty.channel.SimpleChannelInboundHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/io/netty/channel/SimpleChannelInboundHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> SimpleChannelInboundHandler&lt;I&gt; </font></td></tr>
 		</table></td></tr>

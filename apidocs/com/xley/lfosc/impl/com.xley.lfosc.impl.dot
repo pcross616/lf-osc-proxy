@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// com.xley.lfosc.impl.ResultData
-	c0 [label=<<table title="com.xley.lfosc.impl.ResultData" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ResultData.html">
+	c239 [label=<<table title="com.xley.lfosc.impl.ResultData" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ResultData.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ResultData </td></tr>
 		</table></td></tr>
@@ -24,7 +24,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="./ResultData.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.impl.ProxyDaemon
-	c1 [label=<<table title="com.xley.lfosc.impl.ProxyDaemon" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProxyDaemon.html">
+	c240 [label=<<table title="com.xley.lfosc.impl.ProxyDaemon" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProxyDaemon.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ProxyDaemon </td></tr>
 		</table></td></tr>
@@ -40,5 +40,26 @@ digraph G {
 <tr><td align="left" balign="left"> + run() </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ProxyDaemon.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.xley.lfosc.impl.SimpleProtocolData
+	c241 [label=<<table title="com.xley.lfosc.impl.SimpleProtocolData" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SimpleProtocolData.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> SimpleProtocolData </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> # protocol : String </td></tr>
+<tr><td align="left" balign="left"> # target : String </td></tr>
+<tr><td align="left" balign="left"> # operation : String </td></tr>
+<tr><td align="left" balign="left"> # data : List&lt;Object&gt; </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + SimpleProtocolData(protocol : String, target : String, operation : String, data : List&lt;Object&gt;) </td></tr>
+<tr><td align="left" balign="left"> + getType() : String </td></tr>
+<tr><td align="left" balign="left"> + getProtocol() : IProtocol </td></tr>
+<tr><td align="left" balign="left"> + getTarget() : String </td></tr>
+<tr><td align="left" balign="left"> + getOperation() : String </td></tr>
+<tr><td align="left" balign="left"> + getData() : List&lt;Object&gt; </td></tr>
+<tr><td align="left" balign="left"> + configureProtocolData(value : Object) : IProtocolData </td></tr>
+		</table></td></tr>
+		</table>>, URL="./SimpleProtocolData.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

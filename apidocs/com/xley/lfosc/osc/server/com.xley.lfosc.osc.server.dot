@@ -9,21 +9,8 @@ digraph G {
 	node [fontname="Helvetica",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
-	// com.xley.lfosc.osc.server.OSCServer
-	c62 [label=<<table title="com.xley.lfosc.osc.server.OSCServer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./OSCServer.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> OSCServer </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left">  </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + OSCServer(daemon : ProxyDaemon, binding : InetSocketAddress, workerGroup : EventLoopGroup) </td></tr>
-<tr><td align="left" balign="left"> + run() </td></tr>
-		</table></td></tr>
-		</table>>, URL="./OSCServer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.osc.server.OSCServerHandler
-	c63 [label=<<table title="com.xley.lfosc.osc.server.OSCServerHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./OSCServerHandler.html">
+	c29 [label=<<table title="com.xley.lfosc.osc.server.OSCServerHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./OSCServerHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> OSCServerHandler </td></tr>
 		</table></td></tr>
@@ -37,19 +24,18 @@ digraph G {
 <tr><td align="left" balign="left"> + exceptionCaught(ctx : ChannelHandlerContext, cause : Throwable) </td></tr>
 		</table></td></tr>
 		</table>>, URL="./OSCServerHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.xley.lfosc.osc.server.OSCProtocol
-	c64 [label=<<table title="com.xley.lfosc.osc.server.OSCProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./OSCProtocol.html">
+	// com.xley.lfosc.osc.server.OSCServer
+	c30 [label=<<table title="com.xley.lfosc.osc.server.OSCServer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./OSCServer.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> OSCProtocol </font></td></tr>
+<tr><td align="center" balign="center"> OSCServer </td></tr>
 		</table></td></tr>
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + resources : ResourceBundle </td></tr>
+<tr><td align="left" balign="left">  </td></tr>
 		</table></td></tr>
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + OSCProtocol() </td></tr>
-<tr><td align="left" balign="left"> + process(message : OSCMessage) : Object </td></tr>
-<tr><td align="left" balign="left"> + process(address : String, port : int, cmd : CharSequence) : Object </td></tr>
+<tr><td align="left" balign="left"> + OSCServer(daemon : ProxyDaemon, binding : InetSocketAddress, workerGroup : EventLoopGroup) </td></tr>
+<tr><td align="left" balign="left"> + run() </td></tr>
 		</table></td></tr>
-		</table>>, URL="./OSCProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./OSCServer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

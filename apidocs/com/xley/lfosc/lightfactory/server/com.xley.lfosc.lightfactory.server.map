@@ -1,10 +1,8 @@
 <map id="G" name="G">
-<area shape="rect" id="c126" href="./LightFactoryServer.html" title="com.xley.lfosc.lightfactory.server.LightFactoryServer" alt="" coords="16,35,851,125"/>
-<area shape="rect" id="node1" href="./LightFactoryServer.html" title="&lt;TABLE&gt;" alt="" coords="5,30,861,130"/>
-<area shape="rect" id="c127" href="./LightFactoryProtocol.html" title="com.xley.lfosc.lightfactory.server.LightFactoryProtocol" alt="" coords="895,11,1366,149"/>
-<area shape="rect" id="node2" href="./LightFactoryProtocol.html" title="&lt;TABLE&gt;" alt="" coords="885,6,1376,154"/>
-<area shape="rect" id="c128" href="./LightFactoryInitializer.html" title="com.xley.lfosc.lightfactory.server.LightFactoryInitializer" alt="" coords="1411,35,1632,125"/>
-<area shape="rect" id="node3" href="./LightFactoryInitializer.html" title="&lt;TABLE&gt;" alt="" coords="1400,30,1643,130"/>
-<area shape="rect" id="c129" href="./LightFactoryHandler.html" title="com.xley.lfosc.lightfactory.server.LightFactoryHandler" alt="" coords="1677,11,2099,149"/>
-<area shape="rect" id="node4" href="./LightFactoryHandler.html" title="&lt;TABLE&gt;" alt="" coords="1667,6,2109,154"/>
+<area shape="rect" id="c148" href="./LightFactoryInitializer.html" title="com.xley.lfosc.lightfactory.server.LightFactoryInitializer" alt="" coords="16,35,237,125"/>
+<area shape="rect" id="node1" href="./LightFactoryInitializer.html" title="&lt;TABLE&gt;" alt="" coords="5,30,248,130"/>
+<area shape="rect" id="c149" href="./LightFactoryHandler.html" title="com.xley.lfosc.lightfactory.server.LightFactoryHandler" alt="" coords="282,11,705,149"/>
+<area shape="rect" id="node2" href="./LightFactoryHandler.html" title="&lt;TABLE&gt;" alt="" coords="272,6,715,154"/>
+<area shape="rect" id="c150" href="./LightFactoryServer.html" title="com.xley.lfosc.lightfactory.server.LightFactoryServer" alt="" coords="749,35,1584,125"/>
+<area shape="rect" id="node3" href="./LightFactoryServer.html" title="&lt;TABLE&gt;" alt="" coords="739,30,1595,130"/>
 </map>

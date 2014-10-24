@@ -9,46 +9,20 @@ digraph G {
 	node [fontname="Helvetica",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
-	// com.xley.lfosc.http.HttpServerHandler
-	c149 [label=<<table title="com.xley.lfosc.http.HttpServerHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HttpServerHandler.html">
+	// com.xley.lfosc.http.HttpProtocol
+	c301 [label=<<table title="com.xley.lfosc.http.HttpProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HttpProtocol.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> HttpServerHandler </td></tr>
+<tr><td align="center" balign="center"> HttpProtocol </td></tr>
 		</table></td></tr>
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left">  </td></tr>
+<tr><td align="left" balign="left"> + resources : ResourceBundle </td></tr>
 		</table></td></tr>
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + HttpServerHandler() </td></tr>
-<tr><td align="left" balign="left"> + channelReadComplete(ctx : ChannelHandlerContext) </td></tr>
-<tr><td align="left" balign="left"> + channelRead(ctx : ChannelHandlerContext, msg : Object) </td></tr>
-<tr><td align="left" balign="left"> + exceptionCaught(ctx : ChannelHandlerContext, cause : Throwable) </td></tr>
+<tr><td align="left" balign="left"> + HttpProtocol() </td></tr>
+<tr><td align="left" balign="left"> + process(data : IProtocolData) : Object </td></tr>
+<tr><td align="left" balign="left"> + createProtocolData(value : Object) : IProtocolData </td></tr>
+<tr><td align="left" balign="left"> + configureProtocolData(data : IProtocolData, value : Object) : IProtocolData </td></tr>
 		</table></td></tr>
-		</table>>, URL="./HttpServerHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.xley.lfosc.http.HttpServer
-	c150 [label=<<table title="com.xley.lfosc.http.HttpServer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HttpServer.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> HttpServer </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left">  </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + HttpServer(daemon : ProxyDaemon, binding : InetSocketAddress, bossGroup : EventLoopGroup, workerGroup : EventLoopGroup) </td></tr>
-<tr><td align="left" balign="left"> + run() </td></tr>
-		</table></td></tr>
-		</table>>, URL="./HttpServer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.xley.lfosc.http.HttpChannelInitializer
-	c151 [label=<<table title="com.xley.lfosc.http.HttpChannelInitializer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./HttpChannelInitializer.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> HttpChannelInitializer </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left">  </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + HttpChannelInitializer() </td></tr>
-<tr><td align="left" balign="left"> # initChannel(socketChannel : SocketChannel) </td></tr>
-		</table></td></tr>
-		</table>>, URL="./HttpChannelInitializer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./HttpProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

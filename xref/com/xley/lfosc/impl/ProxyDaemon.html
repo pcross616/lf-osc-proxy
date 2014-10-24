@@ -30,7 +30,7 @@
 <a class="jxr_linenumber" name="20" href="#20">20</a>  
 <a class="jxr_linenumber" name="21" href="#21">21</a>  <strong class="jxr_keyword">package</strong> com.xley.lfosc.impl;
 <a class="jxr_linenumber" name="22" href="#22">22</a>  
-<a class="jxr_linenumber" name="23" href="#23">23</a>  <strong class="jxr_keyword">import</strong> com.xley.lfosc.http.HttpServer;
+<a class="jxr_linenumber" name="23" href="#23">23</a>  <strong class="jxr_keyword">import</strong> com.xley.lfosc.http.server.HttpServer;
 <a class="jxr_linenumber" name="24" href="#24">24</a>  <strong class="jxr_keyword">import</strong> com.xley.lfosc.lightfactory.server.LightFactoryServer;
 <a class="jxr_linenumber" name="25" href="#25">25</a>  <strong class="jxr_keyword">import</strong> com.xley.lfosc.osc.server.OSCServer;
 <a class="jxr_linenumber" name="26" href="#26">26</a>  <strong class="jxr_keyword">import</strong> com.xley.lfosc.util.LogUtil;
@@ -181,7 +181,7 @@
 <a class="jxr_linenumber" name="171" href="#171">171</a>             <em class="jxr_comment">//start http server</em>
 <a class="jxr_linenumber" name="172" href="#172">172</a>             <strong class="jxr_keyword">if</strong> (httpServer) {
 <a class="jxr_linenumber" name="173" href="#173">173</a>                 InetSocketAddress binding = <strong class="jxr_keyword">new</strong> InetSocketAddress(InetAddress.getByName(host), httpPortNumber);
-<a class="jxr_linenumber" name="174" href="#174">174</a>                 httpServerThread = <strong class="jxr_keyword">new</strong> Thread(<strong class="jxr_keyword">new</strong> <a href="../../../../com/xley/lfosc/http/HttpServer.html">HttpServer</a>(<strong class="jxr_keyword">this</strong>, binding, bossGroup, workerGroup), <span class="jxr_string">"OSCProxy - HTTP Server"</span>);
+<a class="jxr_linenumber" name="174" href="#174">174</a>                 httpServerThread = <strong class="jxr_keyword">new</strong> Thread(<strong class="jxr_keyword">new</strong> <a href="../../../../com/xley/lfosc/http/server/HttpServer.html">HttpServer</a>(<strong class="jxr_keyword">this</strong>, binding, bossGroup, workerGroup), <span class="jxr_string">"OSCProxy - HTTP Server"</span>);
 <a class="jxr_linenumber" name="175" href="#175">175</a>                 httpServerThread.start();
 <a class="jxr_linenumber" name="176" href="#176">176</a>             }
 <a class="jxr_linenumber" name="177" href="#177">177</a> 

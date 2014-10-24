@@ -1,6 +1,8 @@
 <map id="G" name="G">
-<area shape="rect" id="c0" href="./ResultData.html" title="com.xley.lfosc.impl.ResultData" alt="" coords="15,35,177,141"/>
-<area shape="rect" id="node1" href="./ResultData.html" title="&lt;TABLE&gt;" alt="" coords="5,30,187,146"/>
-<area shape="rect" id="c1" href="./ProxyDaemon.html" title="com.xley.lfosc.impl.ProxyDaemon" alt="" coords="221,11,470,165"/>
-<area shape="rect" id="node2" href="./ProxyDaemon.html" title="&lt;TABLE&gt;" alt="" coords="211,6,480,170"/>
+<area shape="rect" id="c239" href="./ResultData.html" title="com.xley.lfosc.impl.ResultData" alt="" coords="15,67,177,173"/>
+<area shape="rect" id="node1" href="./ResultData.html" title="&lt;TABLE&gt;" alt="" coords="5,62,187,178"/>
+<area shape="rect" id="c240" href="./ProxyDaemon.html" title="com.xley.lfosc.impl.ProxyDaemon" alt="" coords="221,43,470,197"/>
+<area shape="rect" id="node2" href="./ProxyDaemon.html" title="&lt;TABLE&gt;" alt="" coords="211,38,480,202"/>
+<area shape="rect" id="c241" href="./SimpleProtocolData.html" title="com.xley.lfosc.impl.SimpleProtocolData" alt="" coords="515,11,1077,229"/>
+<area shape="rect" id="node3" href="./SimpleProtocolData.html" title="&lt;TABLE&gt;" alt="" coords="504,6,1088,234"/>
 </map>
