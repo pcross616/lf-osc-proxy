@@ -19,27 +19,24 @@
  * under the License.
  */
 
-package com.xley.lfosc.impl;
+package com.xley.lfosc;
 
-public class ResultData {
 
-    private Object data;
-    private Object status;
+public class ClientProtocolException extends ProtocolException {
+    private Object status = null;
 
-    public Object getStatus() {
-        return status;
-    }
-
-    public void setStatus(Object status) {
+    public ClientProtocolException(String message, Object status) {
+        super(message);
         this.status = status;
     }
 
-    public Object getData() {
-        return data;
+    public ClientProtocolException(String message, Object status, Throwable cause) {
+        super(message, cause);
+        this.status = status;
     }
 
-    public void setData(Object data) {
-        this.data = data;
+    public Object getStatus() {
+        return status;
     }
 
 }

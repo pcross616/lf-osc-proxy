@@ -23,10 +23,11 @@ package com.xley.lfosc;
 
 public interface IProtocol {
 
-    public Object process(IProtocolData data) throws ProtocolException;
+    Object process(IProtocolData data) throws ProtocolException;
 
-    public IProtocolData createProtocolData(Object value);
+    IProtocolData createProtocolData(Object value);
 
-    public IProtocolData configureProtocolData(IProtocolData data, Object value);
+    IProtocolData configureProtocolData(IProtocolData data);
 
+    int command(String command, String[] args) throws ProtocolException;
 }

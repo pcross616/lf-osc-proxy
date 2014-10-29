@@ -42,8 +42,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static io.netty.handler.codec.http.HttpHeaders.Names.*;
-import static io.netty.handler.codec.http.HttpResponseStatus.CONTINUE;
-import static io.netty.handler.codec.http.HttpResponseStatus.OK;
+import static io.netty.handler.codec.http.HttpResponseStatus.*;
 import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
 
 public class HttpServerHandler extends ChannelInboundHandlerAdapter {
@@ -97,14 +96,20 @@ public class HttpServerHandler extends ChannelInboundHandlerAdapter {
                 try {
                     result = callback + "(" + mapper.writeValueAsString(jsonp) + ");";
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    LogUtil.error(getClass(), e);
                 }
             }
 
-            FullHttpResponse response = new DefaultFullHttpResponse(HTTP_1_1, OK,
-                    Unpooled.wrappedBuffer(String.valueOf(result).getBytes(Charset.defaultCharset())));
-            response.headers().set(CONTENT_TYPE, contentType);
-            response.headers().set(CONTENT_LENGTH, response.content().readableBytes());
+            FullHttpResponse response = null;
+            if (result != null) {
+                response = new DefaultFullHttpResponse(HTTP_1_1, error ? BAD_REQUEST : OK,
+                        Unpooled.wrappedBuffer(String.valueOf(result).getBytes(Charset.defaultCharset())));
+                response.headers().set(CONTENT_TYPE, contentType);
+                response.headers().set(CONTENT_LENGTH, response.content().readableBytes());
+            } else {
+                response = new DefaultFullHttpResponse(HTTP_1_1, NO_CONTENT);
+            }
+
             if (!keepAlive) {
                 ctx.write(response).addListener(ChannelFutureListener.CLOSE);
             } else {

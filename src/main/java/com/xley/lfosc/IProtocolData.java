@@ -34,7 +34,9 @@ public interface IProtocolData {
 
     public Object getOperation();
 
-    public List<Object> getData();
+    public List<Object> getDataList();
 
-    public IProtocolData configureProtocolData(Object value);
+    public Object getData();
+
+    public IProtocolData configureProtocolData();
 }

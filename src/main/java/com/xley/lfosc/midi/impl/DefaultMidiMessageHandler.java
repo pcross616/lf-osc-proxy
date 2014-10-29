@@ -19,27 +19,25 @@
  * under the License.
  */
 
-package com.xley.lfosc.impl;
+package com.xley.lfosc.midi.impl;
 
-public class ResultData {
+import com.xley.lfosc.midi.IMidiMessageHandler;
+import com.xley.lfosc.midi.receiver.MidiServer;
+import com.xley.lfosc.util.LogUtil;
 
-    private Object data;
-    private Object status;
+import javax.sound.midi.MidiMessage;
 
-    public Object getStatus() {
-        return status;
+public class DefaultMidiMessageHandler implements IMidiMessageHandler {
+
+    protected MidiServer midiServer = null;
+
+    @Override
+    public void setMidiServer(MidiServer server) {
+        this.midiServer = server;
     }
 
-    public void setStatus(Object status) {
-        this.status = status;
+    @Override
+    public void note(MidiMessage message, long timeStamp, String note) {
+        LogUtil.debug(getClass(), note);
     }
-
-    public Object getData() {
-        return data;
-    }
-
-    public void setData(Object data) {
-        this.data = data;
-    }
-
 }

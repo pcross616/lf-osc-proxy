@@ -59,8 +59,10 @@ public class HttpServer implements Runnable {
                     LogUtil.error(getClass(), e);
                 }
             } catch (Exception e) {
-                LogUtil.error(getClass(), e);
-                daemon.shutdown(2);
+                if (!daemon.isShutdown()) {
+                    LogUtil.error(getClass(), e);
+                    daemon.shutdown(2);
+                }
             }
         }
     }

@@ -26,6 +26,7 @@ import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.socket.nio.NioDatagramChannel;
+import io.netty.handler.logging.LoggingHandler;
 
 import java.net.InetSocketAddress;
 
@@ -47,6 +48,7 @@ public class OSCServer implements Runnable {
             try {
                 bootstrap.channel(NioDatagramChannel.class)
                         .option(ChannelOption.SO_BROADCAST, true)
+                        .handler(new LoggingHandler(this.getClass().getName()))
                         .handler(new OSCServerHandler());
 
                 bootstrap.bind(binding).sync().channel().closeFuture().await();
@@ -55,8 +57,10 @@ public class OSCServer implements Runnable {
                     LogUtil.error(getClass(), e);
                 }
             } catch (Exception e) {
-                LogUtil.error(getClass(), e);
-                daemon.shutdown(2);
+                if (!daemon.isShutdown()) {
+                    LogUtil.error(getClass(), e);
+                    daemon.shutdown(2);
+                }
             }
         }
     }

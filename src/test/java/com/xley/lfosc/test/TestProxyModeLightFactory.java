@@ -41,7 +41,7 @@ import java.text.MessageFormat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
-public class TestProxyModeBridge {
+public class TestProxyModeLightFactory {
     private Thread server = null;
     private OSCPortIn receiver = null;
     private MockOSCListener listener = null;
@@ -49,7 +49,7 @@ public class TestProxyModeBridge {
     @Before
     public void setUp() throws Exception {
         server = new Thread(new ProxyServerRunner("lf"),
-                "TestProxyMode - Bridge");
+                "TestProxyMode - LightFactory");
         server.start();
         receiver = new OSCPortIn(new DatagramSocket(
                 new InetSocketAddress(InetAddress.getLoopbackAddress(),
@@ -91,7 +91,7 @@ public class TestProxyModeBridge {
                 + " /message/receiving testoscproxy 123 0.222 bar\n";
         Object response = LightFactoryClient.send(new InetSocketAddress(InetAddress.getLoopbackAddress(), 3100), data);
 
-        Thread.sleep(3000); // wait a bit
+        //Thread.sleep(3000); // wait a bit
 
         assertEquals(">",response);
         assertEquals(1,listener.getMessages().size());
@@ -108,12 +108,12 @@ public class TestProxyModeBridge {
         Object response = LightFactoryClient.send(new InetSocketAddress(InetAddress.getLoopbackAddress(), 3100), data);
 
         //wait
-        Thread.sleep(1000);
+        //Thread.sleep(1000);
 
         //did we get the error?
         assertEquals(">" + MessageFormat.format(LightFactoryProtocol.resources.getString("lf.command.failed"),
                                                 LightFactoryProtocol.resources.getString("lf.error.invalid")), response + "\r\n>");
-        Thread.sleep(2000); // wait a bit
+        //Thread.sleep(2000); // wait a bit
         assertEquals(listener.getMessages().size(), 0);
     }
 
@@ -123,8 +123,14 @@ public class TestProxyModeBridge {
                 + ":9999" + " /message/receiving abc 123 0.222\n";
         Object response = LightFactoryClient.send(new InetSocketAddress(InetAddress.getLoopbackAddress(), 3100), data);
 
-        Thread.sleep(2000); // wait a bit
+        //Thread.sleep(2000); // wait a bit
         assertEquals(">",response);
         assertEquals(listener.getMessages().size(), 0);
+    }
+
+    @Test
+    public void testLFtoMIDI() throws Exception {
+        String data = "midi@default /1:1:1\n";
+        Object response = LightFactoryClient.send(new InetSocketAddress(InetAddress.getLoopbackAddress(), 3100), data);
     }
 }

@@ -24,15 +24,14 @@ package com.xley.lfosc.http;
 import com.xley.lfosc.IProtocol;
 import com.xley.lfosc.IProtocolData;
 import com.xley.lfosc.ProtocolException;
+import com.xley.lfosc.impl.BaseProtocol;
 import com.xley.lfosc.impl.SimpleProtocolData;
 import com.xley.lfosc.util.LogUtil;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.nio.charset.Charset;
-import java.util.*;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
-public class HttpProtocol implements IProtocol {
+public class HttpProtocol extends BaseProtocol implements IProtocol {
 
 
     /**
@@ -91,17 +90,9 @@ public class HttpProtocol implements IProtocol {
             try {
                 String protocol = parts[EVENT_PROTOCOL];
                 String target = parts[EVENT_TARGET];
-                String operation = URLDecoder.decode(parts[EVENT_OPERATION], Charset.defaultCharset().name());
-                List<Object> data = null;
-                if (parts.length == 5) {
-                    String encodedData = parts[EVENT_DATA];
-                    encodedData = URLDecoder.decode(encodedData, Charset.defaultCharset().name()).trim();
-                    data = new ArrayList<>();
-                    Collections.addAll(data, encodedData.split(" "));
-                }
-                SimpleProtocolData pdata = new SimpleProtocolData(protocol, target, operation, data);
-                return pdata.configureProtocolData(url.replace("/" + protocol + "/" + target, ""));
-            } catch (UnsupportedEncodingException e) {
+                SimpleProtocolData pdata = new SimpleProtocolData(protocol, target, url.replace("/" + protocol + "/" + target + "/", ""), null);
+                return pdata.configureProtocolData();
+            } catch (Exception e) {
                 LogUtil.warn(getClass(), e);
             }
         }
@@ -109,7 +100,7 @@ public class HttpProtocol implements IProtocol {
     }
 
     @Override
-    public IProtocolData configureProtocolData(IProtocolData data, Object value) {
+    public IProtocolData configureProtocolData(IProtocolData data) {
         return data;
     }
 }

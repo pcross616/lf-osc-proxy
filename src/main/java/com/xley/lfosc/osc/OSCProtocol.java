@@ -25,6 +25,7 @@ import com.illposed.osc.OSCPacket;
 import com.xley.lfosc.IProtocol;
 import com.xley.lfosc.IProtocolData;
 import com.xley.lfosc.ProtocolException;
+import com.xley.lfosc.impl.BaseProtocol;
 import com.xley.lfosc.impl.SimpleProtocolData;
 import com.xley.lfosc.osc.client.OSCClient;
 import com.xley.lfosc.util.LogUtil;
@@ -42,7 +43,7 @@ import java.util.regex.Pattern;
 /**
  * The type OSC event protocol.
  */
-public class OSCProtocol implements IProtocol {
+public class OSCProtocol extends BaseProtocol implements IProtocol {
 
     /**
      * The constant resources.
@@ -71,7 +72,7 @@ public class OSCProtocol implements IProtocol {
             return _process(address[0], Integer.parseInt(address[1]), (OSCMessage) data.getData());
         }
         return _process(address[0], Integer.parseInt(address[1]), (String) data.getOperation(),
-                data.getData());
+                data.getDataList());
     }
 
 
@@ -110,17 +111,16 @@ public class OSCProtocol implements IProtocol {
     }
 
     @Override
-    public IProtocolData configureProtocolData(IProtocolData data, Object value) {
-        String operation = (String) value;
-        List<Object> argsList = null;
-        if (operation.contains(" ")) {
-            String[] args = operation.substring(operation.indexOf(" ")).trim().split(" "); //find the start of the arguments
-            operation = operation.substring(0, operation.indexOf(" ")); //find the start of the arguments
-            argsList = new ArrayList<>();
-            Collections.addAll(argsList, args);
+    public IProtocolData configureProtocolData(IProtocolData data) {
+        if (data.getOperation() instanceof String) {
+            String operation = (String) data.getOperation();
+            if (!operation.startsWith("/")) {
+                ((SimpleProtocolData) data).setOperation("/" + data.getOperation());
+            }
         }
-        return new OSCProtocolData(data.getType(), (String) data.getTarget(), operation, argsList);
+        return super.configureProtocolData(data);
     }
+
 
     /**
      * Process an incoming OSC event.

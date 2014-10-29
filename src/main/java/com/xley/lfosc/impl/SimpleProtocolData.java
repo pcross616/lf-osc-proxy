@@ -60,13 +60,33 @@ public class SimpleProtocolData implements IProtocolData {
         return this.operation;
     }
 
+    public void setOperation(String operation) {
+        this.operation = operation;
+    }
+
     @Override
-    public List<Object> getData() {
+    public List<Object> getDataList() {
         return this.data;
     }
 
     @Override
-    public IProtocolData configureProtocolData(Object value) {
-        return getProtocol().configureProtocolData(this, value);
+    public Object getData() {
+        if (data == null) {
+            return null;
+        }
+        StringBuilder values = new StringBuilder();
+        for (Object val : this.data) {
+            values.append(val).append(" ");
+        }
+        return values.toString();
+    }
+
+    @Override
+    public IProtocolData configureProtocolData() {
+        IProtocol protocol = getProtocol();
+        if (protocol != null) {
+            return protocol.configureProtocolData(this);
+        }
+        return null;
     }
 }

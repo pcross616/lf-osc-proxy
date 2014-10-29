@@ -73,7 +73,7 @@ public abstract class ProtocolManager {
         for (IProtocol protocol : protocolMap.values()) {
             IProtocolData data = protocol.createProtocolData(value);
             if (data != null) {
-                return data;
+                return data.configureProtocolData();
             }
         }
         return null;
@@ -81,5 +81,13 @@ public abstract class ProtocolManager {
 
     public static void addProtocol(String mode, IProtocol protocol) {
         protocolMap.put(mode, protocol);
+    }
+
+    public static int executeCommand(String mode, String command, String[] args) throws ProtocolException {
+        IProtocol protocol = getProtocol(mode);
+        if (protocol == null) {
+            return -1;
+        }
+        return protocol.command(command, args);
     }
 }

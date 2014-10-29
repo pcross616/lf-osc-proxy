@@ -23,13 +23,16 @@ package com.xley.lfosc.lightfactory;
 import com.xley.lfosc.IProtocol;
 import com.xley.lfosc.IProtocolData;
 import com.xley.lfosc.ProtocolException;
+import com.xley.lfosc.impl.BaseProtocol;
 import com.xley.lfosc.impl.SimpleProtocolData;
 import com.xley.lfosc.lightfactory.client.LightFactoryClient;
 import com.xley.lfosc.util.LogUtil;
 
 import java.io.UnsupportedEncodingException;
-import java.net.*;
-import java.nio.charset.Charset;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.text.MessageFormat;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -38,7 +41,7 @@ import java.util.regex.Pattern;
 /**
  * The type OSC proxy protocol.
  */
-public class LightFactoryProtocol implements IProtocol {
+public class LightFactoryProtocol extends BaseProtocol implements IProtocol {
     /**
      * The constant resources.
      */
@@ -58,13 +61,7 @@ public class LightFactoryProtocol implements IProtocol {
     @Override
     public Object process(IProtocolData data) throws ProtocolException {
         String[] address = ((String) data.getTarget()).split(":");
-        StringBuilder command = new StringBuilder(String.valueOf(data.getOperation()));
-        if (data.getData() != null) {
-            for (Object arg : data.getData()) {
-                command.append(" ").append(String.valueOf(arg));
-            }
-        }
-        return _process(address[0], Integer.parseInt(address[1]), command.toString());
+        return _process(address[0], Integer.parseInt(address[1]), (data.getOperation() + " " + data.getData()).trim());
     }
 
     @Override
@@ -86,29 +83,10 @@ public class LightFactoryProtocol implements IProtocol {
                     String[] dataArray = data.trim().split(" ");
                     Collections.addAll(args, dataArray);
                 }
-
                 return new SimpleProtocolData(protocol, host, address, args);
             }
         }
         return null;
-    }
-
-    @Override
-    public IProtocolData configureProtocolData(IProtocolData data, Object value) {
-        try {
-            String operation = URLDecoder.decode((String) value, Charset.defaultCharset().name());
-            List<Object> argsList = null;
-            if (operation.contains(" ")) {
-                String[] args = operation.substring(operation.indexOf(" ")).trim().split(" "); //find the start of the arguments
-                operation = operation.substring(1, operation.indexOf(" ")); //find the start of the arguments
-                argsList = new ArrayList<>();
-                Collections.addAll(argsList, args);
-            }
-            return new SimpleProtocolData(data.getType(), (String) data.getTarget(), operation, argsList);
-        } catch (Exception e) {
-            LogUtil.warn(getClass(), e);
-            return data;
-        }
     }
 
     private Object _process(String address, int port, String command) throws ProtocolException {

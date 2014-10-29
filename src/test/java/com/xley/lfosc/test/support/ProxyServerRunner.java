@@ -44,6 +44,10 @@ public class ProxyServerRunner implements Runnable {
         this(new String[]{mode});
     }
 
+    public ProxyServerRunner() {
+        this(new String[]{});
+    }
+
     @Override
     public void run() {
         new OSCProxy().execute(args);

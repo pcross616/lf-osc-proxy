@@ -24,7 +24,9 @@ package com.xley.lfosc.midi;
 import com.xley.lfosc.IProtocol;
 import com.xley.lfosc.IProtocolData;
 import com.xley.lfosc.ProtocolException;
+import com.xley.lfosc.impl.BaseProtocol;
 import com.xley.lfosc.impl.SimpleProtocolData;
+import com.xley.lfosc.midi.impl.LearnCommand;
 import com.xley.lfosc.util.LogUtil;
 
 import javax.sound.midi.*;
@@ -34,12 +36,12 @@ import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MIDIProtocol implements IProtocol {
+public class MidiProtocol extends BaseProtocol implements IProtocol {
 
     /**
      * The constant resources.
      */
-    public static final ResourceBundle resources = ResourceBundle.getBundle(MIDIProtocol.class.getSimpleName(),
+    public static final ResourceBundle resources = ResourceBundle.getBundle(MidiProtocol.class.getSimpleName(),
             Locale.getDefault());
 
     /**
@@ -52,6 +54,7 @@ public class MIDIProtocol implements IProtocol {
     private static final int MIDI_EVENT_DEVICE = 2;
     private static final int MIDI_EVENT_NOTE = 3;
 
+    private static final String DEFAULT_DEVICE = "default";
 
     @Override
     public Object process(IProtocolData data) throws ProtocolException {
@@ -68,20 +71,15 @@ public class MIDIProtocol implements IProtocol {
             if (matches.find()) {
                 LogUtil.debug(getClass(), resources.getString("midi.event.valid"));
                 String protocol = matches.group(MIDI_EVENT_PROTOCOL);
-                String host = matches.group(MIDI_EVENT_DEVICE);
+                String device = matches.group(MIDI_EVENT_DEVICE);
                 String note = matches.group(MIDI_EVENT_NOTE);
 
-                return new SimpleProtocolData(protocol, host, note, null);
+                return new SimpleProtocolData(protocol, device, note, null);
             }
         }
         return null;
     }
 
-    @Override
-    public IProtocolData configureProtocolData(IProtocolData data, Object value) {
-        String operation = ((String) value).replace("/", "");
-        return new SimpleProtocolData(data.getType(), (String) data.getTarget(), operation, null);
-    }
 
     private Object _process(int nKey, int nVelocity, int nDuration, String deviceName) throws ProtocolException {
         int nChannel = 0;
@@ -93,8 +91,8 @@ public class MIDIProtocol implements IProtocol {
 
         MidiDevice outputDevice = null;
         Receiver receiver = null;
-        if (deviceName != null) {
-            MidiDevice.Info info = MIDICommon.getMidiDeviceInfo(deviceName, true);
+        if (deviceName != null && !DEFAULT_DEVICE.equalsIgnoreCase(deviceName)) {
+            MidiDevice.Info info = MidiCommon.getMidiDeviceInfo(deviceName, true);
             if (info == null) {
                 throw new ProtocolException(MessageFormat.format(resources.getString("midi.device.not_found"),
                         deviceName));
@@ -103,9 +101,11 @@ public class MIDIProtocol implements IProtocol {
                 outputDevice = MidiSystem.getMidiDevice(info);
                 LogUtil.trace(getClass(), MessageFormat.format(resources.getString("midi.device.output_name"),
                         outputDevice));
-                outputDevice.open();
+                if (!outputDevice.isOpen()) {
+                    outputDevice.open();
+                }
             } catch (MidiUnavailableException e) {
-                LogUtil.error(MIDIProtocol.class, e);
+                LogUtil.error(MidiProtocol.class, e);
             }
 
             if (outputDevice == null) {
@@ -115,13 +115,13 @@ public class MIDIProtocol implements IProtocol {
             try {
                 receiver = outputDevice.getReceiver();
             } catch (MidiUnavailableException e) {
-                LogUtil.error(MIDIProtocol.class, e);
+                LogUtil.error(MidiProtocol.class, e);
             }
         } else {
             try {
                 receiver = MidiSystem.getReceiver();
             } catch (MidiUnavailableException e) {
-                LogUtil.error(MIDIProtocol.class, e);
+                LogUtil.error(MidiProtocol.class, e);
             }
         }
         if (receiver == null) {
@@ -144,11 +144,11 @@ public class MIDIProtocol implements IProtocol {
             offMessage.setMessage(ShortMessage.NOTE_OFF, nChannel, nKey, 0);
 
         } catch (InvalidMidiDataException e) {
-            LogUtil.error(MIDIProtocol.class, e);
+            LogUtil.error(MidiProtocol.class, e);
         }
 
 		/*
-		 *	Turn the note on
+         *	Turn the note on
 		 */
         LogUtil.trace(getClass(), MessageFormat.format(resources.getString("midi.note.on"),
                 onMessage.getStatus(),
@@ -164,7 +164,7 @@ public class MIDIProtocol implements IProtocol {
         try {
             Thread.sleep(nDuration);
         } catch (InterruptedException e) {
-            LogUtil.error(MIDIProtocol.class, e);
+            LogUtil.error(MidiProtocol.class, e);
         }
 
 		/*
@@ -181,9 +181,22 @@ public class MIDIProtocol implements IProtocol {
 		 *	Clean up.
 		 */
         receiver.close();
-        if (outputDevice != null) {
+        if (outputDevice != null && outputDevice.getReceivers().size() == 0) {
             outputDevice.close();
         }
-        return null;
+        return MessageFormat.format(resources.getString("midi.note.sent"), deviceName, nKey, nVelocity, nDuration);
+    }
+
+    @Override
+    public int command(String commandName, String[] args) throws ProtocolException {
+        switch (commandName) {
+            case "list":
+                MidiCommon.listDevices(true, true, true);
+                return 0;
+            case "learn":
+                return new LearnCommand().learn(args);
+            default:
+                return super.command(commandName, args);
+        }
     }
 }

@@ -23,6 +23,7 @@ package com.xley.lfosc.lightfactory.server;
 import com.xley.lfosc.impl.ProxyDaemon;
 import com.xley.lfosc.util.LogUtil;
 import io.netty.bootstrap.ServerBootstrap;
+import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LoggingHandler;
@@ -47,6 +48,7 @@ public class LightFactoryServer implements Runnable {
     public void run() {
         while (!daemon.isShutdown()) {
             try {
+                bootstrap.option(ChannelOption.SO_BACKLOG, 1024);
                 bootstrap.channel(NioServerSocketChannel.class)
                         .handler(new LoggingHandler(this.getClass().getName()))
                         .childHandler(new LightFactoryInitializer());
@@ -57,8 +59,10 @@ public class LightFactoryServer implements Runnable {
                     LogUtil.error(getClass(), e);
                 }
             } catch (Exception e) {
-                LogUtil.error(getClass(), e);
-                daemon.shutdown(2);
+                if (!daemon.isShutdown()) {
+                    LogUtil.error(getClass(), e);
+                    daemon.shutdown(2);
+                }
             }
         }
     }

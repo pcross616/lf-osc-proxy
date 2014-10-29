@@ -81,7 +81,9 @@ public class TestProxyModeOSC {
         OSCMessage msg = new OSCMessage("/lf/localhost:3300/foo", Arrays.asList((Object[]) args));
         Object response = OSCClient.send(new InetSocketAddress(InetAddress.getLoopbackAddress(), 3200), msg);
         assertNull(response);
-        Thread.sleep(5000);
+
+        //due to udp we need to wait to make sure the mock server got the message.
+        Thread.sleep(1000);
         assertEquals("foo bar 1234", mockServer.getLastValue());
     }
 }

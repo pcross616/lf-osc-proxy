@@ -77,7 +77,7 @@ public final class OSCClient {
         Channel ch = b.bind(0).sync().channel();
 
         ChannelFuture lastWriteFuture = ch.writeAndFlush(new DatagramPacket(
-                Unpooled.copiedBuffer(ByteBuffer.wrap(packet.getByteArray())), remote)).sync();
+                Unpooled.copiedBuffer(ByteBuffer.wrap(packet.getByteArray())), remote)).await();
 
         // Wait until all messages are flushed before closing the channel.
         if (lastWriteFuture != null) {

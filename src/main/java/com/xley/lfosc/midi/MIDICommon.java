@@ -21,26 +21,23 @@
 
 package com.xley.lfosc.midi;
 
+import com.xley.lfosc.util.LogUtil;
+
 import javax.sound.midi.MidiDevice;
 import javax.sound.midi.MidiSystem;
 import javax.sound.midi.MidiUnavailableException;
 
-public class MIDICommon {
-    public static void listDevicesAndExit(boolean bForInput,
-                                          boolean bForOutput) {
-        listDevicesAndExit(bForInput, bForOutput, false);
-    }
+public class MidiCommon {
 
-
-    public static void listDevicesAndExit(boolean bForInput,
-                                          boolean bForOutput,
-                                          boolean bVerbose) {
+    public static MidiDevice.Info[] listDevices(boolean bForInput,
+                                                boolean bForOutput,
+                                                boolean bVerbose) {
         if (bForInput && !bForOutput) {
-            out("Available MIDI IN Devices:");
+            LogUtil.info("Available MIDI IN Devices:");
         } else if (!bForInput && bForOutput) {
-            out("Available MIDI OUT Devices:");
+            LogUtil.info("Available MIDI OUT Devices:");
         } else {
-            out("Available MIDI Devices:");
+            LogUtil.info("Available MIDI Devices:");
         }
 
         MidiDevice.Info[] aInfos = MidiSystem.getMidiDeviceInfo();
@@ -52,7 +49,7 @@ public class MIDICommon {
                 if ((bAllowsInput && bForInput) ||
                         (bAllowsOutput && bForOutput)) {
                     if (bVerbose) {
-                        out("" + i + "  "
+                        LogUtil.trace("" + i + "  "
                                 + (bAllowsInput ? "IN " : "   ")
                                 + (bAllowsOutput ? "OUT " : "    ")
                                 + aInfos[i].getName() + ", "
@@ -60,7 +57,7 @@ public class MIDICommon {
                                 + aInfos[i].getVersion() + ", "
                                 + aInfos[i].getDescription());
                     } else {
-                        out("" + i + "  " + aInfos[i].getName());
+                        LogUtil.info("" + i + "  " + aInfos[i].getName());
                     }
                 }
             } catch (MidiUnavailableException e) {
@@ -69,8 +66,9 @@ public class MIDICommon {
             }
         }
         if (aInfos.length == 0) {
-            out("[No devices available]");
+            LogUtil.info("[No devices available]");
         }
+        return aInfos;
     }
 
 
@@ -91,14 +89,14 @@ public class MIDICommon {
      */
     public static MidiDevice.Info getMidiDeviceInfo(String strDeviceName, boolean bForOutput) {
         MidiDevice.Info[] aInfos = MidiSystem.getMidiDeviceInfo();
-        for (int i = 0; i < aInfos.length; i++) {
-            if (aInfos[i].getName().equals(strDeviceName)) {
+        for (MidiDevice.Info aInfo : aInfos) {
+            if (aInfo.getName().equals(strDeviceName)) {
                 try {
-                    MidiDevice device = MidiSystem.getMidiDevice(aInfos[i]);
+                    MidiDevice device = MidiSystem.getMidiDevice(aInfo);
                     boolean bAllowsInput = (device.getMaxTransmitters() != 0);
                     boolean bAllowsOutput = (device.getMaxReceivers() != 0);
                     if ((bAllowsOutput && bForOutput) || (bAllowsInput && !bForOutput)) {
-                        return aInfos[i];
+                        return aInfo;
                     }
                 } catch (MidiUnavailableException e) {
                     // TODO:
@@ -113,7 +111,7 @@ public class MIDICommon {
      * Retrieve a MidiDevice.Info by index number.
      * This method returns a MidiDevice.Info whose index
      * is specified as parameter. This index matches the
-     * number printed in the listDevicesAndExit method.
+     * number printed in the listDevices method.
      * If index is too small or too big, null is returned.
      *
      * @param index the index of the device to be retrieved
@@ -126,9 +124,5 @@ public class MIDICommon {
             return null;
         }
         return aInfos[index];
-    }
-
-    private static void out(String strMessage) {
-        System.out.println(strMessage);
     }
 }

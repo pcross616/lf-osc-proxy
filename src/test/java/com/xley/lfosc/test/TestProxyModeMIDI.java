@@ -19,27 +19,32 @@
  * under the License.
  */
 
-package com.xley.lfosc.impl;
+package com.xley.lfosc.test;
 
-public class ResultData {
+import com.xley.lfosc.midi.MidiCommon;
+import com.xley.lfosc.util.LogUtil;
+import org.apache.log4j.Level;
+import org.junit.Before;
+import org.junit.Test;
 
-    private Object data;
-    private Object status;
+import javax.sound.midi.MidiDevice;
 
-    public Object getStatus() {
-        return status;
+import static org.junit.Assert.*;
+
+public class TestProxyModeMIDI {
+
+
+    @Before
+    public void setup() {
+        LogUtil.setLevel(Level.ALL);
     }
 
-    public void setStatus(Object status) {
-        this.status = status;
-    }
 
-    public Object getData() {
-        return data;
-    }
-
-    public void setData(Object data) {
-        this.data = data;
+    @Test
+    public void testListMidiDevices() throws Exception {
+        MidiDevice.Info[] infos = MidiCommon.listDevices(true, true, true);
+        assertNotNull(infos);
+        assertTrue(infos.length >= 1);
     }
 
 }

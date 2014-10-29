@@ -45,25 +45,26 @@ public class OSCServerHandler extends SimpleChannelInboundHandler<DatagramPacket
         byteBuffer.duplicate().get(bytes);
 
         OSCPacket packet = converter.convert(bytes, bytes.length);
-        processPacket(packet);
+        processPacket(channelHandlerContext, packet);
     }
 
     /**
      * Process the incomming OSC packet using Netty worker pool.
      *
-     * @param bundle the bundle to process
+     * @param channelHandlerContext
+     * @param bundle                the bundle to process
      */
-    private void processPacket(OSCPacket bundle) throws ProtocolException {
+    private void processPacket(ChannelHandlerContext channelHandlerContext, OSCPacket bundle) throws ProtocolException {
         if (bundle instanceof OSCBundle) {
             for (OSCPacket packet : ((OSCBundle) bundle).getPackets()) {
-                processPacket(packet);
+                processPacket(channelHandlerContext, packet);
             }
         } else {
             IProtocolData data = ProtocolManager.resolve(bundle);
             if (data == null) {
                 throw new UnknownProtocolException("Unknown OSC packet protocol");
             }
-            data.getProtocol().process(data);
+            channelHandlerContext.write(data.getProtocol().process(data) + "\r\n");
         }
     }
 

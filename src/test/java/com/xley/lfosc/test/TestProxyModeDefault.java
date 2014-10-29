@@ -20,8 +20,10 @@
 
 package com.xley.lfosc.test;
 
+import com.illposed.osc.OSCMessage;
 import com.xley.lfosc.OSCProxy;
 import com.xley.lfosc.lightfactory.client.LightFactoryClient;
+import com.xley.lfosc.osc.client.OSCClient;
 import com.xley.lfosc.test.support.MockLightFactoryServer;
 import com.xley.lfosc.test.support.ProxyServerRunner;
 import org.junit.After;
@@ -35,9 +37,10 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 
-public class TestProxyModeBoth {
+public class TestProxyModeDefault {
     private Thread server = null;
     private ServerSocket receiver = null;
     private MockLightFactoryServer mockServer = null;
@@ -45,7 +48,7 @@ public class TestProxyModeBoth {
 
     @Before
     public void setUp() throws Exception {
-        server = new Thread(new ProxyServerRunner(new String[]{"osc", "lf"}), "TestProxyMode - Both");
+        server = new Thread(new ProxyServerRunner(), "TestProxyMode - Default");
         server.start();
 
         mockServer = new MockLightFactoryServer(3300);
@@ -53,8 +56,8 @@ public class TestProxyModeBoth {
         mockThread.start();
 
 
-        System.out.println("Waiting for servers to start... (5 sec)");
-        Thread.sleep(5000);
+        System.out.println("Waiting for servers to start... (1 sec)");
+        Thread.sleep(1000);
     }
 
     @After
@@ -85,6 +88,14 @@ public class TestProxyModeBoth {
         LightFactoryClient.send(new InetSocketAddress(InetAddress.getLoopbackAddress(), 3100), data);
         assertEquals("loopback test", mockServer.getLastValue());
     }
+
+/*    @Test
+    public void testOSCtoMIDICommand() throws Exception {
+        OSCMessage msg = new OSCMessage("/midi/loopMIDI%20Port/1:1:1");
+        Object response = OSCClient.send(new InetSocketAddress(InetAddress.getLoopbackAddress(), 3200), msg);
+        Thread.sleep(3000);
+        assertNull(response);
+    }*/
 
     @Test
     public void testAlreadyRunning() throws Exception {

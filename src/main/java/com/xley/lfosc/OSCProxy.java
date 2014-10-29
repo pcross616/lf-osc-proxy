@@ -28,6 +28,7 @@ import joptsimple.OptionSet;
 import org.apache.log4j.Level;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -75,6 +76,8 @@ public class OSCProxy {
                 accepts("l").withOptionalArg().ofType(Integer.class)
                         .describedAs(resources.getString("option.osc.port.desc"))
                         .defaultsTo(Integer.parseInt(resources.getString("option.osc.port.default")));
+                accepts("c").withOptionalArg().ofType(String.class)
+                        .describedAs(resources.getString("option.command.desc"));
                 accepts("m").withOptionalArg().ofType(String.class)
                         .describedAs(resources.getString("option.mode.desc"))
                         .defaultsTo(resources.getString("option.mode.default").split(","));
@@ -87,6 +90,7 @@ public class OSCProxy {
                 accepts("v").withOptionalArg().ofType(String.class)
                         .describedAs(resources.getString("option.verbosity.desc"));
                 accepts("?").withOptionalArg().describedAs(resources.getString("option.help.desc"));
+
             }
         };
 
@@ -114,21 +118,33 @@ public class OSCProxy {
             LogUtil.setLevel(Level.toLevel(((String) options.valueOf("v")).toUpperCase()));
         }
 
+        if (options.has("c")) {
+            String opt = (String) options.valueOf("c");
+            try {
+                List<?> objects = options.nonOptionArguments();
+                return ProtocolManager.executeCommand(opt.substring(0, opt.indexOf(".")),
+                        opt.substring(opt.indexOf(".") + 1),
+                        objects.toArray(new String[objects.size()]));
+            } catch (ProtocolException e) {
+                LogUtil.error(getClass(), e);
+            }
+            return 2;
+        }
+
         //start the main thread
         daemon = new ProxyDaemon(options);
+
+        Runtime.getRuntime().addShutdownHook(new Thread(resources.getString("shutdown.thread.name") + " - " + Thread.currentThread().getName()) {
+            public void run() {
+                daemon.shutdown();
+                LogUtil.info(resources.getString("shutdown.complete"));
+            }
+        });
+
         Thread mainThread = new Thread(daemon, "OSCProxy - Daemon");
         mainThread.setDaemon(true);
         mainThread.start();
 
-        while (mainThread.isAlive()) {
-            if (Thread.interrupted()) {
-                daemon.shutdown();
-                break;
-            }
-        }
-
-        LogUtil.info(resources.getString("shutdown.complete"));
-        return daemon.errorcode();
+        return daemon.exitCode();
     }
-
 }

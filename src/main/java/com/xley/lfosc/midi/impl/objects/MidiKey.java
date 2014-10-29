@@ -19,27 +19,14 @@
  * under the License.
  */
 
-package com.xley.lfosc.impl;
+package com.xley.lfosc.midi.impl.objects;
 
-public class ResultData {
 
-    private Object data;
-    private Object status;
-
-    public Object getStatus() {
-        return status;
-    }
-
-    public void setStatus(Object status) {
+public class MidiKey {
+    public int key = 127;
+    public int status = 0;
+    public MidiKey(int key, int status) {
+        this.key = key;
         this.status = status;
     }
-
-    public Object getData() {
-        return data;
-    }
-
-    public void setData(Object data) {
-        this.data = data;
-    }
-
 }

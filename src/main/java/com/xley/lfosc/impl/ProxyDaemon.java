@@ -22,6 +22,7 @@ package com.xley.lfosc.impl;
 
 import com.xley.lfosc.http.server.HttpServer;
 import com.xley.lfosc.lightfactory.server.LightFactoryServer;
+import com.xley.lfosc.midi.receiver.MidiServer;
 import com.xley.lfosc.osc.server.OSCServer;
 import com.xley.lfosc.util.LogUtil;
 import io.netty.channel.EventLoopGroup;
@@ -45,20 +46,23 @@ public class ProxyDaemon implements Runnable {
      */
     public static final ResourceBundle resources = ResourceBundle.getBundle(ProxyDaemon.class.getSimpleName(),
             Locale.getDefault());
-    private final Object monitor = true;
 
     //configuration
     private final OptionSet options;
     //worker threads and pools
     private final EventLoopGroup bossGroup = new NioEventLoopGroup(1);
     private final EventLoopGroup workerGroup = new NioEventLoopGroup();
+    private final Object shutdownMonitor = new Object();
+    //thread monitor
+    private final Object monitor = new Object();
     //daemon vars
-    private Boolean shutdown = false;
+    private volatile Boolean shutdown = false;
     //process threads
     private Thread daemon;
     private Thread lightFactoryThread;
     private Thread httpServerThread;
     private Thread oscServerThread;
+    private Thread midiReceiverThread;
     private int errorcode = 0;
 
     /**
@@ -75,18 +79,27 @@ public class ProxyDaemon implements Runnable {
      *
      * @return the error code
      */
-    public final int errorcode() {
-        return this.errorcode;
+    public final int exitCode() {
+        synchronized (monitor) {
+            while (!isShutdown()) {
+                try {
+                    monitor.wait();
+                } catch (InterruptedException e) {
+                    LogUtil.trace(getClass(), "Got a shutdown signal, isShutdown: " + isShutdown());
+                }
+            }
+            return this.errorcode;
+        }
     }
 
     public final boolean isShutdown() {
-        synchronized (monitor) {
+        synchronized (shutdownMonitor) {
             return shutdown;
         }
     }
 
     /**
-     * Shutdown and set the errorcode
+     * Shutdown and set the exitCode
      *
      * @param errorcode the error state
      */
@@ -99,35 +112,42 @@ public class ProxyDaemon implements Runnable {
      * Shutdown the OSC proxy.
      */
     public final void shutdown() {
-        synchronized (monitor) {
+        synchronized (shutdownMonitor) {
             if (shutdown) {
                 return;
             }
-
             shutdown = true;
         }
         LogUtil.info(this.getClass(), resources.getString("shutdown.inprogress"));
 
-        //notify daemon that we are shutting down
-        daemon.interrupt();
-
         //shutdown light factory server if enabled
-        if (lightFactoryThread != null) {
+        if (lightFactoryThread != null && !lightFactoryThread.isInterrupted()) {
             lightFactoryThread.interrupt();
         }
 
         //shutdown http server if enabled
-        if (oscServerThread != null) {
+        if (oscServerThread != null && !oscServerThread.isInterrupted()) {
             oscServerThread.interrupt();
         }
 
         //shutdown http server if enabled
-        if (httpServerThread != null) {
+        if (httpServerThread != null && !httpServerThread.isInterrupted()) {
             httpServerThread.interrupt();
+        }
+
+        //shutdown midi receiver if enabled
+        if (midiReceiverThread != null && !midiReceiverThread.isInterrupted()) {
+            midiReceiverThread.interrupt();
         }
 
         bossGroup.shutdownGracefully();
         workerGroup.shutdownGracefully();
+
+        //notify daemon that we are shutting down
+        daemon.interrupt();
+        synchronized (monitor) {
+            monitor.notify();
+        }
     }
 
     @Override
@@ -140,6 +160,7 @@ public class ProxyDaemon implements Runnable {
         boolean oscProxyServer = false;
         boolean lightFactoryProxyServer = false;
         boolean httpServer = false;
+        boolean midiReceiver = false;
 
         for (Object val : options.valuesOf("m")) {
             switch (String.valueOf(val)) {
@@ -152,13 +173,16 @@ public class ProxyDaemon implements Runnable {
                 case "http":
                     httpServer = true;
                     break;
+                case "midi":
+                    midiReceiver = true;
+                    break;
                 default:
                     LogUtil.warn(this.getClass(), MessageFormat.format(resources.getString("options.mode.invalid.entry"), val));
             }
         }
 
         //make sure we have a valid mode
-        if (!oscProxyServer && !lightFactoryProxyServer && !httpServer) {
+        if (!oscProxyServer && !lightFactoryProxyServer && !httpServer && !midiReceiver) {
             LogUtil.error(this.getClass(), resources.getString("options.mode.invalid"));
             errorcode = 1;
             shutdown();
@@ -189,9 +213,22 @@ public class ProxyDaemon implements Runnable {
                 oscServerThread.start();
             }
 
-            while (!isShutdown()) {
-                if (Thread.currentThread().isInterrupted()) {
-                    break;
+            //should we create a OSC Listener?
+            if (midiReceiver) {
+                midiReceiverThread = new Thread(new MidiServer(this, "loopMIDI Port", -1), "OSCProxy - MidiReceiver");
+                midiReceiverThread.start();
+            }
+
+            synchronized (monitor) {
+                while (!isShutdown()) {
+                    try {
+                        monitor.wait();
+                    } catch (InterruptedException e) {
+                        LogUtil.trace(getClass(), "Caught shutdown signal, isShutdown: " + isShutdown());
+                    }
+                    if (Thread.currentThread().isInterrupted()) {
+                        break;
+                    }
                 }
             }
         } catch (UnknownHostException e) {
@@ -203,6 +240,18 @@ public class ProxyDaemon implements Runnable {
             errorcode = 2;
         } finally {
             shutdown();
+            while ((midiReceiverThread != null && midiReceiverThread.isAlive()) ||
+                    (httpServerThread != null && httpServerThread.isAlive()) ||
+                    (oscServerThread != null && oscServerThread.isAlive()) ||
+                    (lightFactoryThread != null && lightFactoryThread.isAlive())) {
+
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    LogUtil.trace(getClass(), "Waiting till all threads exit...");
+                }
+            }
+
         }
     }
 }
