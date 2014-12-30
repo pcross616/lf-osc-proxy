@@ -12,7 +12,7 @@ Using LightFactory create a connection to the LightFactory-OSC Proxy service (ma
 
 Using an OSC event to control LightFactory via LightFactory-OSC Proxy service
   * `connect to the LF-OSC Proxy from your OSC enabled application` - Once connected you can then send OSC events to this enpoint to hit any number of LightFactory instances.
-  * `/ld/<lightfactory-ip>:<port>/<lf cli command data>` - the OSC event contains the destination LightFactory instance along with the LightFactory CLI command.
+  * `/lf/<lightfactory-ip>:<port>/<lf cli command data>` - the OSC event contains the destination LightFactory instance along with the LightFactory CLI command.
 
 
 Download Binary Files
