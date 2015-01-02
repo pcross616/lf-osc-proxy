@@ -27,17 +27,17 @@ import javax.sound.midi.MidiDevice;
 import javax.sound.midi.MidiSystem;
 import javax.sound.midi.MidiUnavailableException;
 
-public class MidiCommon2 {
+public class MidiCommon {
 
     public static MidiDevice.Info[] listDevices(boolean bForInput,
                                                 boolean bForOutput,
                                                 boolean bVerbose) {
         if (bForInput && !bForOutput) {
-            LogUtil.info(MidiProtocol2.resources.getString("midi.common.available.in.devices"));
+            LogUtil.info(MidiProtocol.resources.getString("midi.common.available.in.devices"));
         } else if (!bForInput && bForOutput) {
-            LogUtil.info(MidiProtocol2.resources.getString("midi.common.available.out.devices"));
+            LogUtil.info(MidiProtocol.resources.getString("midi.common.available.out.devices"));
         } else {
-            LogUtil.info(MidiProtocol2.resources.getString("midi.common.available.devices"));
+            LogUtil.info(MidiProtocol.resources.getString("midi.common.available.devices"));
         }
 
         MidiDevice.Info[] aInfos = MidiSystem.getMidiDeviceInfo();
@@ -50,8 +50,8 @@ public class MidiCommon2 {
                         (bAllowsOutput && bForOutput)) {
                     if (bVerbose) {
                         LogUtil.trace("" + i + "  "
-                                + (bAllowsInput ? MidiProtocol2.resources.getString("midi.common.in") + " " : "   ")
-                                + (bAllowsOutput ? MidiProtocol2.resources.getString("midi.common.out") + " " : "    ")
+                                + (bAllowsInput ? MidiProtocol.resources.getString("midi.common.in") + " " : "   ")
+                                + (bAllowsOutput ? MidiProtocol.resources.getString("midi.common.out") + " " : "    ")
                                 + aInfos[i].getName() + ", "
                                 + aInfos[i].getVendor() + ", "
                                 + aInfos[i].getVersion() + ", "
@@ -61,11 +61,11 @@ public class MidiCommon2 {
                     }
                 }
             } catch (MidiUnavailableException e) {
-                LogUtil.trace(MidiCommon2.class, e);
+                LogUtil.trace(MidiCommon.class, e);
             }
         }
         if (aInfos.length == 0) {
-            LogUtil.info(MidiProtocol2.resources.getString("midi.common.no.devices"));
+            LogUtil.info(MidiProtocol.resources.getString("midi.common.no.devices"));
         }
         return aInfos;
     }
@@ -98,7 +98,7 @@ public class MidiCommon2 {
                         return aInfo;
                     }
                 } catch (MidiUnavailableException e) {
-                    LogUtil.trace(MidiCommon2.class, e);
+                    LogUtil.trace(MidiCommon.class, e);
                 }
             }
         }
