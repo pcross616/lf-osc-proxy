@@ -1,6 +1,6 @@
 <map id="G" name="G">
-<area shape="rect" id="c512" href="./MidiServer.html" title="com.xley.lfosc.midi.receiver.MidiServer" alt="" coords="16,67,621,221"/>
-<area shape="rect" id="node1" href="./MidiServer.html" title="&lt;TABLE&gt;" alt="" coords="5,62,632,226"/>
-<area shape="rect" id="c513" href="./MidiReceiver.html" title="com.xley.lfosc.midi.receiver.MidiReceiver" alt="" coords="667,11,1008,277"/>
-<area shape="rect" id="node2" href="./MidiReceiver.html" title="&lt;TABLE&gt;" alt="" coords="656,6,1019,282"/>
+<area shape="rect" id="c217" href="./MidiReceiver.html" title="com.xley.lfosc.midi.receiver.MidiReceiver" alt="" coords="16,11,357,277"/>
+<area shape="rect" id="node1" href="./MidiReceiver.html" title="&lt;TABLE&gt;" alt="" coords="5,6,368,282"/>
+<area shape="rect" id="c218" href="./MidiServer.html" title="com.xley.lfosc.midi.receiver.MidiServer" alt="" coords="403,67,1008,221"/>
+<area shape="rect" id="node2" href="./MidiServer.html" title="&lt;TABLE&gt;" alt="" coords="392,62,1019,226"/>
 </map>

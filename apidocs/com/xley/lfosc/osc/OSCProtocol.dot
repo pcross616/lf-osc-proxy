@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// com.xley.lfosc.IProtocol
-	c1908 [label=<<table title="com.xley.lfosc.IProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../IProtocol.html">
+	c1906 [label=<<table title="com.xley.lfosc.IProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../IProtocol.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> IProtocol </td></tr>
@@ -26,7 +26,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="../IProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.osc.OSCProtocol
-	c1914 [label=<<table title="com.xley.lfosc.osc.OSCProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./OSCProtocol.html">
+	c1925 [label=<<table title="com.xley.lfosc.osc.OSCProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./OSCProtocol.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> OSCProtocol </td></tr>
 		</table></td></tr>
@@ -42,7 +42,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="./OSCProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.impl.BaseProtocol
-	c1915 [label=<<table title="com.xley.lfosc.impl.BaseProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../impl/BaseProtocol.html">
+	c1940 [label=<<table title="com.xley.lfosc.impl.BaseProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../impl/BaseProtocol.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> BaseProtocol </font></td></tr>
 		</table></td></tr>
@@ -56,10 +56,10 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="../impl/BaseProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.xley.lfosc.osc.OSCProtocol extends com.xley.lfosc.impl.BaseProtocol
-	c1915:p -> c1914:p [dir=back,arrowtail=empty];
+	c1940:p -> c1925:p [dir=back,arrowtail=empty];
 	//com.xley.lfosc.osc.OSCProtocol implements com.xley.lfosc.IProtocol
-	c1908:p -> c1914:p [dir=back,arrowtail=empty,style=dashed];
+	c1906:p -> c1925:p [dir=back,arrowtail=empty,style=dashed];
 	//com.xley.lfosc.impl.BaseProtocol implements com.xley.lfosc.IProtocol
-	c1908:p -> c1915:p [dir=back,arrowtail=empty,style=dashed];
+	c1906:p -> c1940:p [dir=back,arrowtail=empty,style=dashed];
 }
 

@@ -1,10 +1,10 @@
 <map id="G" name="G">
-<area shape="rect" id="c2066" href="./UnknownProtocolException.html" title="com.xley.lfosc.UnknownProtocolException" alt="" coords="16,374,317,447"/>
-<area shape="rect" id="node1" href="./UnknownProtocolException.html" title="&lt;TABLE&gt;" alt="" coords="5,369,328,453"/>
-<area shape="rect" id="c2067" href="./ClientProtocolException.html" title="com.xley.lfosc.ClientProtocolException" alt="" coords="362,358,851,463"/>
-<area shape="rect" id="node2" href="./ClientProtocolException.html" title="&lt;TABLE&gt;" alt="" coords="352,353,861,469"/>
-<area shape="rect" id="c2069" href="./ProtocolException.html" title="com.xley.lfosc.ProtocolException" alt="" coords="206,209,567,298"/>
-<area shape="rect" id="node3" href="./ProtocolException.html" title="&lt;TABLE&gt;" alt="" coords="196,203,577,303"/>
+<area shape="rect" id="c2066" href="./ProtocolException.html" title="com.xley.lfosc.ProtocolException" alt="" coords="206,209,567,298"/>
+<area shape="rect" id="node1" href="./ProtocolException.html" title="&lt;TABLE&gt;" alt="" coords="196,203,577,303"/>
+<area shape="rect" id="c2069" href="./UnknownProtocolException.html" title="com.xley.lfosc.UnknownProtocolException" alt="" coords="16,374,317,447"/>
+<area shape="rect" id="node2" href="./UnknownProtocolException.html" title="&lt;TABLE&gt;" alt="" coords="5,369,328,453"/>
+<area shape="rect" id="c2070" href="./ClientProtocolException.html" title="com.xley.lfosc.ClientProtocolException" alt="" coords="362,358,851,463"/>
+<area shape="rect" id="node3" href="./ClientProtocolException.html" title="&lt;TABLE&gt;" alt="" coords="352,353,861,469"/>
 <area shape="rect" id="c2105" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Exception.html" title="java.lang.Exception" alt="" coords="160,11,613,149"/>
-<area shape="rect" id="node6" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Exception.html" title="&lt;TABLE&gt;" alt="" coords="149,6,624,154"/>
+<area shape="rect" id="node4" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Exception.html" title="&lt;TABLE&gt;" alt="" coords="149,6,624,154"/>
 </map>

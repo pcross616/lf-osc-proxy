@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// com.xley.lfosc.IProtocol
-	c1503 [label=<<table title="com.xley.lfosc.IProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../IProtocol.html">
+	c1501 [label=<<table title="com.xley.lfosc.IProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../IProtocol.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> IProtocol </td></tr>
@@ -25,22 +25,8 @@ digraph G {
 <tr><td align="left" balign="left"> + command(command : String, args : String[]) : int </td></tr>
 		</table></td></tr>
 		</table>>, URL="../IProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.xley.lfosc.impl.BaseProtocol
-	c1510 [label=<<table title="com.xley.lfosc.impl.BaseProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../impl/BaseProtocol.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> BaseProtocol </font></td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left">  </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + BaseProtocol() </td></tr>
-<tr><td align="left" balign="left"> + configureProtocolData(data : IProtocolData) : IProtocolData </td></tr>
-<tr><td align="left" balign="left"> + command(command : String, args : String[]) : int </td></tr>
-		</table></td></tr>
-		</table>>, URL="../impl/BaseProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.lightfactory.LightFactoryProtocol
-	c1514 [label=<<table title="com.xley.lfosc.lightfactory.LightFactoryProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./LightFactoryProtocol.html">
+	c1505 [label=<<table title="com.xley.lfosc.lightfactory.LightFactoryProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./LightFactoryProtocol.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> LightFactoryProtocol </td></tr>
 		</table></td></tr>
@@ -54,11 +40,25 @@ digraph G {
 <tr><td align="left" balign="left"> + createProtocolData(value : Object) : IProtocolData </td></tr>
 		</table></td></tr>
 		</table>>, URL="./LightFactoryProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.xley.lfosc.impl.BaseProtocol implements com.xley.lfosc.IProtocol
-	c1503:p -> c1510:p [dir=back,arrowtail=empty,style=dashed];
+	// com.xley.lfosc.impl.BaseProtocol
+	c1535 [label=<<table title="com.xley.lfosc.impl.BaseProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../impl/BaseProtocol.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> BaseProtocol </font></td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left">  </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + BaseProtocol() </td></tr>
+<tr><td align="left" balign="left"> + configureProtocolData(data : IProtocolData) : IProtocolData </td></tr>
+<tr><td align="left" balign="left"> + command(command : String, args : String[]) : int </td></tr>
+		</table></td></tr>
+		</table>>, URL="../impl/BaseProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.xley.lfosc.lightfactory.LightFactoryProtocol extends com.xley.lfosc.impl.BaseProtocol
-	c1510:p -> c1514:p [dir=back,arrowtail=empty];
+	c1535:p -> c1505:p [dir=back,arrowtail=empty];
 	//com.xley.lfosc.lightfactory.LightFactoryProtocol implements com.xley.lfosc.IProtocol
-	c1503:p -> c1514:p [dir=back,arrowtail=empty,style=dashed];
+	c1501:p -> c1505:p [dir=back,arrowtail=empty,style=dashed];
+	//com.xley.lfosc.impl.BaseProtocol implements com.xley.lfosc.IProtocol
+	c1501:p -> c1535:p [dir=back,arrowtail=empty,style=dashed];
 }
 

@@ -1,8 +1,8 @@
 <map id="G" name="G">
-<area shape="rect" id="c975" href="../IProtocol.html" title="com.xley.lfosc.IProtocol" alt="" coords="135,11,513,149"/>
-<area shape="rect" id="node1" href="../IProtocol.html" title="&lt;TABLE&gt;" alt="" coords="124,6,524,154"/>
-<area shape="rect" id="c982" href="../impl/BaseProtocol.html" title="com.xley.lfosc.impl.BaseProtocol" alt="" coords="16,209,395,314"/>
-<area shape="rect" id="node2" href="../impl/BaseProtocol.html" title="&lt;TABLE&gt;" alt="" coords="5,203,405,319"/>
-<area shape="rect" id="c998" href="./HttpProtocol.html" title="com.xley.lfosc.http.HttpProtocol" alt="" coords="135,374,513,495"/>
-<area shape="rect" id="node3" href="./HttpProtocol.html" title="&lt;TABLE&gt;" alt="" coords="124,369,524,501"/>
+<area shape="rect" id="c973" href="../IProtocol.html" title="com.xley.lfosc.IProtocol" alt="" coords="16,11,395,149"/>
+<area shape="rect" id="node1" href="../IProtocol.html" title="&lt;TABLE&gt;" alt="" coords="5,6,405,154"/>
+<area shape="rect" id="c1004" href="./HttpProtocol.html" title="com.xley.lfosc.http.HttpProtocol" alt="" coords="16,374,395,495"/>
+<area shape="rect" id="node2" href="./HttpProtocol.html" title="&lt;TABLE&gt;" alt="" coords="5,369,405,501"/>
+<area shape="rect" id="c1007" href="../impl/BaseProtocol.html" title="com.xley.lfosc.impl.BaseProtocol" alt="" coords="135,209,513,314"/>
+<area shape="rect" id="node3" href="../impl/BaseProtocol.html" title="&lt;TABLE&gt;" alt="" coords="124,203,524,319"/>
 </map>

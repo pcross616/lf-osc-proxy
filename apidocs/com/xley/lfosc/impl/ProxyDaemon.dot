@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// com.xley.lfosc.impl.ProxyDaemon
-	c2160 [label=<<table title="com.xley.lfosc.impl.ProxyDaemon" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ProxyDaemon.html">
+	c2184 [label=<<table title="com.xley.lfosc.impl.ProxyDaemon" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./ProxyDaemon.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ProxyDaemon </td></tr>
 		</table></td></tr>
@@ -27,7 +27,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="./ProxyDaemon.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.xley.lfosc.impl.ProxyDaemon implements java.lang.Runnable
-	c2186:p -> c2160:p [dir=back,arrowtail=empty,style=dashed];
+	c2186:p -> c2184:p [dir=back,arrowtail=empty,style=dashed];
 	// java.lang.Runnable
 	c2186 [label=<<table title="java.lang.Runnable" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Runnable.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">

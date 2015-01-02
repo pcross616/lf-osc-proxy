@@ -9,22 +9,8 @@ digraph G {
 	node [fontname="Helvetica",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
-	// com.xley.lfosc.midi.impl.DefaultMidiMessageHandler
-	c1168 [label=<<table title="com.xley.lfosc.midi.impl.DefaultMidiMessageHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./impl/DefaultMidiMessageHandler.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> DefaultMidiMessageHandler </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> # midiServer : MidiServer </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + DefaultMidiMessageHandler() </td></tr>
-<tr><td align="left" balign="left"> + setMidiServer(server : MidiServer) </td></tr>
-<tr><td align="left" balign="left"> + note(message : MidiMessage, timeStamp : long, note : String) </td></tr>
-		</table></td></tr>
-		</table>>, URL="./impl/DefaultMidiMessageHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.midi.IMidiMessageHandler
-	c1173 [label=<<table title="com.xley.lfosc.midi.IMidiMessageHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./IMidiMessageHandler.html">
+	c1150 [label=<<table title="com.xley.lfosc.midi.IMidiMessageHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./IMidiMessageHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> IMidiMessageHandler </td></tr>
@@ -37,7 +23,21 @@ digraph G {
 <tr><td align="left" balign="left"> + note(message : MidiMessage, timeStamp : long, note : String) </td></tr>
 		</table></td></tr>
 		</table>>, URL="./IMidiMessageHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.xley.lfosc.midi.impl.DefaultMidiMessageHandler
+	c1154 [label=<<table title="com.xley.lfosc.midi.impl.DefaultMidiMessageHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./impl/DefaultMidiMessageHandler.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> DefaultMidiMessageHandler </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> # midiServer : MidiServer </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + DefaultMidiMessageHandler() </td></tr>
+<tr><td align="left" balign="left"> + setMidiServer(server : MidiServer) </td></tr>
+<tr><td align="left" balign="left"> + note(message : MidiMessage, timeStamp : long, note : String) </td></tr>
+		</table></td></tr>
+		</table>>, URL="./impl/DefaultMidiMessageHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.xley.lfosc.midi.impl.DefaultMidiMessageHandler implements com.xley.lfosc.midi.IMidiMessageHandler
-	c1173:p -> c1168:p [dir=back,arrowtail=empty,style=dashed];
+	c1150:p -> c1154:p [dir=back,arrowtail=empty,style=dashed];
 }
 
