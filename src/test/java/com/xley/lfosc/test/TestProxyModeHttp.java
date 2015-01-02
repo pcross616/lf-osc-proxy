@@ -34,6 +34,7 @@ import com.xley.lfosc.util.LogUtil;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.net.DatagramSocket;
@@ -122,6 +123,7 @@ public class TestProxyModeHttp {
     }
 
     @Test
+    @Ignore
     public void testHTTPtoMIDI() throws Exception {
         String url = "http://localhost:8080/midi/default/1:1:1";
         Object response = HttpClient.send(url);
