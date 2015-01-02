@@ -33,6 +33,11 @@ public class SimpleProtocolData implements IProtocolData {
     protected String operation;
     protected List<Object> data;
 
+    protected SimpleProtocolData() {
+    }
+
+    ;
+
     public SimpleProtocolData(String protocol, String target, String operation, List<Object> data) {
         this.protocol = protocol;
         this.target = target;

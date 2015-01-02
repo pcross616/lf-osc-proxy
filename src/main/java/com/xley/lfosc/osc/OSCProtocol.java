@@ -25,6 +25,7 @@ import com.illposed.osc.OSCPacket;
 import com.xley.lfosc.IProtocol;
 import com.xley.lfosc.IProtocolData;
 import com.xley.lfosc.ProtocolException;
+import com.xley.lfosc.ProtocolManager;
 import com.xley.lfosc.impl.BaseProtocol;
 import com.xley.lfosc.impl.SimpleProtocolData;
 import com.xley.lfosc.osc.client.OSCClient;
@@ -66,7 +67,8 @@ public class OSCProtocol extends BaseProtocol implements IProtocol {
     public Object process(IProtocolData data) throws ProtocolException {
         String[] address = ((String) data.getTarget()).split(":");
         if (address.length != 2) {
-            throw new ProtocolException(MessageFormat.format(resources.getString("osc.error.unknownhost"), data.getTarget()));
+            throw new ProtocolException(MessageFormat.format(resources.getString("osc.error.unknownhost"),
+                    data.getTarget()));
         }
         if (data.getData() != null && data.getData() instanceof OSCPacket) {
             return _process(address[0], Integer.parseInt(address[1]), (OSCMessage) data.getData());
@@ -142,7 +144,8 @@ public class OSCProtocol extends BaseProtocol implements IProtocol {
         } catch (UnknownHostException | UnresolvedAddressException e) {
             LogUtil.error(OSCProtocol.class, MessageFormat.format(resources.getString("osc.error.unknownhost"),
                     hostname + ":" + port));
-            throw new ProtocolException(MessageFormat.format(resources.getString("osc.error.unknownhost"), hostname + ":" + port), e);
+            throw new ProtocolException(MessageFormat.format(
+                    resources.getString("osc.error.unknownhost"), hostname + ":" + port), e);
         } catch (Exception e) {
             LogUtil.error(OSCProtocol.class, resources.getString("osc.error"), e);
             throw new ProtocolException(resources.getString("osc.error"), e);
@@ -213,18 +216,23 @@ public class OSCProtocol extends BaseProtocol implements IProtocol {
     }
 
 
-    private class OSCProtocolData extends SimpleProtocolData implements IProtocolData {
+    private static class OSCProtocolData extends SimpleProtocolData implements IProtocolData {
         public OSCProtocolData(String protocol, String target, String operation, List<Object> data) {
             super(protocol, target, operation, data);
         }
 
         public OSCProtocolData(OSCMessage value) {
-            super(value.getAddress().split("/")[1],
-                    value.getAddress().split("/")[2],
-                    value.getAddress().
-                            replace("/" + value.getAddress().split("/")[1] + "/" +
-                                    value.getAddress().split("/")[2] + "/", ""),
-                    value.getArguments());
+            String address = value.getAddress();
+            String[] parts = address.split("/");
+            if (parts.length >= 3 && ProtocolManager.getProtocol(parts[1]) != null) {
+                this.protocol = parts[1];
+                this.target = parts[2];
+                this.operation = address.replace("/" + parts[1] + "/" + parts[2] + "/", "");
+                this.data = value.getArguments();
+            } else {
+                this.target = address;
+                this.data = value.getArguments();
+            }
         }
     }
 }

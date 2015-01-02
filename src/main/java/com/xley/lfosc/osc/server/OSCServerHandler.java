@@ -27,6 +27,7 @@ import com.xley.lfosc.IProtocolData;
 import com.xley.lfosc.ProtocolException;
 import com.xley.lfosc.ProtocolManager;
 import com.xley.lfosc.UnknownProtocolException;
+import com.xley.lfosc.osc.OSCProtocol;
 import com.xley.lfosc.util.LogUtil;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -62,9 +63,9 @@ public class OSCServerHandler extends SimpleChannelInboundHandler<DatagramPacket
         } else {
             IProtocolData data = ProtocolManager.resolve(bundle);
             if (data == null) {
-                throw new UnknownProtocolException("Unknown OSC packet protocol");
+                throw new UnknownProtocolException(OSCProtocol.resources.getString("osc.error.unknown.packet"));
             }
-            channelHandlerContext.write(data.getProtocol().process(data) + "\r\n");
+            channelHandlerContext.writeAndFlush(data.getProtocol().process(data) + "\r\n");
         }
     }
 
@@ -76,7 +77,11 @@ public class OSCServerHandler extends SimpleChannelInboundHandler<DatagramPacket
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-        LogUtil.error(getClass(), cause);
+        if (cause instanceof UnknownProtocolException) {
+            LogUtil.error(cause.getMessage());
+        } else {
+            LogUtil.error(getClass(), cause);
+        }
     }
 
 }

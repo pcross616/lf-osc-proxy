@@ -65,7 +65,7 @@ public class HttpServerHandler extends ChannelInboundHandlerAdapter {
             Object result;
             boolean error = false;
 
-            IProtocol protocol = ProtocolManager.getProtocol("http");
+            IProtocol protocol = ProtocolManager.getProtocol(IHttpConstants.HTTP_PROTOCOL);
             IProtocolData protocolData = protocol.createProtocolData(req.getUri());
             try {
                 if (protocolData == null) {
@@ -80,17 +80,17 @@ public class HttpServerHandler extends ChannelInboundHandlerAdapter {
 
             //check for JSONP request
             QueryStringDecoder qsd = new QueryStringDecoder(req.getUri());
-            String contentType = "text/plain";
-            if (qsd.parameters().get("callback") != null) {
-                String callback = qsd.parameters().get("callback").get(0);
-                contentType = "application/javascript";
+            String contentType = IHttpConstants.CONTENT_TYPE_TEXT_PLAIN;
+            if (qsd.parameters().get(IHttpConstants.JSONP_CALLBACK) != null) {
+                String callback = qsd.parameters().get(IHttpConstants.JSONP_CALLBACK).get(0);
+                contentType = IHttpConstants.CONTENT_TYPE_APPLICATION_JS;
                 ObjectMapper mapper = new ObjectMapper();
                 Map<String, Object> jsonp = new HashMap<>();
 
                 if (error) {
-                    jsonp.put("error", result);
+                    jsonp.put(IHttpConstants.JSON_ERROR, result);
                 } else {
-                    jsonp.put("data", result);
+                    jsonp.put(IHttpConstants.JSON_DATA, result);
                 }
 
                 try {
@@ -100,7 +100,7 @@ public class HttpServerHandler extends ChannelInboundHandlerAdapter {
                 }
             }
 
-            FullHttpResponse response = null;
+            FullHttpResponse response;
             if (result != null) {
                 response = new DefaultFullHttpResponse(HTTP_1_1, error ? BAD_REQUEST : OK,
                         Unpooled.wrappedBuffer(String.valueOf(result).getBytes(Charset.defaultCharset())));
@@ -111,10 +111,10 @@ public class HttpServerHandler extends ChannelInboundHandlerAdapter {
             }
 
             if (!keepAlive) {
-                ctx.write(response).addListener(ChannelFutureListener.CLOSE);
+                ctx.writeAndFlush(response).addListener(ChannelFutureListener.CLOSE);
             } else {
                 response.headers().set(CONNECTION, HttpHeaders.Values.KEEP_ALIVE);
-                ctx.write(response);
+                ctx.writeAndFlush(response);
             }
         }
     }
@@ -124,12 +124,12 @@ public class HttpServerHandler extends ChannelInboundHandlerAdapter {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try {
             //write the error to the response
-            PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(baos));
+            PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(baos, Charset.defaultCharset()));
             cause.printStackTrace(printWriter);
 
             FullHttpResponse response = new DefaultFullHttpResponse(HTTP_1_1, HttpResponseStatus.INTERNAL_SERVER_ERROR,
                     Unpooled.wrappedBuffer(baos.toByteArray()));
-            response.headers().set(CONTENT_TYPE, "text/plain");
+            response.headers().set(CONTENT_TYPE, IHttpConstants.CONTENT_TYPE_TEXT_PLAIN);
             response.headers().set(CONTENT_LENGTH, response.content().readableBytes());
 
             LogUtil.error(getClass(), cause);

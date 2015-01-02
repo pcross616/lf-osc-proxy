@@ -32,9 +32,19 @@ import javax.sound.midi.ShortMessage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.text.MessageFormat;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 
 public class LearnCommand {
+
+    /**
+     * The constant resources.
+     */
+    private static final ResourceBundle resources = ResourceBundle.getBundle(LearnCommand.class.getSimpleName(),
+            Locale.getDefault());
 
     /**
      * Learn Midi Notes
@@ -44,11 +54,11 @@ public class LearnCommand {
      */
     public int learn(String[] args) {
         if (args.length == 0) {
-            System.out.println("midi.learn requires at least one argument, midi.learn <device> (<operation>)");
+            LogUtil.console(resources.getString("learn.help"));
             return -1;
         }
         String device = args[0];
-        System.out.println("Using midi device or index: " + device);
+        LogUtil.debug("Using midi device or index: " + device);
         int deviceIdx = -1;
         try {
             deviceIdx = Integer.parseInt(device);
@@ -61,26 +71,26 @@ public class LearnCommand {
             if (operation == null || operation.isEmpty()) {
                 try {
                     //  open up standard input
-                    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-                    System.out.print("Bind target operation (or just press enter to quit): ");
+                    BufferedReader br = new BufferedReader(new InputStreamReader(System.in, Charset.defaultCharset()));
+                    System.out.print(resources.getString("learn.prompt"));
                     operation = br.readLine();
                     if (operation == null || operation.isEmpty()) {
                         return 0;
                     }
 
                 } catch (IOException ioe) {
-                    System.out.println("IO error trying to process event operation");
+                    LogUtil.error(resources.getString("learn.error.io"), ioe);
                     return -1;
                 }
             }
             IProtocolData data = ProtocolManager.resolve(operation);
             if (data == null) {
-                System.out.println("Target Operation is invalid. [" + operation + "]");
+                LogUtil.console(MessageFormat.format(resources.getString("learn.operation.invalid"), operation));
                 operation = null;
                 continue;
             }
 
-            System.out.println("Listening for Midi Event for Operation: " + operation);
+            LogUtil.console(MessageFormat.format(resources.getString("learn.operation.listening"), operation));
             MidiServer server = new MidiServer(new MidiMapperHandler(operation), device, deviceIdx);
             //clear the existing binding
             server.getOperatorBinding(operation).clear();
@@ -90,7 +100,7 @@ public class LearnCommand {
             try {
                 //  open up standard input
                 BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-                System.out.println("Press the [ENTER] key to stop listening ..");
+                LogUtil.console(resources.getString("learn.operation.listening.stop"));
                 br.readLine();
 
                 server.shutdown();
@@ -107,7 +117,7 @@ public class LearnCommand {
         }
     }
 
-    private class MidiMapperHandler extends DefaultMidiMessageHandler implements IMidiMessageHandler {
+    private static class MidiMapperHandler extends DefaultMidiMessageHandler implements IMidiMessageHandler {
         private final String operation;
 
         public MidiMapperHandler(String operation) {

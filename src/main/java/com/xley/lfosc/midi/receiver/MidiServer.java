@@ -24,6 +24,7 @@ package com.xley.lfosc.midi.receiver;
 import com.xley.lfosc.impl.ProxyDaemon;
 import com.xley.lfosc.midi.IMidiMessageHandler;
 import com.xley.lfosc.midi.MidiCommon;
+import com.xley.lfosc.midi.MidiProtocol;
 import com.xley.lfosc.midi.impl.objects.MidiKey;
 import com.xley.lfosc.util.LogUtil;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -36,6 +37,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -67,7 +69,7 @@ public class MidiServer implements Runnable {
 
         FileInputStream fis = null;
         try {
-            File midiMap = new File("midi-map.json");
+            File midiMap = new File(MidiProtocol.resources.getString("midi.server.map.json"));
             if (midiMap.exists()) {
                 fis = new FileInputStream(midiMap);
                 noteMap = objectMapper.readValue(fis, Map.class);
@@ -76,13 +78,13 @@ public class MidiServer implements Runnable {
             }
 
         } catch (IOException e) {
-            LogUtil.error(getClass(), "unable to load midi-map.properties", e);
+            LogUtil.error(getClass(), MidiProtocol.resources.getString("midi.server.error.load.props"), e);
         } finally {
             if (fis != null) {
                 try {
                     fis.close();
                 } catch (IOException e) {
-                    //dont care
+                    LogUtil.trace(getClass(), e);
                 }
             }
         }
@@ -90,8 +92,8 @@ public class MidiServer implements Runnable {
 
 
     public void run() {
-        if ((deviceName == null) && (deviceNameIdx < 0)) {
-            LogUtil.error(getClass(), "device name/index not specified!");
+        if (deviceName == null && deviceNameIdx < 0) {
+            LogUtil.error(getClass(), MidiProtocol.resources.getString("midi.server.error.no_device"));
             shutdown(2);
             return;
         }
@@ -104,9 +106,11 @@ public class MidiServer implements Runnable {
         }
         if (info == null) {
             if (deviceName != null) {
-                LogUtil.error(getClass(), "no device info found for name " + deviceName);
+                LogUtil.error(getClass(), MessageFormat.format(
+                        MidiProtocol.resources.getString("midi.server.error.no_device_name"), deviceName));
             } else {
-                LogUtil.error(getClass(), "no device info found for index " + deviceNameIdx);
+                LogUtil.error(getClass(), MessageFormat.format(
+                        MidiProtocol.resources.getString("midi.server.error.no_device_index"), deviceNameIdx));
             }
             //no device found
             shutdown(2);
@@ -122,7 +126,8 @@ public class MidiServer implements Runnable {
             LogUtil.error(getClass(), e);
         }
         if (inputDevice == null) {
-            LogUtil.error(getClass(), "wasn't able to retrieve MidiDevice");
+            LogUtil.error(getClass(), MessageFormat.format(
+                    MidiProtocol.resources.getString("midi.server.error.unable.retrieve"), info.getName()));
             shutdown(2);
             return;
         }
@@ -132,7 +137,7 @@ public class MidiServer implements Runnable {
             Transmitter t = inputDevice.getTransmitter();
             t.setReceiver(r);
         } catch (MidiUnavailableException e) {
-            LogUtil.error(getClass(), "wasn't able to connect the device's Transmitter to the Receiver:", e);
+            LogUtil.error(getClass(), MidiProtocol.resources.getString("midi.server.error.unable.connect"), e);
 
             r.close();
             if (inputDevice.getReceivers().size() == 0) {
@@ -165,22 +170,23 @@ public class MidiServer implements Runnable {
 
             FileOutputStream fos = null;
             try {
-                File midiMap = new File("midi-map.json");
+                File midiMap = new File(MidiProtocol.resources.getString("midi.server.map.json"));
                 fos = new FileOutputStream(midiMap);
                 objectMapper.defaultPrettyPrintingWriter().writeValue(fos, noteMap);
             } catch (IOException e) {
+                LogUtil.error(getClass(), MidiProtocol.resources.getString("midi.server.error.save.props"), e);
+            } finally {
                 if (fos != null) {
                     try {
                         fos.close();
                     } catch (IOException e1) {
-                        // ignore
+                        LogUtil.trace(getClass(), e1);
                     }
                 }
-                LogUtil.error(getClass(), "error saving midi-map.properties", e);
             }
-            LogUtil.debug(getClass(), "Received " + r.seCount + " sysex messages with a total of " + r.seByteCount + " bytes");
-            LogUtil.debug(getClass(), "Received " + r.smCount + " short messages with a total of " + r.smByteCount + " bytes");
-            LogUtil.debug(getClass(), "Received a total of " + (r.smByteCount + r.seByteCount) + " bytes");
+            LogUtil.trace(getClass(), "Received " + r.seCount + " sysex messages with a total of " + r.seByteCount + " bytes");
+            LogUtil.trace(getClass(), "Received " + r.smCount + " short messages with a total of " + r.smByteCount + " bytes");
+            LogUtil.trace(getClass(), "Received a total of " + (r.smByteCount + r.seByteCount) + " bytes");
         }
     }
 

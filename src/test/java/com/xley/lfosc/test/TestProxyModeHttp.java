@@ -25,10 +25,8 @@ import com.illposed.osc.OSCMessage;
 import com.illposed.osc.OSCPort;
 import com.illposed.osc.OSCPortIn;
 import com.xley.lfosc.ClientProtocolException;
-import com.xley.lfosc.ProtocolException;
 import com.xley.lfosc.http.client.HttpClient;
 import com.xley.lfosc.midi.MidiProtocol;
-import com.xley.lfosc.osc.client.OSCClient;
 import com.xley.lfosc.test.support.MockLightFactoryServer;
 import com.xley.lfosc.test.support.MockOSCListener;
 import com.xley.lfosc.test.support.ProxyServerRunner;
@@ -43,11 +41,8 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.text.MessageFormat;
-import java.util.Arrays;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 public class TestProxyModeHttp {
     private Thread server = null;
@@ -128,9 +123,9 @@ public class TestProxyModeHttp {
 
     @Test
     public void testHTTPtoMIDI() throws Exception {
-        String url = "http://localhost:8080/midi/loopMIDI%20Port/1:1:1";
+        String url = "http://localhost:8080/midi/default/1:1:1";
         Object response = HttpClient.send(url);
-        assertEquals(MessageFormat.format(MidiProtocol.resources.getString("midi.note.sent"), "loopMIDI Port", 1,1,1), response);
+        assertEquals(MessageFormat.format(MidiProtocol.resources.getString("midi.note.sent"), "default", 1, 1, 1), response);
     }
 
     @Test

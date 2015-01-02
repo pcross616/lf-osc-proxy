@@ -26,17 +26,17 @@ import java.util.List;
 
 public interface IProtocolData {
 
-    public String getType();
+    String getType();
 
-    public IProtocol getProtocol();
+    IProtocol getProtocol();
 
-    public Object getTarget();
+    Object getTarget();
 
-    public Object getOperation();
+    Object getOperation();
 
-    public List<Object> getDataList();
+    List<Object> getDataList();
 
-    public Object getData();
+    Object getData();
 
-    public IProtocolData configureProtocolData();
+    IProtocolData configureProtocolData();
 }

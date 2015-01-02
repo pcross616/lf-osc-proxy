@@ -51,9 +51,13 @@
 package com.xley.lfosc.midi.receiver;
 
 import com.xley.lfosc.midi.IMidiMessageHandler;
+import com.xley.lfosc.util.LogUtil;
 
 import javax.sound.midi.*;
-import java.io.PrintStream;
+import java.nio.charset.Charset;
+import java.text.MessageFormat;
+
+import static com.xley.lfosc.midi.MidiProtocol.resources;
 
 
 /**
@@ -65,45 +69,45 @@ public class MidiReceiver implements Receiver {
     private static final String[] sm_astrKeySignatures = {"Cb", "Gb", "Db", "Ab", "Eb", "Bb", "F", "C", "G", "D", "A", "E", "B", "F#", "C#"};
     private static final String[] SYSTEM_MESSAGE_TEXT =
             {
-                    "System Exclusive (should not be in ShortMessage!)",
-                    "MTC Quarter Frame: ",
-                    "Song Position: ",
-                    "Song Select: ",
-                    "Undefined",
-                    "Undefined",
-                    "Tune Request",
-                    "End of SysEx (should not be in ShortMessage!)",
-                    "Timing clock",
-                    "Undefined",
-                    "Start",
-                    "Continue",
-                    "Stop",
-                    "Undefined",
-                    "Active Sensing",
-                    "System Reset"
+                    resources.getString("midi.recv.sys.0"),
+                    resources.getString("midi.recv.sys.1"),
+                    resources.getString("midi.recv.sys.2"),
+                    resources.getString("midi.recv.sys.3"),
+                    resources.getString("midi.recv.sys.4"),
+                    resources.getString("midi.recv.sys.5"),
+                    resources.getString("midi.recv.sys.6"),
+                    resources.getString("midi.recv.sys.7"),
+                    resources.getString("midi.recv.sys.8"),
+                    resources.getString("midi.recv.sys.9"),
+                    resources.getString("midi.recv.sys.10"),
+                    resources.getString("midi.recv.sys.11"),
+                    resources.getString("midi.recv.sys.12"),
+                    resources.getString("midi.recv.sys.13"),
+                    resources.getString("midi.recv.sys.14"),
+                    resources.getString("midi.recv.sys.15")
             };
     private static final String[] QUARTER_FRAME_MESSAGE_TEXT =
             {
-                    "frame count LS: ",
-                    "frame count MS: ",
-                    "seconds count LS: ",
-                    "seconds count MS: ",
-                    "minutes count LS: ",
-                    "minutes count MS: ",
-                    "hours count LS: ",
-                    "hours count MS: "
+                    resources.getString("midi.recv.qf.0"),
+                    resources.getString("midi.recv.qf.1"),
+                    resources.getString("midi.recv.qf.2"),
+                    resources.getString("midi.recv.qf.3"),
+                    resources.getString("midi.recv.qf.4"),
+                    resources.getString("midi.recv.qf.5"),
+                    resources.getString("midi.recv.qf.6"),
+                    resources.getString("midi.recv.qf.7"),
             };
     private static final String[] FRAME_TYPE_TEXT =
             {
-                    "24 frames/second",
-                    "25 frames/second",
-                    "30 frames/second (drop)",
-                    "30 frames/second (non-drop)",
+                    resources.getString("midi.recv.ft.0"),
+                    resources.getString("midi.recv.ft.1"),
+                    resources.getString("midi.recv.ft.2"),
+                    resources.getString("midi.recv.ft.3"),
             };
-    public static long seByteCount = 0;
-    public static long smByteCount = 0;
-    public static long seCount = 0;
-    public static long smCount = 0;
+    protected static long seByteCount = 0;
+    protected static long smByteCount = 0;
+    protected static long seCount = 0;
+    protected static long smCount = 0;
     private static char hexDigits[] =
             {'0', '1', '2', '3',
                     '4', '5', '6', '7',
@@ -111,23 +115,8 @@ public class MidiReceiver implements Receiver {
                     'C', 'D', 'E', 'F'};
 
 
-    private PrintStream m_printStream;
-    private boolean m_bDebug;
-    private boolean m_bPrintTimeStampAsTicks;
     private IMidiMessageHandler noteHandler;
 
-
-    public MidiReceiver(PrintStream printStream) {
-        this(printStream, false);
-    }
-
-
-    public MidiReceiver(PrintStream printStream,
-                        boolean bPrintTimeStampAsTicks) {
-        m_printStream = printStream;
-        m_bDebug = false;
-        m_bPrintTimeStampAsTicks = bPrintTimeStampAsTicks;
-    }
 
     public MidiReceiver(IMidiMessageHandler noteHandler) {
         this.noteHandler = noteHandler;
@@ -135,7 +124,7 @@ public class MidiReceiver implements Receiver {
 
     public static String getKeyName(int nKeyNumber) {
         if (nKeyNumber > 127) {
-            return "illegal value";
+            return resources.getString("midi.recv.key.illegal_value");
         } else {
             int nNote = nKeyNumber % 12;
             int nOctave = nKeyNumber / 12;
@@ -216,38 +205,50 @@ public class MidiReceiver implements Receiver {
     }
 
     public static String decodeMessage(ShortMessage message) {
-        String strMessage = null;
+        String strMessage;
         switch (message.getCommand()) {
             case 0x80:
-                strMessage = "note Off " + getKeyName(message.getData1()) + " velocity: " + message.getData2();
+                strMessage = MessageFormat.format(resources.getString("midi.recv.msg.note_off"),
+                        getKeyName(message.getData1()), message.getData2());
                 break;
 
             case 0x90:
-                strMessage = "note On " + getKeyName(message.getData1()) + " velocity: " + message.getData2();
+                strMessage = MessageFormat.format(resources.getString("midi.recv.msg.note_on"),
+                        getKeyName(message.getData1()), message.getData2());
                 break;
 
             case 0xa0:
-                strMessage = "polyphonic key pressure " + getKeyName(message.getData1()) + " pressure: " + message.getData2();
+
+                strMessage = MessageFormat.format(resources.getString("midi.recv.msg.poly_key_press"),
+                        getKeyName(message.getData1()), message.getData2());
+
                 break;
 
             case 0xb0:
-                strMessage = "control change " + message.getData1() + " value: " + message.getData2();
+                strMessage = MessageFormat.format(resources.getString("midi.recv.msg.ctrl_chg"),
+                        message.getData1(), message.getData2());
                 break;
 
             case 0xc0:
-                strMessage = "program change " + message.getData1();
+                strMessage = MessageFormat.format(resources.getString("midi.recv.msg.pgrm_chg"),
+                        message.getData1());
+
                 break;
 
             case 0xd0:
-                strMessage = "key pressure " + getKeyName(message.getData1()) + " pressure: " + message.getData2();
+                strMessage = MessageFormat.format(resources.getString("midi.recv.msg.key_press"),
+                        getKeyName(message.getData1()), message.getData2());
+
                 break;
 
             case 0xe0:
-                strMessage = "pitch wheel change " + get14bitValue(message.getData1(), message.getData2());
+                strMessage = MessageFormat.format(resources.getString("midi.recv.msg.pitch_wheel_chg"),
+                        get14bitValue(message.getData1(), message.getData2()));
+
                 break;
 
             case 0xF0:
-                strMessage = SYSTEM_MESSAGE_TEXT[message.getChannel()];
+                strMessage = resources.getString(SYSTEM_MESSAGE_TEXT[message.getChannel()]);
                 switch (message.getChannel()) {
                     case 0x1:
                         int nQType = (message.getData1() & 0x70) >> 4;
@@ -255,10 +256,11 @@ public class MidiReceiver implements Receiver {
                         if (nQType == 7) {
                             nQData = nQData & 0x1;
                         }
-                        strMessage += QUARTER_FRAME_MESSAGE_TEXT[nQType] + nQData;
+                        strMessage += resources.getString(QUARTER_FRAME_MESSAGE_TEXT[nQType]) + nQData;
                         if (nQType == 7) {
                             int nFrameType = (message.getData1() & 0x06) >> 1;
-                            strMessage += ", frame type: " + FRAME_TYPE_TEXT[nFrameType];
+                            strMessage += ", " + MessageFormat.format(resources.getString("midi.recv.msg.frame_type"),
+                                    resources.getString(FRAME_TYPE_TEXT[nFrameType]));
                         }
                         break;
 
@@ -273,13 +275,13 @@ public class MidiReceiver implements Receiver {
                 break;
 
             default:
-                strMessage = "unknown message: status = " + message.getStatus() + ", byte1 = " + message.getData1() + ", byte2 = " + message.getData2();
+                strMessage = MessageFormat.format(resources.getString("midi.recv.msg.unknown"),
+                        message.getStatus(), message.getData1(), message.getData2());
                 break;
         }
         if (message.getCommand() != 0xF0) {
             int nChannel = message.getChannel() + 1;
-            String strChannel = "channel " + nChannel + ": ";
-            strMessage = strChannel + strMessage;
+            strMessage = MessageFormat.format(resources.getString("midi.recv.msg.channel"), nChannel, strMessage);
         }
         smCount++;
         smByteCount += message.getLength();
@@ -291,9 +293,10 @@ public class MidiReceiver implements Receiver {
         String strMessage = null;
         // System.out.println("sysex status: " + message.getStatus());
         if (message.getStatus() == SysexMessage.SYSTEM_EXCLUSIVE) {
-            strMessage = "Sysex message: F0" + getHexString(abData);
+            strMessage = MessageFormat.format(resources.getString("midi.recv.msg.sysex_msg"), getHexString(abData));
         } else if (message.getStatus() == SysexMessage.SPECIAL_SYSTEM_EXCLUSIVE) {
-            strMessage = "Continued Sysex message F7" + getHexString(abData);
+            strMessage = MessageFormat.format(
+                    resources.getString("midi.recv.msg.cont_sysex_msg"), getHexString(abData));
             seByteCount--; // do not count the F7
         }
         seByteCount += abData.length + 1;
@@ -302,59 +305,66 @@ public class MidiReceiver implements Receiver {
     }
 
     public static String decodeMessage(MetaMessage message) {
-        byte[] abMessage = message.getMessage();
         byte[] abData = message.getData();
-        int nDataLength = message.getLength();
-        String strMessage = null;
-        // System.out.println("data array length: " + abData.length);
+        String strMessage;
+        LogUtil.trace(MidiReceiver.class, "data array length: " + abData.length);
         switch (message.getType()) {
             case 0:
                 int nSequenceNumber = ((abData[0] & 0xFF) << 8) | (abData[1] & 0xFF);
-                strMessage = "Sequence Number: " + nSequenceNumber;
+                strMessage = MessageFormat.format(
+                        resources.getString("midi.recv.msg.seq_num"), nSequenceNumber);
                 break;
 
             case 1:
-                String strText = new String(abData);
-                strMessage = "Text Event: " + strText;
+                String strText = new String(abData, Charset.defaultCharset());
+                strMessage = MessageFormat.format(
+                        resources.getString("midi.recv.msg.txt_event"), strText);
                 break;
 
             case 2:
-                String strCopyrightText = new String(abData);
-                strMessage = "Copyright Notice: " + strCopyrightText;
+                String strCopyrightText = new String(abData, Charset.defaultCharset());
+                strMessage = MessageFormat.format(
+                        resources.getString("midi.recv.msg.copyright"), strCopyrightText);
                 break;
 
             case 3:
-                String strTrackName = new String(abData);
-                strMessage = "Sequence/Track Name: " + strTrackName;
+                String strTrackName = new String(abData, Charset.defaultCharset());
+                strMessage = MessageFormat.format(
+                        resources.getString("midi.recv.msg.seq_name"), strTrackName);
                 break;
 
             case 4:
-                String strInstrumentName = new String(abData);
-                strMessage = "Instrument Name: " + strInstrumentName;
+                String strInstrumentName = new String(abData, Charset.defaultCharset());
+                strMessage = MessageFormat.format(
+                        resources.getString("midi.recv.msg.inst_name"), strInstrumentName);
                 break;
 
             case 5:
-                String strLyrics = new String(abData);
-                strMessage = "Lyric: " + strLyrics;
+                String strLyrics = new String(abData, Charset.defaultCharset());
+                strMessage = MessageFormat.format(
+                        resources.getString("midi.recv.msg.lyric"), strLyrics);
                 break;
 
             case 6:
-                String strMarkerText = new String(abData);
-                strMessage = "Marker: " + strMarkerText;
+                String strMarkerText = new String(abData, Charset.defaultCharset());
+                strMessage = MessageFormat.format(
+                        resources.getString("midi.recv.msg.marker"), strMarkerText);
                 break;
 
             case 7:
-                String strCuePointText = new String(abData);
-                strMessage = "Cue Point: " + strCuePointText;
+                String strCuePointText = new String(abData, Charset.defaultCharset());
+                strMessage = MessageFormat.format(
+                        resources.getString("midi.recv.msg.cue_point"), strCuePointText);
                 break;
 
             case 0x20:
                 int nChannelPrefix = abData[0] & 0xFF;
-                strMessage = "MIDI Channel Prefix: " + nChannelPrefix;
+                strMessage = MessageFormat.format(
+                        resources.getString("midi.recv.msg.midi_channel_prefix"), nChannelPrefix);
                 break;
 
             case 0x2F:
-                strMessage = "End of Track";
+                strMessage = resources.getString("midi.recv.msg.eot");
                 break;
 
             case 0x51:
@@ -363,41 +373,50 @@ public class MidiReceiver implements Receiver {
                         | (abData[2] & 0xFF);           // tempo in microseconds per beat
                 float bpm = convertTempo(nTempo);
                 // truncate it to 2 digits after dot
-                bpm = (float) (Math.round(bpm * 100.0f) / 100.0f);
-                strMessage = "Set Tempo: " + bpm + " bpm";
+                bpm = (Math.round(bpm * 100.0f) / 100.0f);
+                strMessage = MessageFormat.format(
+                        resources.getString("midi.recv.msg.set_tempo"), bpm);
                 break;
 
             case 0x54:
-                // System.out.println("data array length: " + abData.length);
-                strMessage = "SMTPE Offset: "
-                        + (abData[0] & 0xFF) + ":"
-                        + (abData[1] & 0xFF) + ":"
-                        + (abData[2] & 0xFF) + "."
-                        + (abData[3] & 0xFF) + "."
-                        + (abData[4] & 0xFF);
+                strMessage = MessageFormat.format(
+                        resources.getString("midi.recv.msg.smtpe_off"),
+                        +(abData[0] & 0xFF) + ":"
+                                + (abData[1] & 0xFF) + ":"
+                                + (abData[2] & 0xFF) + "."
+                                + (abData[3] & 0xFF) + "."
+                                + (abData[4] & 0xFF));
                 break;
 
             case 0x58:
-                strMessage = "Time Signature: "
-                        + (abData[0] & 0xFF) + "/" + (1 << (abData[1] & 0xFF))
-                        + ", MIDI clocks per metronome tick: " + (abData[2] & 0xFF)
-                        + ", 1/32 per 24 MIDI clocks: " + (abData[3] & 0xFF);
+                strMessage = MessageFormat.format(
+                        resources.getString("midi.recv.msg.time_sig"),
+                        (abData[0] & 0xFF),
+                        (1 << (abData[1] & 0xFF)),
+                        (abData[2] & 0xFF),
+                        (abData[3] & 0xFF));
                 break;
 
             case 0x59:
-                String strGender = (abData[1] == 1) ? "minor" : "major";
-                strMessage = "Key Signature: " + sm_astrKeySignatures[abData[0] + 7] + " " + strGender;
+                String strGender = (abData[1] == 1) ?
+                        resources.getString("midi.recv.msg.key_sig.minor") :
+                        resources.getString("midi.recv.msg.key_sig.major");
+
+                strMessage = MessageFormat.format(
+                        resources.getString("midi.recv.msg.key_sig"), sm_astrKeySignatures[abData[0] + 7], strGender);
                 break;
 
             case 0x7F:
                 // TODO: decode vendor code, dump data in rows
                 String strDataDump = getHexString(abData);
-                strMessage = "Sequencer-Specific Meta event: " + strDataDump;
+                strMessage = MessageFormat.format(
+                        resources.getString("midi.recv.msg.seq_spec_meta"), strDataDump);
                 break;
 
             default:
                 String strUnknownDump = getHexString(abData);
-                strMessage = "unknown Meta event: " + strUnknownDump;
+                strMessage = MessageFormat.format(
+                        resources.getString("midi.recv.msg.unknown_meta"), strUnknownDump);
                 break;
 
         }
@@ -408,7 +427,7 @@ public class MidiReceiver implements Receiver {
     }
 
     public void send(MidiMessage message, long lTimeStamp) {
-        String strMessage = null;
+        String strMessage;
         if (message instanceof ShortMessage) {
             strMessage = decodeMessage((ShortMessage) message);
         } else if (message instanceof SysexMessage) {
@@ -416,22 +435,9 @@ public class MidiReceiver implements Receiver {
         } else if (message instanceof MetaMessage) {
             strMessage = decodeMessage((MetaMessage) message);
         } else {
-            strMessage = "unknown message type";
+            strMessage = resources.getString("midi.recv.msg.unknown_msg_type");
         }
-        String strTimeStamp = null;
-        if (m_bPrintTimeStampAsTicks) {
-            strTimeStamp = "tick " + lTimeStamp + ": ";
-        } else {
-            if (lTimeStamp == -1L) {
-                strTimeStamp = "timestamp [unknown]: ";
-            } else {
-                strTimeStamp = "timestamp " + lTimeStamp + " us: ";
-            }
-        }
-        if (noteHandler != null) {
-            noteHandler.note(message, lTimeStamp, strMessage);
-        } else if (m_printStream != null) {
-            m_printStream.println(strTimeStamp + strMessage);
-        }
+
+        noteHandler.note(message, lTimeStamp, strMessage);
     }
 }

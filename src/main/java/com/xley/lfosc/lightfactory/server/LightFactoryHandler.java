@@ -41,12 +41,8 @@ public class LightFactoryHandler extends SimpleChannelInboundHandler<String> {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         // Send greeting for a new connection.
-        ctx.write("LightFactory remote command interface on " + InetAddress.getLocalHost().getHostName() + "\r\n" +
-                "\r\n" +
-                ".\r\n" +
-                "LightFactory-OSC Proxy Server\r\n" +
-                "\r\n" +
-                ">");
+        ctx.write(MessageFormat.format(LightFactoryProtocol.resources.getString("lf.connection.header"),
+                InetAddress.getLocalHost().getHostName()));
         ctx.flush();
     }
 
@@ -57,8 +53,8 @@ public class LightFactoryHandler extends SimpleChannelInboundHandler<String> {
         boolean close = false;
         if (request.isEmpty()) {
             response = "\r\n>";
-        } else if ("exit".equals(request.toLowerCase())) {
-            response = "Closing connection";
+        } else if (LightFactoryProtocol.resources.getString("lf.connection.close.cmd").equals(request.toLowerCase())) {
+            response = LightFactoryProtocol.resources.getString("lf.connection.close");
             close = true;
         } else {
             IProtocolData data = ProtocolManager.resolve(request);
@@ -79,7 +75,7 @@ public class LightFactoryHandler extends SimpleChannelInboundHandler<String> {
 
         // We do not need to write a ChannelBuffer here.
         // We know the encoder inserted at PipelineFactory will do the conversion.
-        ChannelFuture future = ctx.write(response);
+        ChannelFuture future = ctx.writeAndFlush(response);
 
         // Close the connection
         if (close) {

@@ -22,6 +22,8 @@
 package com.xley.lfosc.http.client;
 
 import com.xley.lfosc.ClientProtocolException;
+import com.xley.lfosc.http.HttpProtocol;
+import com.xley.lfosc.http.server.IHttpConstants;
 import com.xley.lfosc.impl.ResultData;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
@@ -32,7 +34,9 @@ import io.netty.handler.codec.http.*;
 import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 
+import java.net.InetAddress;
 import java.net.URI;
+import java.text.MessageFormat;
 
 public final class HttpClient {
 
@@ -63,23 +67,25 @@ public final class HttpClient {
     public static Object send(EventLoopGroup group, final String url) throws Exception {
         ResultData data = new ResultData();
         URI uri = new URI(url);
-        String scheme = uri.getScheme() == null ? "http" : uri.getScheme();
-        String host = uri.getHost() == null ? "127.0.0.1" : uri.getHost();
+        String scheme = uri.getScheme() == null ? IHttpConstants.HTTP_PROTOCOL : uri.getScheme();
+        String host = uri.getHost() == null ? InetAddress.getLoopbackAddress().getHostAddress() : uri.getHost();
         int port = uri.getPort();
         if (port == -1) {
-            if ("http".equalsIgnoreCase(scheme)) {
-                port = 80;
-            } else if ("https".equalsIgnoreCase(scheme)) {
-                port = 443;
+            if (IHttpConstants.HTTP_PROTOCOL.equalsIgnoreCase(scheme)) {
+                port = IHttpConstants.HTTP_PROTOCOL_PORT;
+            } else if (IHttpConstants.HTTPS_PROTOCOL.equalsIgnoreCase(scheme)) {
+                port = IHttpConstants.HTTPS_PROTOCOL_PORT;
             }
         }
 
-        if (!"http".equalsIgnoreCase(scheme) && !"https".equalsIgnoreCase(scheme)) {
-            throw new ClientProtocolException("Only HTTP(S) is supported. [" + url + "]", null);
+        if (!IHttpConstants.HTTP_PROTOCOL.equalsIgnoreCase(scheme) &&
+                !IHttpConstants.HTTPS_PROTOCOL.equalsIgnoreCase(scheme)) {
+            throw new ClientProtocolException(MessageFormat.format(
+                    HttpProtocol.resources.getString("http.error.only_http_protocols"), url), null);
         }
 
         // Configure SSL context if necessary.
-        final boolean ssl = "https".equalsIgnoreCase(scheme);
+        final boolean ssl = IHttpConstants.HTTPS_PROTOCOL.equalsIgnoreCase(scheme);
         final SslContext sslCtx;
         if (ssl) {
             sslCtx = SslContext.newClientContext(InsecureTrustManagerFactory.INSTANCE);
@@ -109,7 +115,7 @@ public final class HttpClient {
         // Wait for the server to close the connection.
         ch.closeFuture().sync();
         Object result = data.getData();
-        if (data.getStatus() instanceof HttpResponseStatus && (((HttpResponseStatus) data.getStatus()).code() >= 400)) {
+        if (data.getStatus() instanceof HttpResponseStatus && ((HttpResponseStatus) data.getStatus()).code() >= 400) {
             if (result instanceof Throwable) {
                 throw new ClientProtocolException(((HttpResponseStatus) data.getStatus()).reasonPhrase(),
                         data.getStatus(), (Throwable) result);

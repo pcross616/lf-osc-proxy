@@ -20,6 +20,7 @@
 
 package com.xley.lfosc.http.server;
 
+import com.xley.lfosc.http.HttpProtocol;
 import com.xley.lfosc.impl.ProxyDaemon;
 import com.xley.lfosc.util.LogUtil;
 import io.netty.bootstrap.ServerBootstrap;
@@ -30,6 +31,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LoggingHandler;
 
 import java.net.InetSocketAddress;
+import java.text.MessageFormat;
 
 public class HttpServer implements Runnable {
     private final InetSocketAddress binding;
@@ -51,7 +53,8 @@ public class HttpServer implements Runnable {
                 bootstrap.channel(NioServerSocketChannel.class)
                         .handler(new LoggingHandler(this.getClass().getName()))
                         .childHandler(new HttpChannelInitializer());
-
+                LogUtil.info(MessageFormat.format(HttpProtocol.resources.getString("http.listening"),
+                        binding.toString()));
                 Channel ch = bootstrap.bind(binding).sync().channel();
                 ch.closeFuture().sync();
             } catch (InterruptedException e) {

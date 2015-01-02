@@ -21,6 +21,7 @@
 package com.xley.lfosc.lightfactory.server;
 
 import com.xley.lfosc.impl.ProxyDaemon;
+import com.xley.lfosc.lightfactory.LightFactoryProtocol;
 import com.xley.lfosc.util.LogUtil;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelOption;
@@ -29,6 +30,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LoggingHandler;
 
 import java.net.InetSocketAddress;
+import java.text.MessageFormat;
 
 public class LightFactoryServer implements Runnable {
 
@@ -52,7 +54,8 @@ public class LightFactoryServer implements Runnable {
                 bootstrap.channel(NioServerSocketChannel.class)
                         .handler(new LoggingHandler(this.getClass().getName()))
                         .childHandler(new LightFactoryInitializer());
-
+                LogUtil.info(MessageFormat.format(LightFactoryProtocol.resources.getString("lf.listening"),
+                        binding.toString()));
                 bootstrap.bind(binding).sync().channel().closeFuture().sync();
             } catch (InterruptedException e) {
                 if (!daemon.isShutdown()) {

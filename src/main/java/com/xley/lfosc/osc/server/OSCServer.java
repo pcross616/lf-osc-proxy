@@ -21,6 +21,7 @@
 package com.xley.lfosc.osc.server;
 
 import com.xley.lfosc.impl.ProxyDaemon;
+import com.xley.lfosc.osc.OSCProtocol;
 import com.xley.lfosc.util.LogUtil;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelOption;
@@ -29,6 +30,7 @@ import io.netty.channel.socket.nio.NioDatagramChannel;
 import io.netty.handler.logging.LoggingHandler;
 
 import java.net.InetSocketAddress;
+import java.text.MessageFormat;
 
 public class OSCServer implements Runnable {
     private final InetSocketAddress binding;
@@ -50,7 +52,7 @@ public class OSCServer implements Runnable {
                         .option(ChannelOption.SO_BROADCAST, true)
                         .handler(new LoggingHandler(this.getClass().getName()))
                         .handler(new OSCServerHandler());
-
+                LogUtil.info(MessageFormat.format(OSCProtocol.resources.getString("osc.listening"),binding.toString()));
                 bootstrap.bind(binding).sync().channel().closeFuture().await();
             } catch (InterruptedException e) {
                 if (!daemon.isShutdown()) {

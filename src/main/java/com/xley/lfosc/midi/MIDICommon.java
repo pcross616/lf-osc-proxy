@@ -33,11 +33,11 @@ public class MidiCommon {
                                                 boolean bForOutput,
                                                 boolean bVerbose) {
         if (bForInput && !bForOutput) {
-            LogUtil.info("Available MIDI IN Devices:");
+            LogUtil.info(MidiProtocol.resources.getString("midi.common.available.in.devices"));
         } else if (!bForInput && bForOutput) {
-            LogUtil.info("Available MIDI OUT Devices:");
+            LogUtil.info(MidiProtocol.resources.getString("midi.common.available.out.devices"));
         } else {
-            LogUtil.info("Available MIDI Devices:");
+            LogUtil.info(MidiProtocol.resources.getString("midi.common.available.devices"));
         }
 
         MidiDevice.Info[] aInfos = MidiSystem.getMidiDeviceInfo();
@@ -50,8 +50,8 @@ public class MidiCommon {
                         (bAllowsOutput && bForOutput)) {
                     if (bVerbose) {
                         LogUtil.trace("" + i + "  "
-                                + (bAllowsInput ? "IN " : "   ")
-                                + (bAllowsOutput ? "OUT " : "    ")
+                                + (bAllowsInput ? MidiProtocol.resources.getString("midi.common.in") + " " : "   ")
+                                + (bAllowsOutput ? MidiProtocol.resources.getString("midi.common.out") + " " : "    ")
                                 + aInfos[i].getName() + ", "
                                 + aInfos[i].getVendor() + ", "
                                 + aInfos[i].getVersion() + ", "
@@ -61,12 +61,11 @@ public class MidiCommon {
                     }
                 }
             } catch (MidiUnavailableException e) {
-                // device is obviously not available...
-                // out(e);
+                LogUtil.trace(MidiCommon.class, e);
             }
         }
         if (aInfos.length == 0) {
-            LogUtil.info("[No devices available]");
+            LogUtil.info(MidiProtocol.resources.getString("midi.common.no.devices"));
         }
         return aInfos;
     }
@@ -99,7 +98,7 @@ public class MidiCommon {
                         return aInfo;
                     }
                 } catch (MidiUnavailableException e) {
-                    // TODO:
+                    LogUtil.trace(MidiCommon.class, e);
                 }
             }
         }

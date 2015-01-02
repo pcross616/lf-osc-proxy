@@ -20,24 +20,19 @@
 
 package com.xley.lfosc.test;
 
-import com.illposed.osc.OSCMessage;
 import com.xley.lfosc.OSCProxy;
 import com.xley.lfosc.lightfactory.client.LightFactoryClient;
-import com.xley.lfosc.osc.client.OSCClient;
 import com.xley.lfosc.test.support.MockLightFactoryServer;
 import com.xley.lfosc.test.support.ProxyServerRunner;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.DataOutputStream;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
-import java.net.Socket;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 
 
 public class TestProxyModeDefault {

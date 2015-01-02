@@ -37,6 +37,14 @@ public abstract class LogUtil {
     private static Map<Class, Logger> loggerMap = new ConcurrentHashMap<>();
     private static Level level = null;
 
+    public static void console_error(Object message) {
+        System.err.println(message);
+    }
+
+    public static void console(Object message) {
+        System.out.println(message);
+    }
+
     public static void trace(Object message) {
         getLogger(OSCProxy.class).trace(message);
     }

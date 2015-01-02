@@ -157,6 +157,7 @@ public class ProxyDaemon implements Runnable {
         int portNumber = (int) options.valueOf("p");
         int httpPortNumber = (int) options.valueOf("w");
         int oscPortNumber = (int) options.valueOf("l");
+        String midiDevice = (String) options.valueOf("md");
         boolean oscProxyServer = false;
         boolean lightFactoryProxyServer = false;
         boolean httpServer = false;
@@ -174,10 +175,15 @@ public class ProxyDaemon implements Runnable {
                     httpServer = true;
                     break;
                 case "midi":
-                    midiReceiver = true;
+                    if (midiDevice != null && midiDevice.length() != 0) {
+                        midiReceiver = true;
+                    } else {
+                        LogUtil.warn(this.getClass(), resources.getString("options.mode.midi.invalid.device"));
+                    }
                     break;
                 default:
-                    LogUtil.warn(this.getClass(), MessageFormat.format(resources.getString("options.mode.invalid.entry"), val));
+                    LogUtil.warn(this.getClass(), MessageFormat.format(
+                            resources.getString("options.mode.invalid.entry"), val));
             }
         }
 
@@ -195,14 +201,16 @@ public class ProxyDaemon implements Runnable {
             //start http server
             if (httpServer) {
                 InetSocketAddress binding = new InetSocketAddress(InetAddress.getByName(host), httpPortNumber);
-                httpServerThread = new Thread(new HttpServer(this, binding, bossGroup, workerGroup), "OSCProxy - HTTP Server");
+                httpServerThread = new Thread(new HttpServer(this, binding, bossGroup, workerGroup),
+                        "OSCProxy - HTTP Server");
                 httpServerThread.start();
             }
 
             // should we create a LightFactory Proxy Server?
             if (lightFactoryProxyServer) {
                 InetSocketAddress binding = new InetSocketAddress(InetAddress.getByName(host), portNumber);
-                lightFactoryThread = new Thread(new LightFactoryServer(this, binding, bossGroup, workerGroup), "OSCProxy - LightFactory Server");
+                lightFactoryThread = new Thread(new LightFactoryServer(this, binding, bossGroup, workerGroup),
+                        "OSCProxy - LightFactory Server");
                 lightFactoryThread.start();
             }
 
@@ -215,7 +223,8 @@ public class ProxyDaemon implements Runnable {
 
             //should we create a OSC Listener?
             if (midiReceiver) {
-                midiReceiverThread = new Thread(new MidiServer(this, "loopMIDI Port", -1), "OSCProxy - MidiReceiver");
+                midiReceiverThread = new Thread(new MidiServer(this, midiDevice, -1),
+                        "OSCProxy - MidiReceiver (" + midiDevice + ")");
                 midiReceiverThread.start();
             }
 
@@ -232,7 +241,8 @@ public class ProxyDaemon implements Runnable {
                 }
             }
         } catch (UnknownHostException e) {
-            LogUtil.fatal(this.getClass(), MessageFormat.format(resources.getString("daemon.error.unknown.host"), host), e);
+            LogUtil.fatal(this.getClass(), MessageFormat.format(
+                    resources.getString("daemon.error.unknown.host"), host), e);
             errorcode = 2;
         } catch (Exception e) {
             LogUtil.fatal(this.getClass(), MessageFormat.format(resources.getString("daemon.error.socket"), host), e);
@@ -240,10 +250,10 @@ public class ProxyDaemon implements Runnable {
             errorcode = 2;
         } finally {
             shutdown();
-            while ((midiReceiverThread != null && midiReceiverThread.isAlive()) ||
-                    (httpServerThread != null && httpServerThread.isAlive()) ||
-                    (oscServerThread != null && oscServerThread.isAlive()) ||
-                    (lightFactoryThread != null && lightFactoryThread.isAlive())) {
+            while (midiReceiverThread != null && midiReceiverThread.isAlive() ||
+                    httpServerThread != null && httpServerThread.isAlive() ||
+                    oscServerThread != null && oscServerThread.isAlive() ||
+                    lightFactoryThread != null && lightFactoryThread.isAlive()) {
 
                 try {
                     Thread.sleep(1000);

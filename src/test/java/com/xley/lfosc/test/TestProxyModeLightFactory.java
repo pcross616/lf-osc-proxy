@@ -23,23 +23,20 @@ package com.xley.lfosc.test;
 import com.illposed.osc.OSCMessage;
 import com.illposed.osc.OSCPort;
 import com.illposed.osc.OSCPortIn;
-import com.xley.lfosc.lightfactory.client.LightFactoryClient;
 import com.xley.lfosc.lightfactory.LightFactoryProtocol;
+import com.xley.lfosc.lightfactory.client.LightFactoryClient;
 import com.xley.lfosc.test.support.MockOSCListener;
 import com.xley.lfosc.test.support.ProxyServerRunner;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.DataOutputStream;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
-import java.net.Socket;
 import java.text.MessageFormat;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 
 public class TestProxyModeLightFactory {
     private Thread server = null;
@@ -93,8 +90,8 @@ public class TestProxyModeLightFactory {
 
         //Thread.sleep(3000); // wait a bit
 
-        assertEquals(">",response);
-        assertEquals(1,listener.getMessages().size());
+        assertEquals(">", response);
+        assertEquals(1, listener.getMessages().size());
         assertEquals("testoscproxy", ((OSCMessage) listener.getMessages().toArray()[0])
                 .getArguments()
                 .get(0));
@@ -112,7 +109,7 @@ public class TestProxyModeLightFactory {
 
         //did we get the error?
         assertEquals(">" + MessageFormat.format(LightFactoryProtocol.resources.getString("lf.command.failed"),
-                                                LightFactoryProtocol.resources.getString("lf.error.invalid")), response + "\r\n>");
+                LightFactoryProtocol.resources.getString("lf.error.invalid")), response + "\r\n>");
         //Thread.sleep(2000); // wait a bit
         assertEquals(listener.getMessages().size(), 0);
     }
@@ -124,7 +121,7 @@ public class TestProxyModeLightFactory {
         Object response = LightFactoryClient.send(new InetSocketAddress(InetAddress.getLoopbackAddress(), 3100), data);
 
         //Thread.sleep(2000); // wait a bit
-        assertEquals(">",response);
+        assertEquals(">", response);
         assertEquals(listener.getMessages().size(), 0);
     }
 

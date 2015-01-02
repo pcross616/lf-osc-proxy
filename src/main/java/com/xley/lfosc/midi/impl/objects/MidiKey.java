@@ -23,10 +23,19 @@ package com.xley.lfosc.midi.impl.objects;
 
 
 public class MidiKey {
-    public int key = 127;
-    public int status = 0;
+    private int key = 127;
+    private int status = 0;
+
     public MidiKey(int key, int status) {
         this.key = key;
         this.status = status;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public int getKey() {
+        return key;
     }
 }

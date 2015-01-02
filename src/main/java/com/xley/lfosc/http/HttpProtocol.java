@@ -24,6 +24,7 @@ package com.xley.lfosc.http;
 import com.xley.lfosc.IProtocol;
 import com.xley.lfosc.IProtocolData;
 import com.xley.lfosc.ProtocolException;
+import com.xley.lfosc.http.server.IHttpConstants;
 import com.xley.lfosc.impl.BaseProtocol;
 import com.xley.lfosc.impl.SimpleProtocolData;
 import com.xley.lfosc.util.LogUtil;
@@ -46,23 +47,16 @@ public class HttpProtocol extends BaseProtocol implements IProtocol {
     private static final int EVENT_PROTOCOL = 1;
 
 
+    /**
+     * Get the target segment from the URL.
+     */
     private static final int EVENT_TARGET = 2;
-
-    /**
-     * Get the operation segment from the URL.
-     */
-    private static final int EVENT_OPERATION = 3;
-
-    /**
-     * Get the data segment from the URL.
-     */
-    private static final int EVENT_DATA = 4;
 
 
     @Override
     public Object process(IProtocolData data) throws ProtocolException {
         //HTTP does not process any direct protocols (eg.. http)
-        if (data.getType().equals("http")) {
+        if (data.getType().equals(IHttpConstants.HTTP_PROTOCOL)) {
             throw new ProtocolException(resources.getString("http.error.cannot_process_http"));
         }
         return data.getProtocol().process(data);

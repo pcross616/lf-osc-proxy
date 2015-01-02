@@ -25,12 +25,17 @@ import com.xley.lfosc.util.LogUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
+import java.text.MessageFormat;
+import java.util.*;
 
 public abstract class ProtocolManager {
+
+    /**
+     * The constant resources.
+     */
+    private static final ResourceBundle resources = ResourceBundle.getBundle(ProtocolManager.class.getSimpleName(),
+            Locale.getDefault());
+
 
     private static final Properties config = new Properties();
     private static final Map<String, IProtocol> protocolMap = new HashMap<>();
@@ -73,6 +78,12 @@ public abstract class ProtocolManager {
         for (IProtocol protocol : protocolMap.values()) {
             IProtocolData data = protocol.createProtocolData(value);
             if (data != null) {
+                LogUtil.trace(ProtocolManager.class, MessageFormat.format(resources.getString("protocol.data.dump"),
+                        data.getProtocol(),
+                        data.getTarget(),
+                        data.getOperation(),
+                        data.getType(),
+                        data.getData()));
                 return data.configureProtocolData();
             }
         }

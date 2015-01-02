@@ -28,6 +28,7 @@ import joptsimple.OptionSet;
 import org.apache.log4j.Level;
 
 import java.io.IOException;
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -81,6 +82,8 @@ public class OSCProxy {
                 accepts("m").withOptionalArg().ofType(String.class)
                         .describedAs(resources.getString("option.mode.desc"))
                         .defaultsTo(resources.getString("option.mode.default").split(","));
+                accepts("md").withOptionalArg().ofType(String.class)
+                        .describedAs(resources.getString("option.midi.device.desc"));
                 accepts("b").withOptionalArg().ofType(String.class)
                         .describedAs(resources.getString("option.bind.address.desc"))
                         .defaultsTo(resources.getString("option.bind.address.default"));
@@ -101,8 +104,12 @@ public class OSCProxy {
         } catch (OptionException e) {
             needHelp = true;
         }
+        String version = getClass().getPackage().getImplementationVersion() == null ?
+                "Development Build" : getClass().getPackage().getImplementationVersion();
+
         if (needHelp || options.has("?")) {
-            System.out.println(resources.getString("console.header.1"));
+
+            System.out.println(MessageFormat.format(resources.getString("console.header.1"), version));
             try {
                 parser.printHelpOn(System.out);
             } catch (IOException e) {
@@ -111,7 +118,7 @@ public class OSCProxy {
             return needHelp ? 1 : 0;
         }
 
-        System.out.println(resources.getString("console.header.1"));
+        System.out.println(MessageFormat.format(resources.getString("console.header.1"), version));
         System.out.println(resources.getString("console.header.2"));
 
         if (options.has("v")) {

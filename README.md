@@ -12,8 +12,9 @@ Using LightFactory create a connection to the LightFactory-OSC Proxy service (ma
 
 Using an OSC event to control LightFactory via LightFactory-OSC Proxy service
   * `connect to the LF-OSC Proxy from your OSC enabled application` - Once connected you can then send OSC events to this enpoint to hit any number of LightFactory instances.
-  * `/ld/<lightfactory-ip>:<port>/<lf cli command data>` - the OSC event contains the destination LightFactory instance along with the LightFactory CLI command.
+  * `/lf/<lightfactory-ip>:<port>/<lf cli command data>` - the OSC event contains the destination LightFactory instance along with the LightFactory CLI command.
 
+More documentation and examples to come.
 
 Download Binary Files
 --------
@@ -27,7 +28,7 @@ Building LightFactory-OSC Proxy
 --------
   * requires Java7 and Maven 3
   * `mvn clean package` - will create an all in one runnable jar file
-  * `java -jar lf-osc-proxy-0.2-SNAPSHOT-shaded.jar` - Will run the proxy and listen on 127.0.0.1:3100 for LF commands and 127.0.0.1:3200 for OSC events, use -? to determine flags to change bind address and port.
+  * `java -jar lf-osc-proxy-0.3-SNAPSHOT-shaded.jar` - Will run the proxy and listen on 127.0.0.1:3100 for LF commands and 127.0.0.1:3200 for OSC events, use -? to determine flags to change bind address and port.
  
 Command Line Options
 --------
@@ -35,13 +36,22 @@ Command Line Options
     Option                                  Description
     ------                                  -----------
     -? [This help message]
-    -b [bind address]                       (default: 127.0.0.1)
-    -d [FATAL|ERROR|WARN|INFO|DEBUG|TRACE]
-    -l [Integer: osc bind port]             (default: 3200)
-    -m [Proxy mode (osc | bridge | both)]   (default: both)
-    -p [Integer: bind port]                 (default: 3100)
+    -b [address to bind on]                 (default: 127.0.0.1)
+    -c [Specify a protocol command to run.
+      (<proto>.<command> <args>)]
+    -l [Integer: bind to port for OSC       (default: 3200)
+      connections]
+    -m [Proxy mode(s) allows multiple       (default: [osc, lf, http, midi])
+      options (osc | lf | http | midi)]
+    --md [Specify a midi port/device to
+      use when transmitting or listening
+      to MIDI protocols]
+    -p [Integer: bind to port for           (default: 3100)
+      LightFactory connections]
     -t [Integer: max number of socket       (default: 100)
-       threads]
+      threads]
+    -v [FATAL|ERROR|WARN|INFO|DEBUG|TRACE]
+    -w [Integer: bind to port for HTTP      (default: 8080)
 
 Contribute
 --------

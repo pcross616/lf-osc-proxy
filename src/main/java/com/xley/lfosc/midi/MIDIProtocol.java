@@ -80,6 +80,16 @@ public class MidiProtocol extends BaseProtocol implements IProtocol {
         return null;
     }
 
+    @Override
+    public IProtocolData configureProtocolData(IProtocolData data) {
+        if (data.getOperation() instanceof String) {
+            String operation = (String) data.getOperation();
+            if (operation.startsWith("/")) {
+                ((SimpleProtocolData) data).setOperation(((String) data.getOperation()).substring(1));
+            }
+        }
+        return super.configureProtocolData(data);
+    }
 
     private Object _process(int nKey, int nVelocity, int nDuration, String deviceName) throws ProtocolException {
         int nChannel = 0;
@@ -158,7 +168,7 @@ public class MidiProtocol extends BaseProtocol implements IProtocol {
         receiver.send(onMessage, -1);
 
 		/*
-		 *	Wait for the specified amount of time
+         *	Wait for the specified amount of time
 		 *	(the duration of the note).
 		 */
         try {
