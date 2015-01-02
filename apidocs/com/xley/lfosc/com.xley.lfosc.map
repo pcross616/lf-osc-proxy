@@ -1,6 +1,16 @@
 <map id="G" name="G">
-<area shape="rect" id="c0" href="./OSCProxy.html" title="com.xley.lfosc.OSCProxy" alt="" coords="16,19,213,125"/>
-<area shape="rect" id="node1" href="./OSCProxy.html" title="&lt;TABLE&gt;" alt="" coords="5,14,224,130"/>
-<area shape="rect" id="c1" href="./ProxyDaemon.html" title="com.xley.lfosc.ProxyDaemon" alt="" coords="259,11,507,133"/>
-<area shape="rect" id="node2" href="./ProxyDaemon.html" title="&lt;TABLE&gt;" alt="" coords="248,6,517,138"/>
+<area shape="rect" id="c0" href="./IProtocolData.html" title="com.xley.lfosc.IProtocolData" alt="" coords="16,11,277,197"/>
+<area shape="rect" id="node1" href="./IProtocolData.html" title="&lt;TABLE&gt;" alt="" coords="5,6,288,202"/>
+<area shape="rect" id="c1" href="./UnknownProtocolException.html" title="com.xley.lfosc.UnknownProtocolException" alt="" coords="132,273,433,346"/>
+<area shape="rect" id="node2" href="./UnknownProtocolException.html" title="&lt;TABLE&gt;" alt="" coords="121,267,444,351"/>
+<area shape="rect" id="c2" href="./ClientProtocolException.html" title="com.xley.lfosc.ClientProtocolException" alt="" coords="478,257,967,362"/>
+<area shape="rect" id="node3" href="./ClientProtocolException.html" title="&lt;TABLE&gt;" alt="" coords="468,251,977,367"/>
+<area shape="rect" id="c3" href="./OSCProxy.html" title="com.xley.lfosc.OSCProxy" alt="" coords="728,51,925,157"/>
+<area shape="rect" id="node4" href="./OSCProxy.html" title="&lt;TABLE&gt;" alt="" coords="717,46,936,162"/>
+<area shape="rect" id="c4" href="./ProtocolException.html" title="com.xley.lfosc.ProtocolException" alt="" coords="322,59,683,149"/>
+<area shape="rect" id="node5" href="./ProtocolException.html" title="&lt;TABLE&gt;" alt="" coords="312,54,693,154"/>
+<area shape="rect" id="c5" href="./IProtocol.html" title="com.xley.lfosc.IProtocol" alt="" coords="971,35,1349,173"/>
+<area shape="rect" id="node6" href="./IProtocol.html" title="&lt;TABLE&gt;" alt="" coords="960,30,1360,178"/>
+<area shape="rect" id="c6" href="./ProtocolManager.html" title="com.xley.lfosc.ProtocolManager" alt="" coords="1394,35,1843,173"/>
+<area shape="rect" id="node7" href="./ProtocolManager.html" title="&lt;TABLE&gt;" alt="" coords="1384,30,1853,178"/>
 </map>

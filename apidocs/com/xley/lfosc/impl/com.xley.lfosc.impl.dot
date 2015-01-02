@@ -9,60 +9,76 @@ digraph G {
 	node [fontname="Helvetica",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
-	// com.xley.lfosc.impl.LightFactoryProxyThread
-	c9 [label=<<table title="com.xley.lfosc.impl.LightFactoryProxyThread" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LightFactoryProxyThread.html">
+	// com.xley.lfosc.impl.BaseProtocol
+	c172 [label=<<table title="com.xley.lfosc.impl.BaseProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BaseProtocol.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> LightFactoryProxyThread </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + resources : ResourceBundle </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + LightFactoryProxyThread(connection : Socket) </td></tr>
-<tr><td align="left" balign="left"> + run() </td></tr>
-		</table></td></tr>
-		</table>>, URL="./LightFactoryProxyThread.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.xley.lfosc.impl.OSCProtocol
-	c10 [label=<<table title="com.xley.lfosc.impl.OSCProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./OSCProtocol.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> OSCProtocol </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + resources : ResourceBundle </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + OSCProtocol(message : OSCMessage) </td></tr>
-<tr><td align="left" balign="left"> + run() </td></tr>
-		</table></td></tr>
-		</table>>, URL="./OSCProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.xley.lfosc.impl.LightFactoryProtocol
-	c11 [label=<<table title="com.xley.lfosc.impl.LightFactoryProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LightFactoryProtocol.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> LightFactoryProtocol </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + resources : ResourceBundle </td></tr>
-<tr><td align="left" balign="left"> # oscPattern : Pattern </td></tr>
-<tr><td align="left" balign="left"> # dataPattern : Pattern </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + LightFactoryProtocol() </td></tr>
-<tr><td align="left" balign="left"> # process(cmd : String) : String </td></tr>
-		</table></td></tr>
-		</table>>, URL="./LightFactoryProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.xley.lfosc.impl.OSCProxyListener
-	c12 [label=<<table title="com.xley.lfosc.impl.OSCProxyListener" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./OSCProxyListener.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> OSCProxyListener </td></tr>
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> BaseProtocol </font></td></tr>
 		</table></td></tr>
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="left" balign="left">  </td></tr>
 		</table></td></tr>
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + OSCProxyListener() </td></tr>
-<tr><td align="left" balign="left"> + acceptMessage(time : Date, message : OSCMessage) </td></tr>
-<tr><td align="left" balign="left"> + shutdown() </td></tr>
+<tr><td align="left" balign="left"> + BaseProtocol() </td></tr>
+<tr><td align="left" balign="left"> + configureProtocolData(data : IProtocolData) : IProtocolData </td></tr>
+<tr><td align="left" balign="left"> + command(command : String, args : String[]) : int </td></tr>
 		</table></td></tr>
-		</table>>, URL="./OSCProxyListener.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		</table>>, URL="./BaseProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.xley.lfosc.impl.SimpleProtocolData
+	c173 [label=<<table title="com.xley.lfosc.impl.SimpleProtocolData" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SimpleProtocolData.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> SimpleProtocolData </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> # protocol : String </td></tr>
+<tr><td align="left" balign="left"> # target : String </td></tr>
+<tr><td align="left" balign="left"> # operation : String </td></tr>
+<tr><td align="left" balign="left"> # data : List&lt;Object&gt; </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> # SimpleProtocolData() </td></tr>
+<tr><td align="left" balign="left"> + SimpleProtocolData(protocol : String, target : String, operation : String, data : List&lt;Object&gt;) </td></tr>
+<tr><td align="left" balign="left"> + getType() : String </td></tr>
+<tr><td align="left" balign="left"> + getProtocol() : IProtocol </td></tr>
+<tr><td align="left" balign="left"> + getTarget() : String </td></tr>
+<tr><td align="left" balign="left"> + getOperation() : String </td></tr>
+<tr><td align="left" balign="left"> + setOperation(operation : String) </td></tr>
+<tr><td align="left" balign="left"> + getDataList() : List&lt;Object&gt; </td></tr>
+<tr><td align="left" balign="left"> + getData() : Object </td></tr>
+<tr><td align="left" balign="left"> + configureProtocolData() : IProtocolData </td></tr>
+		</table></td></tr>
+		</table>>, URL="./SimpleProtocolData.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.xley.lfosc.impl.ProxyDaemon
+	c174 [label=<<table title="com.xley.lfosc.impl.ProxyDaemon" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProxyDaemon.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ProxyDaemon </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + resources : ResourceBundle </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + ProxyDaemon(optionSet : OptionSet) </td></tr>
+<tr><td align="left" balign="left"> + exitCode() : int </td></tr>
+<tr><td align="left" balign="left"> + isShutdown() : boolean </td></tr>
+<tr><td align="left" balign="left"> + shutdown(errorcode : int) </td></tr>
+<tr><td align="left" balign="left"> + shutdown() </td></tr>
+<tr><td align="left" balign="left"> + run() </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ProxyDaemon.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.xley.lfosc.impl.ResultData
+	c175 [label=<<table title="com.xley.lfosc.impl.ResultData" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ResultData.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ResultData </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left">  </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + ResultData() </td></tr>
+<tr><td align="left" balign="left"> + getStatus() : Object </td></tr>
+<tr><td align="left" balign="left"> + setStatus(status : Object) </td></tr>
+<tr><td align="left" balign="left"> + getData() : Object </td></tr>
+<tr><td align="left" balign="left"> + setData(data : Object) </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ResultData.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

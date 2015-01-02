@@ -1,10 +1,10 @@
 <map id="G" name="G">
-<area shape="rect" id="c9" href="./LightFactoryProxyThread.html" title="com.xley.lfosc.impl.LightFactoryProxyThread" alt="" coords="15,27,318,117"/>
-<area shape="rect" id="node1" href="./LightFactoryProxyThread.html" title="&lt;TABLE&gt;" alt="" coords="5,22,328,122"/>
-<area shape="rect" id="c10" href="./OSCProtocol.html" title="com.xley.lfosc.impl.OSCProtocol" alt="" coords="362,27,627,117"/>
-<area shape="rect" id="node2" href="./OSCProtocol.html" title="&lt;TABLE&gt;" alt="" coords="352,22,637,122"/>
-<area shape="rect" id="c11" href="./LightFactoryProtocol.html" title="com.xley.lfosc.impl.LightFactoryProtocol" alt="" coords="672,11,875,133"/>
-<area shape="rect" id="node3" href="./LightFactoryProtocol.html" title="&lt;TABLE&gt;" alt="" coords="661,6,885,138"/>
-<area shape="rect" id="c12" href="./OSCProxyListener.html" title="com.xley.lfosc.impl.OSCProxyListener" alt="" coords="919,19,1273,125"/>
-<area shape="rect" id="node4" href="./OSCProxyListener.html" title="&lt;TABLE&gt;" alt="" coords="909,14,1283,130"/>
+<area shape="rect" id="c172" href="./BaseProtocol.html" title="com.xley.lfosc.impl.BaseProtocol" alt="" coords="16,91,395,197"/>
+<area shape="rect" id="node1" href="./BaseProtocol.html" title="&lt;TABLE&gt;" alt="" coords="5,86,405,202"/>
+<area shape="rect" id="c173" href="./SimpleProtocolData.html" title="com.xley.lfosc.impl.SimpleProtocolData" alt="" coords="440,11,1003,277"/>
+<area shape="rect" id="node2" href="./SimpleProtocolData.html" title="&lt;TABLE&gt;" alt="" coords="429,6,1013,282"/>
+<area shape="rect" id="c174" href="./ProxyDaemon.html" title="com.xley.lfosc.impl.ProxyDaemon" alt="" coords="1047,67,1297,221"/>
+<area shape="rect" id="node3" href="./ProxyDaemon.html" title="&lt;TABLE&gt;" alt="" coords="1037,62,1307,226"/>
+<area shape="rect" id="c175" href="./ResultData.html" title="com.xley.lfosc.impl.ResultData" alt="" coords="1341,75,1523,213"/>
+<area shape="rect" id="node4" href="./ResultData.html" title="&lt;TABLE&gt;" alt="" coords="1331,70,1533,218"/>
 </map>
