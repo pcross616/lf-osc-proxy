@@ -1,7 +1,7 @@
 LightFactory-OSC Proxy
 ============
 
-[![Build Status](https://travis-ci.org/pcross616/lf-osc-proxy.svg?branch=master)](https://travis-ci.org/pcross616/lf-osc-proxy) [![Coverage Status](https://coveralls.io/repos/pcross616/lf-osc-proxy/badge.png)](https://coveralls.io/r/pcross616/lf-osc-proxy)
+[![Build Status](https://travis-ci.org/pcross616/lf-osc-proxy.svg?branch=master)](https://travis-ci.org/pcross616/lf-osc-proxy) [![Coverage Status](https://coveralls.io/repos/pcross616/lf-osc-proxy/badge.png)](https://coveralls.io/r/pcross616/lf-osc-proxy) [ ![Download](https://api.bintray.com/packages/pcross616/generic/lf-osc-proxy/images/download.svg) ](https://bintray.com/pcross616/generic/lf-osc-proxy/_latestVersion)
 
 LightFactory-OSC Proxy Service, enables Open Sound Control messages to be sent from LightFactory using the built in CONNECT and SEND functions. In addition to control LightFactory from a OSC enabled application.
 
