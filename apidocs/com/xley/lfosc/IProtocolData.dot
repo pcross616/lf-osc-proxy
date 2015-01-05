@@ -29,7 +29,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="./IProtocolData.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.impl.SimpleProtocolData
-	c1253 [label=<<table title="com.xley.lfosc.impl.SimpleProtocolData" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./impl/SimpleProtocolData.html">
+	c1230 [label=<<table title="com.xley.lfosc.impl.SimpleProtocolData" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./impl/SimpleProtocolData.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SimpleProtocolData </td></tr>
 		</table></td></tr>
@@ -53,6 +53,6 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="./impl/SimpleProtocolData.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.xley.lfosc.impl.SimpleProtocolData implements com.xley.lfosc.IProtocolData
-	c1216:p -> c1253:p [dir=back,arrowtail=empty,style=dashed];
+	c1216:p -> c1230:p [dir=back,arrowtail=empty,style=dashed];
 }
 

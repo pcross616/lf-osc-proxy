@@ -25,8 +25,22 @@ digraph G {
 <tr><td align="left" balign="left"> + command(command : String, args : String[]) : int </td></tr>
 		</table></td></tr>
 		</table>>, URL="../IProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.xley.lfosc.impl.BaseProtocol
+	c1718 [label=<<table title="com.xley.lfosc.impl.BaseProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../impl/BaseProtocol.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> BaseProtocol </font></td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left">  </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + BaseProtocol() </td></tr>
+<tr><td align="left" balign="left"> + configureProtocolData(data : IProtocolData) : IProtocolData </td></tr>
+<tr><td align="left" balign="left"> + command(command : String, args : String[]) : int </td></tr>
+		</table></td></tr>
+		</table>>, URL="../impl/BaseProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.midi.MidiProtocol
-	c1714 [label=<<table title="com.xley.lfosc.midi.MidiProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MidiProtocol.html">
+	c1725 [label=<<table title="com.xley.lfosc.midi.MidiProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MidiProtocol.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> MidiProtocol </td></tr>
 		</table></td></tr>
@@ -42,25 +56,11 @@ digraph G {
 <tr><td align="left" balign="left"> + command(commandName : String, args : String[]) : int </td></tr>
 		</table></td></tr>
 		</table>>, URL="./MidiProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.xley.lfosc.impl.BaseProtocol
-	c1736 [label=<<table title="com.xley.lfosc.impl.BaseProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../impl/BaseProtocol.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> BaseProtocol </font></td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left">  </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + BaseProtocol() </td></tr>
-<tr><td align="left" balign="left"> + configureProtocolData(data : IProtocolData) : IProtocolData </td></tr>
-<tr><td align="left" balign="left"> + command(command : String, args : String[]) : int </td></tr>
-		</table></td></tr>
-		</table>>, URL="../impl/BaseProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.xley.lfosc.midi.MidiProtocol extends com.xley.lfosc.impl.BaseProtocol
-	c1736:p -> c1714:p [dir=back,arrowtail=empty];
-	//com.xley.lfosc.midi.MidiProtocol implements com.xley.lfosc.IProtocol
-	c1702:p -> c1714:p [dir=back,arrowtail=empty,style=dashed];
 	//com.xley.lfosc.impl.BaseProtocol implements com.xley.lfosc.IProtocol
-	c1702:p -> c1736:p [dir=back,arrowtail=empty,style=dashed];
+	c1702:p -> c1718:p [dir=back,arrowtail=empty,style=dashed];
+	//com.xley.lfosc.midi.MidiProtocol extends com.xley.lfosc.impl.BaseProtocol
+	c1718:p -> c1725:p [dir=back,arrowtail=empty];
+	//com.xley.lfosc.midi.MidiProtocol implements com.xley.lfosc.IProtocol
+	c1702:p -> c1725:p [dir=back,arrowtail=empty,style=dashed];
 }
 

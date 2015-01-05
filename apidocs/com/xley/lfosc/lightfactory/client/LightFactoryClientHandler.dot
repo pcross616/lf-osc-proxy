@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// com.xley.lfosc.lightfactory.client.LightFactoryClientHandler
-	c1347 [label=<<table title="com.xley.lfosc.lightfactory.client.LightFactoryClientHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./LightFactoryClientHandler.html">
+	c1367 [label=<<table title="com.xley.lfosc.lightfactory.client.LightFactoryClientHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./LightFactoryClientHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> LightFactoryClientHandler </td></tr>
 		</table></td></tr>
@@ -24,7 +24,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="./LightFactoryClientHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.xley.lfosc.lightfactory.client.LightFactoryClientHandler extends io.netty.channel.SimpleChannelInboundHandler<java.lang.String>
-	c1374:p -> c1347:p [dir=back,arrowtail=empty];
+	c1374:p -> c1367:p [dir=back,arrowtail=empty];
 	// io.netty.channel.SimpleChannelInboundHandler<I>
 	c1374 [label=<<table title="io.netty.channel.SimpleChannelInboundHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/io/netty/channel/SimpleChannelInboundHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">

@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// com.xley.lfosc.midi.impl.DefaultMidiMessageHandler
-	c300 [label=<<table title="com.xley.lfosc.midi.impl.DefaultMidiMessageHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultMidiMessageHandler.html">
+	c343 [label=<<table title="com.xley.lfosc.midi.impl.DefaultMidiMessageHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./DefaultMidiMessageHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DefaultMidiMessageHandler </td></tr>
 		</table></td></tr>
@@ -24,7 +24,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="./DefaultMidiMessageHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.midi.impl.LearnCommand
-	c301 [label=<<table title="com.xley.lfosc.midi.impl.LearnCommand" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LearnCommand.html">
+	c344 [label=<<table title="com.xley.lfosc.midi.impl.LearnCommand" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LearnCommand.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> LearnCommand </td></tr>
 		</table></td></tr>

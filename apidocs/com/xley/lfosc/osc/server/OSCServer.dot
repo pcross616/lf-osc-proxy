@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// com.xley.lfosc.osc.server.OSCServer
-	c2006 [label=<<table title="com.xley.lfosc.osc.server.OSCServer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./OSCServer.html">
+	c2020 [label=<<table title="com.xley.lfosc.osc.server.OSCServer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./OSCServer.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> OSCServer </td></tr>
 		</table></td></tr>
@@ -23,7 +23,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="./OSCServer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.xley.lfosc.osc.server.OSCServer implements java.lang.Runnable
-	c2023:p -> c2006:p [dir=back,arrowtail=empty,style=dashed];
+	c2023:p -> c2020:p [dir=back,arrowtail=empty,style=dashed];
 	// java.lang.Runnable
 	c2023 [label=<<table title="java.lang.Runnable" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Runnable.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">

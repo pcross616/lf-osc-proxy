@@ -1,10 +1,10 @@
 <map id="G" name="G">
-<area shape="rect" id="c636" href="./ResultData.html" title="com.xley.lfosc.impl.ResultData" alt="" coords="15,75,198,213"/>
-<area shape="rect" id="node1" href="./ResultData.html" title="&lt;TABLE&gt;" alt="" coords="5,70,208,218"/>
-<area shape="rect" id="c637" href="./BaseProtocol.html" title="com.xley.lfosc.impl.BaseProtocol" alt="" coords="243,91,621,197"/>
-<area shape="rect" id="node2" href="./BaseProtocol.html" title="&lt;TABLE&gt;" alt="" coords="232,86,632,202"/>
-<area shape="rect" id="c638" href="./ProxyDaemon.html" title="com.xley.lfosc.impl.ProxyDaemon" alt="" coords="666,67,915,221"/>
-<area shape="rect" id="node3" href="./ProxyDaemon.html" title="&lt;TABLE&gt;" alt="" coords="656,62,925,226"/>
-<area shape="rect" id="c639" href="./SimpleProtocolData.html" title="com.xley.lfosc.impl.SimpleProtocolData" alt="" coords="960,11,1523,277"/>
-<area shape="rect" id="node4" href="./SimpleProtocolData.html" title="&lt;TABLE&gt;" alt="" coords="949,6,1533,282"/>
+<area shape="rect" id="c216" href="./SimpleProtocolData.html" title="com.xley.lfosc.impl.SimpleProtocolData" alt="" coords="16,11,579,277"/>
+<area shape="rect" id="node1" href="./SimpleProtocolData.html" title="&lt;TABLE&gt;" alt="" coords="5,6,589,282"/>
+<area shape="rect" id="c217" href="./ResultData.html" title="com.xley.lfosc.impl.ResultData" alt="" coords="623,75,806,213"/>
+<area shape="rect" id="node2" href="./ResultData.html" title="&lt;TABLE&gt;" alt="" coords="613,70,816,218"/>
+<area shape="rect" id="c218" href="./ProxyDaemon.html" title="com.xley.lfosc.impl.ProxyDaemon" alt="" coords="850,67,1099,221"/>
+<area shape="rect" id="node3" href="./ProxyDaemon.html" title="&lt;TABLE&gt;" alt="" coords="840,62,1109,226"/>
+<area shape="rect" id="c219" href="./BaseProtocol.html" title="com.xley.lfosc.impl.BaseProtocol" alt="" coords="1144,91,1523,197"/>
+<area shape="rect" id="node4" href="./BaseProtocol.html" title="&lt;TABLE&gt;" alt="" coords="1133,86,1533,202"/>
 </map>

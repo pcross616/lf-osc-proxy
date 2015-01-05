@@ -26,7 +26,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="../IProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.http.HttpProtocol
-	c1004 [label=<<table title="com.xley.lfosc.http.HttpProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./HttpProtocol.html">
+	c978 [label=<<table title="com.xley.lfosc.http.HttpProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./HttpProtocol.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> HttpProtocol </td></tr>
 		</table></td></tr>
@@ -41,7 +41,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="./HttpProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.impl.BaseProtocol
-	c1007 [label=<<table title="com.xley.lfosc.impl.BaseProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../impl/BaseProtocol.html">
+	c989 [label=<<table title="com.xley.lfosc.impl.BaseProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../impl/BaseProtocol.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> BaseProtocol </font></td></tr>
 		</table></td></tr>
@@ -55,10 +55,10 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="../impl/BaseProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.xley.lfosc.http.HttpProtocol extends com.xley.lfosc.impl.BaseProtocol
-	c1007:p -> c1004:p [dir=back,arrowtail=empty];
+	c989:p -> c978:p [dir=back,arrowtail=empty];
 	//com.xley.lfosc.http.HttpProtocol implements com.xley.lfosc.IProtocol
-	c973:p -> c1004:p [dir=back,arrowtail=empty,style=dashed];
+	c973:p -> c978:p [dir=back,arrowtail=empty,style=dashed];
 	//com.xley.lfosc.impl.BaseProtocol implements com.xley.lfosc.IProtocol
-	c973:p -> c1007:p [dir=back,arrowtail=empty,style=dashed];
+	c973:p -> c989:p [dir=back,arrowtail=empty,style=dashed];
 }
 
