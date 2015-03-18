@@ -9,22 +9,8 @@ digraph G {
 	node [fontname="Helvetica",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
-	// com.xley.lfosc.impl.BaseProtocol
-	c636 [label=<<table title="com.xley.lfosc.impl.BaseProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BaseProtocol.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> BaseProtocol </font></td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left">  </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + BaseProtocol() </td></tr>
-<tr><td align="left" balign="left"> + configureProtocolData(data : IProtocolData) : IProtocolData </td></tr>
-<tr><td align="left" balign="left"> + command(command : String, args : String[]) : int </td></tr>
-		</table></td></tr>
-		</table>>, URL="./BaseProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.impl.ResultData
-	c637 [label=<<table title="com.xley.lfosc.impl.ResultData" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ResultData.html">
+	c461 [label=<<table title="com.xley.lfosc.impl.ResultData" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ResultData.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ResultData </td></tr>
 		</table></td></tr>
@@ -39,8 +25,39 @@ digraph G {
 <tr><td align="left" balign="left"> + setData(data : Object) </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ResultData.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.xley.lfosc.impl.ProxyDaemon
+	c462 [label=<<table title="com.xley.lfosc.impl.ProxyDaemon" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProxyDaemon.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ProxyDaemon </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + resources : ResourceBundle </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + ProxyDaemon(optionSet : OptionSet) </td></tr>
+<tr><td align="left" balign="left"> + exitCode() : int </td></tr>
+<tr><td align="left" balign="left"> + isShutdown() : boolean </td></tr>
+<tr><td align="left" balign="left"> + shutdown(errorcode : int) </td></tr>
+<tr><td align="left" balign="left"> + shutdown() </td></tr>
+<tr><td align="left" balign="left"> + run() </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ProxyDaemon.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.xley.lfosc.impl.BaseProtocol
+	c463 [label=<<table title="com.xley.lfosc.impl.BaseProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./BaseProtocol.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> BaseProtocol </font></td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left">  </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + BaseProtocol() </td></tr>
+<tr><td align="left" balign="left"> + configureProtocolData(data : IProtocolData) : IProtocolData </td></tr>
+<tr><td align="left" balign="left"> + command(command : String, args : String[]) : int </td></tr>
+		</table></td></tr>
+		</table>>, URL="./BaseProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.impl.SimpleProtocolData
-	c638 [label=<<table title="com.xley.lfosc.impl.SimpleProtocolData" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SimpleProtocolData.html">
+	c464 [label=<<table title="com.xley.lfosc.impl.SimpleProtocolData" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SimpleProtocolData.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SimpleProtocolData </td></tr>
 		</table></td></tr>
@@ -63,22 +80,5 @@ digraph G {
 <tr><td align="left" balign="left"> + configureProtocolData() : IProtocolData </td></tr>
 		</table></td></tr>
 		</table>>, URL="./SimpleProtocolData.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.xley.lfosc.impl.ProxyDaemon
-	c639 [label=<<table title="com.xley.lfosc.impl.ProxyDaemon" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProxyDaemon.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ProxyDaemon </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + resources : ResourceBundle </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + ProxyDaemon(optionSet : OptionSet) </td></tr>
-<tr><td align="left" balign="left"> + exitCode() : int </td></tr>
-<tr><td align="left" balign="left"> + isShutdown() : boolean </td></tr>
-<tr><td align="left" balign="left"> + shutdown(errorcode : int) </td></tr>
-<tr><td align="left" balign="left"> + shutdown() </td></tr>
-<tr><td align="left" balign="left"> + run() </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ProxyDaemon.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

@@ -9,8 +9,25 @@ digraph G {
 	node [fontname="Helvetica",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
+	// com.xley.lfosc.midi.receiver.MidiServer
+	c166 [label=<<table title="com.xley.lfosc.midi.receiver.MidiServer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MidiServer.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> MidiServer </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left">  </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + MidiServer(proxyDaemon : ProxyDaemon, deviceName : String, deviceNameIdx : int) </td></tr>
+<tr><td align="left" balign="left"> + MidiServer(midiMapperHandler : IMidiMessageHandler, deviceName : String, deviceNameIdx : int) </td></tr>
+<tr><td align="left" balign="left"> + run() </td></tr>
+<tr><td align="left" balign="left"> + addNoteBinding(operation : String, status : int, key : int) </td></tr>
+<tr><td align="left" balign="left"> + getOperatorBinding(operation : String) : List&lt;MidiKey&gt; </td></tr>
+<tr><td align="left" balign="left"> + shutdown() </td></tr>
+		</table></td></tr>
+		</table>>, URL="./MidiServer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.midi.receiver.MidiReceiver
-	c258 [label=<<table title="com.xley.lfosc.midi.receiver.MidiReceiver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MidiReceiver.html">
+	c167 [label=<<table title="com.xley.lfosc.midi.receiver.MidiReceiver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MidiReceiver.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> MidiReceiver </td></tr>
 		</table></td></tr>
@@ -33,22 +50,5 @@ digraph G {
 <tr><td align="left" balign="left"> + send(message : MidiMessage, lTimeStamp : long) </td></tr>
 		</table></td></tr>
 		</table>>, URL="./MidiReceiver.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.xley.lfosc.midi.receiver.MidiServer
-	c259 [label=<<table title="com.xley.lfosc.midi.receiver.MidiServer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MidiServer.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> MidiServer </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left">  </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + MidiServer(proxyDaemon : ProxyDaemon, deviceName : String, deviceNameIdx : int) </td></tr>
-<tr><td align="left" balign="left"> + MidiServer(midiMapperHandler : IMidiMessageHandler, deviceName : String, deviceNameIdx : int) </td></tr>
-<tr><td align="left" balign="left"> + run() </td></tr>
-<tr><td align="left" balign="left"> + addNoteBinding(operation : String, status : int, key : int) </td></tr>
-<tr><td align="left" balign="left"> + getOperatorBinding(operation : String) : List&lt;MidiKey&gt; </td></tr>
-<tr><td align="left" balign="left"> + shutdown() </td></tr>
-		</table></td></tr>
-		</table>>, URL="./MidiServer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

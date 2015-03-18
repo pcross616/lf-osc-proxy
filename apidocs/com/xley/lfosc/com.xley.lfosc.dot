@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// com.xley.lfosc.OSCProxy
-	c0 [label=<<table title="com.xley.lfosc.OSCProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./OSCProxy.html">
+	c633 [label=<<table title="com.xley.lfosc.OSCProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./OSCProxy.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> OSCProxy </td></tr>
 		</table></td></tr>
@@ -23,8 +23,37 @@ digraph G {
 <tr><td align="left" balign="left"> + execute(args : String[]) : int </td></tr>
 		</table></td></tr>
 		</table>>, URL="./OSCProxy.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.xley.lfosc.ProtocolException
+	c634 [label=<<table title="com.xley.lfosc.ProtocolException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProtocolException.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ProtocolException </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left">  </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + ProtocolException(message : String) </td></tr>
+<tr><td align="left" balign="left"> + ProtocolException(message : String, cause : Throwable) </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ProtocolException.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.xley.lfosc.IProtocol
+	c635 [label=<<table title="com.xley.lfosc.IProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./IProtocol.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> IProtocol </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left">  </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + process(data : IProtocolData) : Object </td></tr>
+<tr><td align="left" balign="left"> + createProtocolData(value : Object) : IProtocolData </td></tr>
+<tr><td align="left" balign="left"> + configureProtocolData(data : IProtocolData) : IProtocolData </td></tr>
+<tr><td align="left" balign="left"> + command(command : String, args : String[]) : int </td></tr>
+		</table></td></tr>
+		</table>>, URL="./IProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.IProtocolData
-	c1 [label=<<table title="com.xley.lfosc.IProtocolData" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./IProtocolData.html">
+	c636 [label=<<table title="com.xley.lfosc.IProtocolData" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./IProtocolData.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> IProtocolData </td></tr>
@@ -42,37 +71,8 @@ digraph G {
 <tr><td align="left" balign="left"> + configureProtocolData() : IProtocolData </td></tr>
 		</table></td></tr>
 		</table>>, URL="./IProtocolData.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.xley.lfosc.IProtocol
-	c2 [label=<<table title="com.xley.lfosc.IProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./IProtocol.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> IProtocol </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left">  </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + process(data : IProtocolData) : Object </td></tr>
-<tr><td align="left" balign="left"> + createProtocolData(value : Object) : IProtocolData </td></tr>
-<tr><td align="left" balign="left"> + configureProtocolData(data : IProtocolData) : IProtocolData </td></tr>
-<tr><td align="left" balign="left"> + command(command : String, args : String[]) : int </td></tr>
-		</table></td></tr>
-		</table>>, URL="./IProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.xley.lfosc.ProtocolException
-	c3 [label=<<table title="com.xley.lfosc.ProtocolException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProtocolException.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ProtocolException </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left">  </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + ProtocolException(message : String) </td></tr>
-<tr><td align="left" balign="left"> + ProtocolException(message : String, cause : Throwable) </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ProtocolException.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.ProtocolManager
-	c4 [label=<<table title="com.xley.lfosc.ProtocolManager" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProtocolManager.html">
+	c637 [label=<<table title="com.xley.lfosc.ProtocolManager" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProtocolManager.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ProtocolManager </font></td></tr>
 		</table></td></tr>
@@ -88,7 +88,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="./ProtocolManager.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.ClientProtocolException
-	c5 [label=<<table title="com.xley.lfosc.ClientProtocolException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ClientProtocolException.html">
+	c638 [label=<<table title="com.xley.lfosc.ClientProtocolException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ClientProtocolException.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ClientProtocolException </td></tr>
 		</table></td></tr>
@@ -102,7 +102,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="./ClientProtocolException.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.UnknownProtocolException
-	c6 [label=<<table title="com.xley.lfosc.UnknownProtocolException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UnknownProtocolException.html">
+	c639 [label=<<table title="com.xley.lfosc.UnknownProtocolException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UnknownProtocolException.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> UnknownProtocolException </td></tr>
 		</table></td></tr>
@@ -114,8 +114,8 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="./UnknownProtocolException.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.xley.lfosc.ClientProtocolException extends com.xley.lfosc.ProtocolException
-	c3:p -> c5:p [dir=back,arrowtail=empty];
+	c634:p -> c638:p [dir=back,arrowtail=empty];
 	//com.xley.lfosc.UnknownProtocolException extends com.xley.lfosc.ProtocolException
-	c3:p -> c6:p [dir=back,arrowtail=empty];
+	c634:p -> c639:p [dir=back,arrowtail=empty];
 }
 
