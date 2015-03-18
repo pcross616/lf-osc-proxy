@@ -9,8 +9,22 @@ digraph G {
 	node [fontname="Helvetica",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
+	// com.xley.lfosc.midi.IMidiMessageHandler
+	c215 [label=<<table title="com.xley.lfosc.midi.IMidiMessageHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./IMidiMessageHandler.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> IMidiMessageHandler </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left">  </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + setMidiServer(server : MidiServer) </td></tr>
+<tr><td align="left" balign="left"> + note(message : MidiMessage, timeStamp : long, note : String) </td></tr>
+		</table></td></tr>
+		</table>>, URL="./IMidiMessageHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.midi.MidiCommon
-	c88 [label=<<table title="com.xley.lfosc.midi.MidiCommon" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MidiCommon.html">
+	c216 [label=<<table title="com.xley.lfosc.midi.MidiCommon" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MidiCommon.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> MidiCommon </td></tr>
 		</table></td></tr>
@@ -25,7 +39,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="./MidiCommon.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.midi.MidiProtocol
-	c89 [label=<<table title="com.xley.lfosc.midi.MidiProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MidiProtocol.html">
+	c217 [label=<<table title="com.xley.lfosc.midi.MidiProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./MidiProtocol.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> MidiProtocol </td></tr>
 		</table></td></tr>
@@ -41,19 +55,5 @@ digraph G {
 <tr><td align="left" balign="left"> + command(commandName : String, args : String[]) : int </td></tr>
 		</table></td></tr>
 		</table>>, URL="./MidiProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.xley.lfosc.midi.IMidiMessageHandler
-	c90 [label=<<table title="com.xley.lfosc.midi.IMidiMessageHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./IMidiMessageHandler.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> IMidiMessageHandler </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left">  </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + setMidiServer(server : MidiServer) </td></tr>
-<tr><td align="left" balign="left"> + note(message : MidiMessage, timeStamp : long, note : String) </td></tr>
-		</table></td></tr>
-		</table>>, URL="./IMidiMessageHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

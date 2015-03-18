@@ -9,20 +9,8 @@ digraph G {
 	node [fontname="Helvetica",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
-	// com.xley.lfosc.UnknownProtocolException
-	c2268 [label=<<table title="com.xley.lfosc.UnknownProtocolException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./UnknownProtocolException.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> UnknownProtocolException </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left">  </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + UnknownProtocolException(message : String) </td></tr>
-		</table></td></tr>
-		</table>>, URL="./UnknownProtocolException.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.ProtocolException
-	c2273 [label=<<table title="com.xley.lfosc.ProtocolException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProtocolException.html">
+	c2270 [label=<<table title="com.xley.lfosc.ProtocolException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProtocolException.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> ProtocolException </td></tr>
 		</table></td></tr>
@@ -34,7 +22,19 @@ digraph G {
 <tr><td align="left" balign="left"> + ProtocolException(message : String, cause : Throwable) </td></tr>
 		</table></td></tr>
 		</table>>, URL="./ProtocolException.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.xley.lfosc.UnknownProtocolException
+	c2273 [label=<<table title="com.xley.lfosc.UnknownProtocolException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./UnknownProtocolException.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> UnknownProtocolException </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left">  </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + UnknownProtocolException(message : String) </td></tr>
+		</table></td></tr>
+		</table>>, URL="./UnknownProtocolException.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.xley.lfosc.UnknownProtocolException extends com.xley.lfosc.ProtocolException
-	c2273:p -> c2268:p [dir=back,arrowtail=empty];
+	c2270:p -> c2273:p [dir=back,arrowtail=empty];
 }
 

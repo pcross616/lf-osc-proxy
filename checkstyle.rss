@@ -125,21 +125,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  17
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/pcross616/lf-osc-proxy#readme/checkstyle.html#com.xley.lfosc.lightfactory.client.LightFactoryClientHandler.java">com/xley/lfosc/lightfactory/client/LightFactoryClientHandler.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  12
+                  16
                 </td>
               </tr>
                           <tr>
@@ -154,6 +140,20 @@ under the License.
                 </td>
                 <td>
                   8
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/pcross616/lf-osc-proxy#readme/checkstyle.html#com.xley.lfosc.lightfactory.client.LightFactoryClientHandler.java">com/xley/lfosc/lightfactory/client/LightFactoryClientHandler.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  12
                 </td>
               </tr>
                           <tr>
@@ -209,7 +209,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  13
+                  12
                 </td>
               </tr>
                           <tr>
@@ -251,7 +251,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  14
+                  13
                 </td>
               </tr>
                           <tr>
@@ -265,7 +265,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  12
+                  13
                 </td>
               </tr>
                           <tr>
@@ -279,7 +279,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  45
+                  44
                 </td>
               </tr>
                           <tr>
@@ -326,20 +326,6 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/pcross616/lf-osc-proxy#readme/checkstyle.html#com.xley.lfosc.lightfactory.LightFactoryProtocol.java">com/xley/lfosc/lightfactory/LightFactoryProtocol.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  21
-                </td>
-              </tr>
-                          <tr>
-                <td>
                   <a href="https://github.com/pcross616/lf-osc-proxy#readme/checkstyle.html#com.xley.lfosc.ProtocolManager.java">com/xley/lfosc/ProtocolManager.java</a>
                 </td>
                 <td>
@@ -350,6 +336,20 @@ under the License.
                 </td>
                 <td>
                   18
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/pcross616/lf-osc-proxy#readme/checkstyle.html#com.xley.lfosc.lightfactory.LightFactoryProtocol.java">com/xley/lfosc/lightfactory/LightFactoryProtocol.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  21
                 </td>
               </tr>
                           <tr>
@@ -419,7 +419,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  3
+                  4
                 </td>
               </tr>
                           <tr>
@@ -447,7 +447,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  12
+                  13
                 </td>
               </tr>
                           <tr>
@@ -503,7 +503,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  141
+                  142
                 </td>
               </tr>
                           <tr>
@@ -517,7 +517,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  15
+                  16
                 </td>
               </tr>
                           <tr>
@@ -545,7 +545,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  33
+                  32
                 </td>
               </tr>
                           <tr>
@@ -578,20 +578,6 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/pcross616/lf-osc-proxy#readme/checkstyle.html#com.xley.lfosc.http.client.HttpClientHandler.java">com/xley/lfosc/http/client/HttpClientHandler.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  12
-                </td>
-              </tr>
-                          <tr>
-                <td>
                   <a href="https://github.com/pcross616/lf-osc-proxy#readme/checkstyle.html#com.xley.lfosc.midi.impl.objects.MidiKey.java">com/xley/lfosc/midi/impl/objects/MidiKey.java</a>
                 </td>
                 <td>
@@ -602,6 +588,20 @@ under the License.
                 </td>
                 <td>
                   14
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/pcross616/lf-osc-proxy#readme/checkstyle.html#com.xley.lfosc.http.client.HttpClientHandler.java">com/xley/lfosc/http/client/HttpClientHandler.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  13
                 </td>
               </tr>
                           <tr>
@@ -643,7 +643,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  5
+                  6
                 </td>
               </tr>
                           <tr>
@@ -671,7 +671,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  14
+                  13
                 </td>
               </tr>
                           <tr>
@@ -755,7 +755,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  13
+                  12
                 </td>
               </tr>
                       </tbody>

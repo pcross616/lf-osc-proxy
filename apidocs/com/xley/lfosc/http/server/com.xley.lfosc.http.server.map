@@ -1,10 +1,10 @@
 <map id="G" name="G">
-<area shape="rect" id="c340" href="./HttpServerHandler.html" title="com.xley.lfosc.http.server.HttpServerHandler" alt="" coords="15,59,438,181"/>
-<area shape="rect" id="node1" href="./HttpServerHandler.html" title="&lt;TABLE&gt;" alt="" coords="5,54,448,186"/>
-<area shape="rect" id="c341" href="./HttpServer.html" title="com.xley.lfosc.http.server.HttpServer" alt="" coords="482,75,1270,165"/>
-<area shape="rect" id="node2" href="./HttpServer.html" title="&lt;TABLE&gt;" alt="" coords="472,70,1280,170"/>
-<area shape="rect" id="c342" href="./HttpChannelInitializer.html" title="com.xley.lfosc.http.server.HttpChannelInitializer" alt="" coords="1315,75,1608,165"/>
-<area shape="rect" id="node3" href="./HttpChannelInitializer.html" title="&lt;TABLE&gt;" alt="" coords="1304,70,1619,170"/>
-<area shape="rect" id="c343" href="./IHttpConstants.html" title="com.xley.lfosc.http.server.IHttpConstants" alt="" coords="1653,11,1958,229"/>
-<area shape="rect" id="node4" href="./IHttpConstants.html" title="&lt;TABLE&gt;" alt="" coords="1643,6,1968,234"/>
+<area shape="rect" id="c549" href="./IHttpConstants.html" title="com.xley.lfosc.http.server.IHttpConstants" alt="" coords="15,11,321,229"/>
+<area shape="rect" id="node1" href="./IHttpConstants.html" title="&lt;TABLE&gt;" alt="" coords="5,6,331,234"/>
+<area shape="rect" id="c550" href="./HttpServerHandler.html" title="com.xley.lfosc.http.server.HttpServerHandler" alt="" coords="365,59,787,181"/>
+<area shape="rect" id="node2" href="./HttpServerHandler.html" title="&lt;TABLE&gt;" alt="" coords="355,54,797,186"/>
+<area shape="rect" id="c551" href="./HttpChannelInitializer.html" title="com.xley.lfosc.http.server.HttpChannelInitializer" alt="" coords="832,75,1125,165"/>
+<area shape="rect" id="node3" href="./HttpChannelInitializer.html" title="&lt;TABLE&gt;" alt="" coords="821,70,1136,170"/>
+<area shape="rect" id="c552" href="./HttpServer.html" title="com.xley.lfosc.http.server.HttpServer" alt="" coords="1170,75,1958,165"/>
+<area shape="rect" id="node4" href="./HttpServer.html" title="&lt;TABLE&gt;" alt="" coords="1160,70,1968,170"/>
 </map>

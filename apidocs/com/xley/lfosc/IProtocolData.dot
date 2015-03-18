@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// com.xley.lfosc.IProtocolData
-	c1218 [label=<<table title="com.xley.lfosc.IProtocolData" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./IProtocolData.html">
+	c1215 [label=<<table title="com.xley.lfosc.IProtocolData" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./IProtocolData.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> IProtocolData </td></tr>
@@ -29,7 +29,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="./IProtocolData.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.impl.SimpleProtocolData
-	c1250 [label=<<table title="com.xley.lfosc.impl.SimpleProtocolData" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./impl/SimpleProtocolData.html">
+	c1252 [label=<<table title="com.xley.lfosc.impl.SimpleProtocolData" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./impl/SimpleProtocolData.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SimpleProtocolData </td></tr>
 		</table></td></tr>
@@ -53,6 +53,6 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="./impl/SimpleProtocolData.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.xley.lfosc.impl.SimpleProtocolData implements com.xley.lfosc.IProtocolData
-	c1218:p -> c1250:p [dir=back,arrowtail=empty,style=dashed];
+	c1215:p -> c1252:p [dir=back,arrowtail=empty,style=dashed];
 }
 
