@@ -51,8 +51,8 @@ public class TestProxyModeDefault {
         mockThread.start();
 
 
-        System.out.println("Waiting for servers to start... (1 sec)");
-        Thread.sleep(1000);
+        System.out.println("Waiting for servers to start... (2 sec)");
+        Thread.sleep(2000);
     }
 
     @After
