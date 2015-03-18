@@ -9,22 +9,8 @@ digraph G {
 	node [fontname="Helvetica",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
-	// com.xley.lfosc.lightfactory.client.LightFactoryClientHandler
-	c172 [label=<<table title="com.xley.lfosc.lightfactory.client.LightFactoryClientHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LightFactoryClientHandler.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> LightFactoryClientHandler </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left">  </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + LightFactoryClientHandler(data : ResultData) </td></tr>
-<tr><td align="left" balign="left"> + exceptionCaught(ctx : ChannelHandlerContext, cause : Throwable) </td></tr>
-<tr><td align="left" balign="left"> # channelRead0(channelHandlerContext : ChannelHandlerContext, s : String) </td></tr>
-		</table></td></tr>
-		</table>>, URL="./LightFactoryClientHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.lightfactory.client.LightFactoryClient
-	c173 [label=<<table title="com.xley.lfosc.lightfactory.client.LightFactoryClient" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LightFactoryClient.html">
+	c593 [label=<<table title="com.xley.lfosc.lightfactory.client.LightFactoryClient" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LightFactoryClient.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> LightFactoryClient </td></tr>
 		</table></td></tr>
@@ -37,8 +23,22 @@ digraph G {
 <tr><td align="left" balign="left"> + send(remote : SocketAddress, group : EventLoopGroup, command : CharSequence) : Object </td></tr>
 		</table></td></tr>
 		</table>>, URL="./LightFactoryClient.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.xley.lfosc.lightfactory.client.LightFactoryClientHandler
+	c594 [label=<<table title="com.xley.lfosc.lightfactory.client.LightFactoryClientHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LightFactoryClientHandler.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> LightFactoryClientHandler </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left">  </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + LightFactoryClientHandler(data : ResultData) </td></tr>
+<tr><td align="left" balign="left"> + exceptionCaught(ctx : ChannelHandlerContext, cause : Throwable) </td></tr>
+<tr><td align="left" balign="left"> # channelRead0(channelHandlerContext : ChannelHandlerContext, s : String) </td></tr>
+		</table></td></tr>
+		</table>>, URL="./LightFactoryClientHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.lightfactory.client.LightFactoryClientInitializer
-	c174 [label=<<table title="com.xley.lfosc.lightfactory.client.LightFactoryClientInitializer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LightFactoryClientInitializer.html">
+	c595 [label=<<table title="com.xley.lfosc.lightfactory.client.LightFactoryClientInitializer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./LightFactoryClientInitializer.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> LightFactoryClientInitializer </td></tr>
 		</table></td></tr>

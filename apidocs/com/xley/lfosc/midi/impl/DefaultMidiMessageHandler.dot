@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// com.xley.lfosc.midi.IMidiMessageHandler
-	c782 [label=<<table title="com.xley.lfosc.midi.IMidiMessageHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../IMidiMessageHandler.html">
+	c768 [label=<<table title="com.xley.lfosc.midi.IMidiMessageHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../IMidiMessageHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> IMidiMessageHandler </td></tr>
@@ -24,7 +24,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="../IMidiMessageHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.midi.impl.DefaultMidiMessageHandler
-	c787 [label=<<table title="com.xley.lfosc.midi.impl.DefaultMidiMessageHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DefaultMidiMessageHandler.html">
+	c772 [label=<<table title="com.xley.lfosc.midi.impl.DefaultMidiMessageHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./DefaultMidiMessageHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> DefaultMidiMessageHandler </td></tr>
 		</table></td></tr>
@@ -38,6 +38,6 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="./DefaultMidiMessageHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.xley.lfosc.midi.impl.DefaultMidiMessageHandler implements com.xley.lfosc.midi.IMidiMessageHandler
-	c782:p -> c787:p [dir=back,arrowtail=empty,style=dashed];
+	c768:p -> c772:p [dir=back,arrowtail=empty,style=dashed];
 }
 

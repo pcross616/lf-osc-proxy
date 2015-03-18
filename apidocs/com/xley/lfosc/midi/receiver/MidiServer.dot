@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// com.xley.lfosc.midi.receiver.MidiServer
-	c1800 [label=<<table title="com.xley.lfosc.midi.receiver.MidiServer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MidiServer.html">
+	c1785 [label=<<table title="com.xley.lfosc.midi.receiver.MidiServer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MidiServer.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> MidiServer </td></tr>
 		</table></td></tr>
@@ -27,7 +27,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="./MidiServer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.xley.lfosc.midi.receiver.MidiServer implements java.lang.Runnable
-	c1821:p -> c1800:p [dir=back,arrowtail=empty,style=dashed];
+	c1821:p -> c1785:p [dir=back,arrowtail=empty,style=dashed];
 	// java.lang.Runnable
 	c1821 [label=<<table title="java.lang.Runnable" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Runnable.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">

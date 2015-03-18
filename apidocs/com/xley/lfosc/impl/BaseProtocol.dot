@@ -9,39 +9,8 @@ digraph G {
 	node [fontname="Helvetica",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
-	// com.xley.lfosc.IProtocol
-	c646 [label=<<table title="com.xley.lfosc.IProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../IProtocol.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> IProtocol </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left">  </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + process(data : IProtocolData) : Object </td></tr>
-<tr><td align="left" balign="left"> + createProtocolData(value : Object) : IProtocolData </td></tr>
-<tr><td align="left" balign="left"> + configureProtocolData(data : IProtocolData) : IProtocolData </td></tr>
-<tr><td align="left" balign="left"> + command(command : String, args : String[]) : int </td></tr>
-		</table></td></tr>
-		</table>>, URL="../IProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.xley.lfosc.lightfactory.LightFactoryProtocol
-	c659 [label=<<table title="com.xley.lfosc.lightfactory.LightFactoryProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../lightfactory/LightFactoryProtocol.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> LightFactoryProtocol </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + resources : ResourceBundle </td></tr>
-<tr><td align="left" balign="left"> # lfPattern : Pattern </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + LightFactoryProtocol() </td></tr>
-<tr><td align="left" balign="left"> + process(data : IProtocolData) : Object </td></tr>
-<tr><td align="left" balign="left"> + createProtocolData(value : Object) : IProtocolData </td></tr>
-		</table></td></tr>
-		</table>>, URL="../lightfactory/LightFactoryProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.midi.MidiProtocol
-	c680 [label=<<table title="com.xley.lfosc.midi.MidiProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../midi/MidiProtocol.html">
+	c647 [label=<<table title="com.xley.lfosc.midi.MidiProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../midi/MidiProtocol.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> MidiProtocol </td></tr>
 		</table></td></tr>
@@ -57,8 +26,24 @@ digraph G {
 <tr><td align="left" balign="left"> + command(commandName : String, args : String[]) : int </td></tr>
 		</table></td></tr>
 		</table>>, URL="../midi/MidiProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.xley.lfosc.IProtocol
+	c673 [label=<<table title="com.xley.lfosc.IProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../IProtocol.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> IProtocol </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left">  </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + process(data : IProtocolData) : Object </td></tr>
+<tr><td align="left" balign="left"> + createProtocolData(value : Object) : IProtocolData </td></tr>
+<tr><td align="left" balign="left"> + configureProtocolData(data : IProtocolData) : IProtocolData </td></tr>
+<tr><td align="left" balign="left"> + command(command : String, args : String[]) : int </td></tr>
+		</table></td></tr>
+		</table>>, URL="../IProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.osc.OSCProtocol
-	c697 [label=<<table title="com.xley.lfosc.osc.OSCProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../osc/OSCProtocol.html">
+	c677 [label=<<table title="com.xley.lfosc.osc.OSCProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../osc/OSCProtocol.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> OSCProtocol </td></tr>
 		</table></td></tr>
@@ -74,7 +59,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="../osc/OSCProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.http.HttpProtocol
-	c703 [label=<<table title="com.xley.lfosc.http.HttpProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../http/HttpProtocol.html">
+	c704 [label=<<table title="com.xley.lfosc.http.HttpProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../http/HttpProtocol.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> HttpProtocol </td></tr>
 		</table></td></tr>
@@ -88,6 +73,21 @@ digraph G {
 <tr><td align="left" balign="left"> + configureProtocolData(data : IProtocolData) : IProtocolData </td></tr>
 		</table></td></tr>
 		</table>>, URL="../http/HttpProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.xley.lfosc.lightfactory.LightFactoryProtocol
+	c706 [label=<<table title="com.xley.lfosc.lightfactory.LightFactoryProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../lightfactory/LightFactoryProtocol.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> LightFactoryProtocol </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + resources : ResourceBundle </td></tr>
+<tr><td align="left" balign="left"> # lfPattern : Pattern </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + LightFactoryProtocol() </td></tr>
+<tr><td align="left" balign="left"> + process(data : IProtocolData) : Object </td></tr>
+<tr><td align="left" balign="left"> + createProtocolData(value : Object) : IProtocolData </td></tr>
+		</table></td></tr>
+		</table>>, URL="../lightfactory/LightFactoryProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.impl.BaseProtocol
 	c719 [label=<<table title="com.xley.lfosc.impl.BaseProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./BaseProtocol.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
@@ -102,23 +102,23 @@ digraph G {
 <tr><td align="left" balign="left"> + command(command : String, args : String[]) : int </td></tr>
 		</table></td></tr>
 		</table>>, URL="./BaseProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.xley.lfosc.lightfactory.LightFactoryProtocol extends com.xley.lfosc.impl.BaseProtocol
-	c719:p -> c659:p [dir=back,arrowtail=empty];
-	//com.xley.lfosc.lightfactory.LightFactoryProtocol implements com.xley.lfosc.IProtocol
-	c646:p -> c659:p [dir=back,arrowtail=empty,style=dashed];
 	//com.xley.lfosc.midi.MidiProtocol extends com.xley.lfosc.impl.BaseProtocol
-	c719:p -> c680:p [dir=back,arrowtail=empty];
+	c719:p -> c647:p [dir=back,arrowtail=empty];
 	//com.xley.lfosc.midi.MidiProtocol implements com.xley.lfosc.IProtocol
-	c646:p -> c680:p [dir=back,arrowtail=empty,style=dashed];
+	c673:p -> c647:p [dir=back,arrowtail=empty,style=dashed];
 	//com.xley.lfosc.osc.OSCProtocol extends com.xley.lfosc.impl.BaseProtocol
-	c719:p -> c697:p [dir=back,arrowtail=empty];
+	c719:p -> c677:p [dir=back,arrowtail=empty];
 	//com.xley.lfosc.osc.OSCProtocol implements com.xley.lfosc.IProtocol
-	c646:p -> c697:p [dir=back,arrowtail=empty,style=dashed];
+	c673:p -> c677:p [dir=back,arrowtail=empty,style=dashed];
 	//com.xley.lfosc.http.HttpProtocol extends com.xley.lfosc.impl.BaseProtocol
-	c719:p -> c703:p [dir=back,arrowtail=empty];
+	c719:p -> c704:p [dir=back,arrowtail=empty];
 	//com.xley.lfosc.http.HttpProtocol implements com.xley.lfosc.IProtocol
-	c646:p -> c703:p [dir=back,arrowtail=empty,style=dashed];
+	c673:p -> c704:p [dir=back,arrowtail=empty,style=dashed];
+	//com.xley.lfosc.lightfactory.LightFactoryProtocol extends com.xley.lfosc.impl.BaseProtocol
+	c719:p -> c706:p [dir=back,arrowtail=empty];
+	//com.xley.lfosc.lightfactory.LightFactoryProtocol implements com.xley.lfosc.IProtocol
+	c673:p -> c706:p [dir=back,arrowtail=empty,style=dashed];
 	//com.xley.lfosc.impl.BaseProtocol implements com.xley.lfosc.IProtocol
-	c646:p -> c719:p [dir=back,arrowtail=empty,style=dashed];
+	c673:p -> c719:p [dir=back,arrowtail=empty,style=dashed];
 }
 

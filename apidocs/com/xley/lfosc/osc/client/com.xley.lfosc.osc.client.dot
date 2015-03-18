@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// com.xley.lfosc.osc.client.OSCClient
-	c466 [label=<<table title="com.xley.lfosc.osc.client.OSCClient" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./OSCClient.html">
+	c339 [label=<<table title="com.xley.lfosc.osc.client.OSCClient" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./OSCClient.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> OSCClient </td></tr>
 		</table></td></tr>
@@ -24,7 +24,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="./OSCClient.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.osc.client.OSCClientHandler
-	c467 [label=<<table title="com.xley.lfosc.osc.client.OSCClientHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./OSCClientHandler.html">
+	c340 [label=<<table title="com.xley.lfosc.osc.client.OSCClientHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./OSCClientHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> OSCClientHandler </td></tr>
 		</table></td></tr>

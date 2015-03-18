@@ -1,6 +1,6 @@
 <map id="G" name="G">
-<area shape="rect" id="c729" href="./ProtocolException.html" title="com.xley.lfosc.ProtocolException" alt="" coords="79,11,441,101"/>
-<area shape="rect" id="node1" href="./ProtocolException.html" title="&lt;TABLE&gt;" alt="" coords="69,6,451,106"/>
-<area shape="rect" id="c731" href="./ClientProtocolException.html" title="com.xley.lfosc.ClientProtocolException" alt="" coords="15,161,505,266"/>
-<area shape="rect" id="node2" href="./ClientProtocolException.html" title="&lt;TABLE&gt;" alt="" coords="5,155,515,271"/>
+<area shape="rect" id="c737" href="./ClientProtocolException.html" title="com.xley.lfosc.ClientProtocolException" alt="" coords="15,161,505,266"/>
+<area shape="rect" id="node1" href="./ClientProtocolException.html" title="&lt;TABLE&gt;" alt="" coords="5,155,515,271"/>
+<area shape="rect" id="c739" href="./ProtocolException.html" title="com.xley.lfosc.ProtocolException" alt="" coords="79,11,441,101"/>
+<area shape="rect" id="node2" href="./ProtocolException.html" title="&lt;TABLE&gt;" alt="" coords="69,6,451,106"/>
 </map>
