@@ -71,6 +71,9 @@ public abstract class ProtocolManager {
     }
 
     public static IProtocol getProtocol(String mode) {
+        if (mode == null) {
+            return null;
+        }
         return protocolMap.get(mode.toLowerCase());
     }
 

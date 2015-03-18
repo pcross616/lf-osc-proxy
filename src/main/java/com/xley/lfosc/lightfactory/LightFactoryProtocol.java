@@ -67,7 +67,7 @@ public class LightFactoryProtocol extends BaseProtocol implements IProtocol {
     @Override
     public IProtocolData createProtocolData(Object value) {
         if (value instanceof CharSequence) {
-            Matcher matches = lfPattern.matcher((CharSequence) value);
+            Matcher matches = lfPattern.matcher(String.valueOf(value).toLowerCase());
             //find the address and verify
             if (matches.find()) {
                 LogUtil.debug(getClass(), resources.getString("lf.event.valid"));
