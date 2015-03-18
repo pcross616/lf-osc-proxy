@@ -1,8 +1,8 @@
 <map id="G" name="G">
-<area shape="rect" id="c425" href="./HttpClient.html" title="com.xley.lfosc.http.client.HttpClient" alt="" coords="16,11,344,117"/>
+<area shape="rect" id="c593" href="./HttpClient.html" title="com.xley.lfosc.http.client.HttpClient" alt="" coords="16,11,344,117"/>
 <area shape="rect" id="node1" href="./HttpClient.html" title="&lt;TABLE&gt;" alt="" coords="5,6,355,122"/>
-<area shape="rect" id="c426" href="./HttpClientHandler.html" title="com.xley.lfosc.http.client.HttpClientHandler" alt="" coords="389,11,811,117"/>
+<area shape="rect" id="c594" href="./HttpClientHandler.html" title="com.xley.lfosc.http.client.HttpClientHandler" alt="" coords="389,11,811,117"/>
 <area shape="rect" id="node2" href="./HttpClientHandler.html" title="&lt;TABLE&gt;" alt="" coords="379,6,821,122"/>
-<area shape="rect" id="c427" href="./HttpClientInitializer.html" title="com.xley.lfosc.http.client.HttpClientInitializer" alt="" coords="855,19,1233,109"/>
+<area shape="rect" id="c595" href="./HttpClientInitializer.html" title="com.xley.lfosc.http.client.HttpClientInitializer" alt="" coords="855,19,1233,109"/>
 <area shape="rect" id="node3" href="./HttpClientInitializer.html" title="&lt;TABLE&gt;" alt="" coords="845,14,1243,114"/>
 </map>

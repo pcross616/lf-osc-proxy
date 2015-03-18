@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// com.xley.lfosc.http.server.HttpServer
-	c1034 [label=<<table title="com.xley.lfosc.http.server.HttpServer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./HttpServer.html">
+	c1042 [label=<<table title="com.xley.lfosc.http.server.HttpServer" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./HttpServer.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> HttpServer </td></tr>
 		</table></td></tr>
@@ -23,7 +23,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="./HttpServer.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.xley.lfosc.http.server.HttpServer implements java.lang.Runnable
-	c1050:p -> c1034:p [dir=back,arrowtail=empty,style=dashed];
+	c1050:p -> c1042:p [dir=back,arrowtail=empty,style=dashed];
 	// java.lang.Runnable
 	c1050 [label=<<table title="java.lang.Runnable" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Runnable.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">

@@ -1,8 +1,8 @@
 <map id="G" name="G">
-<area shape="rect" id="c0" href="./MidiCommon.html" title="com.xley.lfosc.midi.MidiCommon" alt="" coords="16,27,595,149"/>
-<area shape="rect" id="node1" href="./MidiCommon.html" title="&lt;TABLE&gt;" alt="" coords="5,22,605,154"/>
-<area shape="rect" id="c1" href="./IMidiMessageHandler.html" title="com.xley.lfosc.midi.IMidiMessageHandler" alt="" coords="639,35,1033,141"/>
-<area shape="rect" id="node2" href="./IMidiMessageHandler.html" title="&lt;TABLE&gt;" alt="" coords="629,30,1043,146"/>
-<area shape="rect" id="c2" href="./MidiProtocol.html" title="com.xley.lfosc.midi.MidiProtocol" alt="" coords="1077,11,1456,165"/>
+<area shape="rect" id="c215" href="./IMidiMessageHandler.html" title="com.xley.lfosc.midi.IMidiMessageHandler" alt="" coords="15,35,409,141"/>
+<area shape="rect" id="node1" href="./IMidiMessageHandler.html" title="&lt;TABLE&gt;" alt="" coords="5,30,419,146"/>
+<area shape="rect" id="c216" href="./MidiCommon.html" title="com.xley.lfosc.midi.MidiCommon" alt="" coords="453,27,1032,149"/>
+<area shape="rect" id="node2" href="./MidiCommon.html" title="&lt;TABLE&gt;" alt="" coords="443,22,1043,154"/>
+<area shape="rect" id="c217" href="./MidiProtocol.html" title="com.xley.lfosc.midi.MidiProtocol" alt="" coords="1077,11,1456,165"/>
 <area shape="rect" id="node3" href="./MidiProtocol.html" title="&lt;TABLE&gt;" alt="" coords="1067,6,1467,170"/>
 </map>

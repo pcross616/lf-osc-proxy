@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// com.xley.lfosc.IProtocol
-	c1512 [label=<<table title="com.xley.lfosc.IProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../IProtocol.html">
+	c1500 [label=<<table title="com.xley.lfosc.IProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../IProtocol.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> IProtocol </td></tr>
@@ -26,7 +26,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="../IProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.lightfactory.LightFactoryProtocol
-	c1527 [label=<<table title="com.xley.lfosc.lightfactory.LightFactoryProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./LightFactoryProtocol.html">
+	c1506 [label=<<table title="com.xley.lfosc.lightfactory.LightFactoryProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./LightFactoryProtocol.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> LightFactoryProtocol </td></tr>
 		</table></td></tr>
@@ -55,10 +55,10 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="../impl/BaseProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.xley.lfosc.lightfactory.LightFactoryProtocol extends com.xley.lfosc.impl.BaseProtocol
-	c1534:p -> c1527:p [dir=back,arrowtail=empty];
+	c1534:p -> c1506:p [dir=back,arrowtail=empty];
 	//com.xley.lfosc.lightfactory.LightFactoryProtocol implements com.xley.lfosc.IProtocol
-	c1512:p -> c1527:p [dir=back,arrowtail=empty,style=dashed];
+	c1500:p -> c1506:p [dir=back,arrowtail=empty,style=dashed];
 	//com.xley.lfosc.impl.BaseProtocol implements com.xley.lfosc.IProtocol
-	c1512:p -> c1534:p [dir=back,arrowtail=empty,style=dashed];
+	c1500:p -> c1534:p [dir=back,arrowtail=empty,style=dashed];
 }
 

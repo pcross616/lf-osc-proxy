@@ -9,8 +9,24 @@ digraph G {
 	node [fontname="Helvetica",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
+	// com.xley.lfosc.IProtocol
+	c1701 [label=<<table title="com.xley.lfosc.IProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../IProtocol.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> IProtocol </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left">  </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + process(data : IProtocolData) : Object </td></tr>
+<tr><td align="left" balign="left"> + createProtocolData(value : Object) : IProtocolData </td></tr>
+<tr><td align="left" balign="left"> + configureProtocolData(data : IProtocolData) : IProtocolData </td></tr>
+<tr><td align="left" balign="left"> + command(command : String, args : String[]) : int </td></tr>
+		</table></td></tr>
+		</table>>, URL="../IProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.midi.MidiProtocol
-	c1701 [label=<<table title="com.xley.lfosc.midi.MidiProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MidiProtocol.html">
+	c1716 [label=<<table title="com.xley.lfosc.midi.MidiProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MidiProtocol.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> MidiProtocol </td></tr>
 		</table></td></tr>
@@ -26,22 +42,6 @@ digraph G {
 <tr><td align="left" balign="left"> + command(commandName : String, args : String[]) : int </td></tr>
 		</table></td></tr>
 		</table>>, URL="./MidiProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.xley.lfosc.IProtocol
-	c1713 [label=<<table title="com.xley.lfosc.IProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../IProtocol.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> IProtocol </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left">  </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + process(data : IProtocolData) : Object </td></tr>
-<tr><td align="left" balign="left"> + createProtocolData(value : Object) : IProtocolData </td></tr>
-<tr><td align="left" balign="left"> + configureProtocolData(data : IProtocolData) : IProtocolData </td></tr>
-<tr><td align="left" balign="left"> + command(command : String, args : String[]) : int </td></tr>
-		</table></td></tr>
-		</table>>, URL="../IProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.impl.BaseProtocol
 	c1735 [label=<<table title="com.xley.lfosc.impl.BaseProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="../impl/BaseProtocol.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
@@ -57,10 +57,10 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="../impl/BaseProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.xley.lfosc.midi.MidiProtocol extends com.xley.lfosc.impl.BaseProtocol
-	c1735:p -> c1701:p [dir=back,arrowtail=empty];
+	c1735:p -> c1716:p [dir=back,arrowtail=empty];
 	//com.xley.lfosc.midi.MidiProtocol implements com.xley.lfosc.IProtocol
-	c1713:p -> c1701:p [dir=back,arrowtail=empty,style=dashed];
+	c1701:p -> c1716:p [dir=back,arrowtail=empty,style=dashed];
 	//com.xley.lfosc.impl.BaseProtocol implements com.xley.lfosc.IProtocol
-	c1713:p -> c1735:p [dir=back,arrowtail=empty,style=dashed];
+	c1701:p -> c1735:p [dir=back,arrowtail=empty,style=dashed];
 }
 

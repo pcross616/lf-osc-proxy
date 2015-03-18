@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// com.xley.lfosc.http.client.HttpClientHandler
-	c914 [label=<<table title="com.xley.lfosc.http.client.HttpClientHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./HttpClientHandler.html">
+	c922 [label=<<table title="com.xley.lfosc.http.client.HttpClientHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./HttpClientHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> HttpClientHandler </td></tr>
 		</table></td></tr>
@@ -24,7 +24,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="./HttpClientHandler.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.xley.lfosc.http.client.HttpClientHandler extends io.netty.channel.SimpleChannelInboundHandler<io.netty.handler.codec.http.HttpObject>
-	c928:p -> c914:p [dir=back,arrowtail=empty];
+	c928:p -> c922:p [dir=back,arrowtail=empty];
 	// io.netty.channel.SimpleChannelInboundHandler<I>
 	c928 [label=<<table title="io.netty.channel.SimpleChannelInboundHandler" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/io/netty/channel/SimpleChannelInboundHandler.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">

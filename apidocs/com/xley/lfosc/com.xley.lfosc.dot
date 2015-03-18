@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// com.xley.lfosc.OSCProxy
-	c209 [label=<<table title="com.xley.lfosc.OSCProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./OSCProxy.html">
+	c0 [label=<<table title="com.xley.lfosc.OSCProxy" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./OSCProxy.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> OSCProxy </td></tr>
 		</table></td></tr>
@@ -23,79 +23,8 @@ digraph G {
 <tr><td align="left" balign="left"> + execute(args : String[]) : int </td></tr>
 		</table></td></tr>
 		</table>>, URL="./OSCProxy.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.xley.lfosc.UnknownProtocolException
-	c210 [label=<<table title="com.xley.lfosc.UnknownProtocolException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UnknownProtocolException.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> UnknownProtocolException </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left">  </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + UnknownProtocolException(message : String) </td></tr>
-		</table></td></tr>
-		</table>>, URL="./UnknownProtocolException.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.xley.lfosc.ClientProtocolException
-	c211 [label=<<table title="com.xley.lfosc.ClientProtocolException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ClientProtocolException.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ClientProtocolException </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left">  </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + ClientProtocolException(message : String, status : Object) </td></tr>
-<tr><td align="left" balign="left"> + ClientProtocolException(message : String, status : Object, cause : Throwable) </td></tr>
-<tr><td align="left" balign="left"> + getStatus() : Object </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ClientProtocolException.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.xley.lfosc.ProtocolManager
-	c212 [label=<<table title="com.xley.lfosc.ProtocolManager" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProtocolManager.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ProtocolManager </font></td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left">  </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + ProtocolManager() </td></tr>
-<tr><td align="left" balign="left"> + getProtocol(mode : String) : IProtocol </td></tr>
-<tr><td align="left" balign="left"> + resolve(value : Object) : IProtocolData </td></tr>
-<tr><td align="left" balign="left"> + addProtocol(mode : String, protocol : IProtocol) </td></tr>
-<tr><td align="left" balign="left"> + executeCommand(mode : String, command : String, args : String[]) : int </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ProtocolManager.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.xley.lfosc.ProtocolException
-	c213 [label=<<table title="com.xley.lfosc.ProtocolException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProtocolException.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> ProtocolException </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left">  </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + ProtocolException(message : String) </td></tr>
-<tr><td align="left" balign="left"> + ProtocolException(message : String, cause : Throwable) </td></tr>
-		</table></td></tr>
-		</table>>, URL="./ProtocolException.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	// com.xley.lfosc.IProtocol
-	c214 [label=<<table title="com.xley.lfosc.IProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./IProtocol.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
-<tr><td align="center" balign="center"> IProtocol </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left">  </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + process(data : IProtocolData) : Object </td></tr>
-<tr><td align="left" balign="left"> + createProtocolData(value : Object) : IProtocolData </td></tr>
-<tr><td align="left" balign="left"> + configureProtocolData(data : IProtocolData) : IProtocolData </td></tr>
-<tr><td align="left" balign="left"> + command(command : String, args : String[]) : int </td></tr>
-		</table></td></tr>
-		</table>>, URL="./IProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.xley.lfosc.IProtocolData
-	c215 [label=<<table title="com.xley.lfosc.IProtocolData" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./IProtocolData.html">
+	c1 [label=<<table title="com.xley.lfosc.IProtocolData" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./IProtocolData.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
 <tr><td align="center" balign="center"> IProtocolData </td></tr>
@@ -113,9 +42,80 @@ digraph G {
 <tr><td align="left" balign="left"> + configureProtocolData() : IProtocolData </td></tr>
 		</table></td></tr>
 		</table>>, URL="./IProtocolData.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
-	//com.xley.lfosc.UnknownProtocolException extends com.xley.lfosc.ProtocolException
-	c213:p -> c210:p [dir=back,arrowtail=empty];
+	// com.xley.lfosc.IProtocol
+	c2 [label=<<table title="com.xley.lfosc.IProtocol" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./IProtocol.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> IProtocol </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left">  </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + process(data : IProtocolData) : Object </td></tr>
+<tr><td align="left" balign="left"> + createProtocolData(value : Object) : IProtocolData </td></tr>
+<tr><td align="left" balign="left"> + configureProtocolData(data : IProtocolData) : IProtocolData </td></tr>
+<tr><td align="left" balign="left"> + command(command : String, args : String[]) : int </td></tr>
+		</table></td></tr>
+		</table>>, URL="./IProtocol.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.xley.lfosc.ProtocolException
+	c3 [label=<<table title="com.xley.lfosc.ProtocolException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProtocolException.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ProtocolException </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left">  </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + ProtocolException(message : String) </td></tr>
+<tr><td align="left" balign="left"> + ProtocolException(message : String, cause : Throwable) </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ProtocolException.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.xley.lfosc.ProtocolManager
+	c4 [label=<<table title="com.xley.lfosc.ProtocolManager" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ProtocolManager.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> ProtocolManager </font></td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left">  </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + ProtocolManager() </td></tr>
+<tr><td align="left" balign="left"> + getProtocol(mode : String) : IProtocol </td></tr>
+<tr><td align="left" balign="left"> + resolve(value : Object) : IProtocolData </td></tr>
+<tr><td align="left" balign="left"> + addProtocol(mode : String, protocol : IProtocol) </td></tr>
+<tr><td align="left" balign="left"> + executeCommand(mode : String, command : String, args : String[]) : int </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ProtocolManager.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.xley.lfosc.ClientProtocolException
+	c5 [label=<<table title="com.xley.lfosc.ClientProtocolException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./ClientProtocolException.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> ClientProtocolException </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left">  </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + ClientProtocolException(message : String, status : Object) </td></tr>
+<tr><td align="left" balign="left"> + ClientProtocolException(message : String, status : Object, cause : Throwable) </td></tr>
+<tr><td align="left" balign="left"> + getStatus() : Object </td></tr>
+		</table></td></tr>
+		</table>>, URL="./ClientProtocolException.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.xley.lfosc.UnknownProtocolException
+	c6 [label=<<table title="com.xley.lfosc.UnknownProtocolException" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./UnknownProtocolException.html">
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="center" balign="center"> UnknownProtocolException </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left">  </td></tr>
+		</table></td></tr>
+		<tr><td><table border="0" cellspacing="0" cellpadding="1">
+<tr><td align="left" balign="left"> + UnknownProtocolException(message : String) </td></tr>
+		</table></td></tr>
+		</table>>, URL="./UnknownProtocolException.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.xley.lfosc.ClientProtocolException extends com.xley.lfosc.ProtocolException
-	c213:p -> c211:p [dir=back,arrowtail=empty];
+	c3:p -> c5:p [dir=back,arrowtail=empty];
+	//com.xley.lfosc.UnknownProtocolException extends com.xley.lfosc.ProtocolException
+	c3:p -> c6:p [dir=back,arrowtail=empty];
 }
 
