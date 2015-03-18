@@ -10,7 +10,7 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// com.xley.lfosc.midi.receiver.MidiReceiver
-	c1760 [label=<<table title="com.xley.lfosc.midi.receiver.MidiReceiver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MidiReceiver.html">
+	c1750 [label=<<table title="com.xley.lfosc.midi.receiver.MidiReceiver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./MidiReceiver.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> MidiReceiver </td></tr>
 		</table></td></tr>
@@ -34,7 +34,7 @@ digraph G {
 		</table></td></tr>
 		</table>>, URL="./MidiReceiver.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.xley.lfosc.midi.receiver.MidiReceiver implements javax.sound.midi.Receiver
-	c1780:p -> c1760:p [dir=back,arrowtail=empty,style=dashed];
+	c1780:p -> c1750:p [dir=back,arrowtail=empty,style=dashed];
 	// javax.sound.midi.Receiver
 	c1780 [label=<<table title="javax.sound.midi.Receiver" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/javax/sound/midi/Receiver.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">

@@ -1,16 +1,16 @@
 <map id="G" name="G">
-<area shape="rect" id="c41" href="./ClientProtocolException.html" title="com.xley.lfosc.ClientProtocolException" alt="" coords="15,257,505,362"/>
-<area shape="rect" id="node1" href="./ClientProtocolException.html" title="&lt;TABLE&gt;" alt="" coords="5,251,515,367"/>
-<area shape="rect" id="c42" href="./IProtocolData.html" title="com.xley.lfosc.IProtocolData" alt="" coords="705,11,967,197"/>
-<area shape="rect" id="node2" href="./IProtocolData.html" title="&lt;TABLE&gt;" alt="" coords="695,6,977,202"/>
-<area shape="rect" id="c43" href="./IProtocol.html" title="com.xley.lfosc.IProtocol" alt="" coords="1012,35,1391,173"/>
-<area shape="rect" id="node3" href="./IProtocol.html" title="&lt;TABLE&gt;" alt="" coords="1001,30,1401,178"/>
-<area shape="rect" id="c44" href="./UnknownProtocolException.html" title="com.xley.lfosc.UnknownProtocolException" alt="" coords="549,273,851,346"/>
-<area shape="rect" id="node4" href="./UnknownProtocolException.html" title="&lt;TABLE&gt;" alt="" coords="539,267,861,351"/>
-<area shape="rect" id="c45" href="./OSCProxy.html" title="com.xley.lfosc.OSCProxy" alt="" coords="1436,51,1633,157"/>
-<area shape="rect" id="node5" href="./OSCProxy.html" title="&lt;TABLE&gt;" alt="" coords="1425,46,1644,162"/>
-<area shape="rect" id="c46" href="./ProtocolManager.html" title="com.xley.lfosc.ProtocolManager" alt="" coords="1678,35,2127,173"/>
-<area shape="rect" id="node6" href="./ProtocolManager.html" title="&lt;TABLE&gt;" alt="" coords="1668,30,2137,178"/>
-<area shape="rect" id="c47" href="./ProtocolException.html" title="com.xley.lfosc.ProtocolException" alt="" coords="299,59,661,149"/>
-<area shape="rect" id="node7" href="./ProtocolException.html" title="&lt;TABLE&gt;" alt="" coords="289,54,671,154"/>
+<area shape="rect" id="c41" href="./UnknownProtocolException.html" title="com.xley.lfosc.UnknownProtocolException" alt="" coords="16,273,317,346"/>
+<area shape="rect" id="node1" href="./UnknownProtocolException.html" title="&lt;TABLE&gt;" alt="" coords="5,267,328,351"/>
+<area shape="rect" id="c42" href="./ProtocolManager.html" title="com.xley.lfosc.ProtocolManager" alt="" coords="611,35,1061,173"/>
+<area shape="rect" id="node2" href="./ProtocolManager.html" title="&lt;TABLE&gt;" alt="" coords="601,30,1071,178"/>
+<area shape="rect" id="c43" href="./IProtocol.html" title="com.xley.lfosc.IProtocol" alt="" coords="1105,35,1484,173"/>
+<area shape="rect" id="node3" href="./IProtocol.html" title="&lt;TABLE&gt;" alt="" coords="1095,30,1495,178"/>
+<area shape="rect" id="c44" href="./IProtocolData.html" title="com.xley.lfosc.IProtocolData" alt="" coords="1529,11,1791,197"/>
+<area shape="rect" id="node4" href="./IProtocolData.html" title="&lt;TABLE&gt;" alt="" coords="1519,6,1801,202"/>
+<area shape="rect" id="c45" href="./ClientProtocolException.html" title="com.xley.lfosc.ClientProtocolException" alt="" coords="362,257,851,362"/>
+<area shape="rect" id="node5" href="./ClientProtocolException.html" title="&lt;TABLE&gt;" alt="" coords="352,251,861,367"/>
+<area shape="rect" id="c46" href="./ProtocolException.html" title="com.xley.lfosc.ProtocolException" alt="" coords="206,59,567,149"/>
+<area shape="rect" id="node6" href="./ProtocolException.html" title="&lt;TABLE&gt;" alt="" coords="196,54,577,154"/>
+<area shape="rect" id="c47" href="./OSCProxy.html" title="com.xley.lfosc.OSCProxy" alt="" coords="1836,51,2033,157"/>
+<area shape="rect" id="node7" href="./OSCProxy.html" title="&lt;TABLE&gt;" alt="" coords="1825,46,2044,162"/>
 </map>
