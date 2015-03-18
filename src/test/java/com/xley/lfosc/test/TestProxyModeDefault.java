@@ -81,6 +81,7 @@ public class TestProxyModeDefault {
                 ":3300/loopback test\n";
 
         LightFactoryClient.send(new InetSocketAddress(InetAddress.getLoopbackAddress(), 3100), data);
+        Thread.sleep(1000);
         assertEquals("loopback test", mockServer.getLastValue());
     }
 
