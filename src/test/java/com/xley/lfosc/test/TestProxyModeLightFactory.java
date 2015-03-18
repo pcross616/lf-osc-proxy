@@ -86,7 +86,7 @@ public class TestProxyModeLightFactory {
         String data = "osc@" + InetAddress.getLoopbackAddress().getHostAddress()
                 + ":" + OSCPort.defaultSCOSCPort()
                 + " /message/receiving testoscproxy 123 0.222 bar\n";
-        Object response = LightFactoryClient.send(new InetSocketAddress(InetAddress.getLoopbackAddress(), 3100), data);
+        Object response = LightFactoryClient.send(new InetSocketAddress(InetAddress.getLoopbackAddress(), 3100), data.toUpperCase());
 
         //Thread.sleep(3000); // wait a bit
 
