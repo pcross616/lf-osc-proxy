@@ -10,17 +10,15 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// com.xley.lfosc.util.LogUtil
-	c1579 [label=<<table title="com.xley.lfosc.util.LogUtil" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./LogUtil.html">
+	c46 [label=<<table title="com.xley.lfosc.util.LogUtil" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./LogUtil.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"><font face="Helvetica-Oblique"> LogUtil </font></td></tr>
+<tr><td align="center" balign="center"> LogUtil </td></tr>
 		</table></td></tr>
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="left" balign="left">  </td></tr>
 		</table></td></tr>
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="left" balign="left"> + LogUtil() </td></tr>
-<tr><td align="left" balign="left"> + console_error(message : Object) </td></tr>
-<tr><td align="left" balign="left"> + console(message : Object) </td></tr>
 <tr><td align="left" balign="left"> + trace(message : Object) </td></tr>
 <tr><td align="left" balign="left"> + debug(message : Object) </td></tr>
 <tr><td align="left" balign="left"> + info(message : Object) </td></tr>
@@ -33,11 +31,10 @@ digraph G {
 <tr><td align="left" balign="left"> + debug(clazz : Class&lt;&gt;, message : Object) </td></tr>
 <tr><td align="left" balign="left"> + info(clazz : Class&lt;&gt;, message : Object) </td></tr>
 <tr><td align="left" balign="left"> + warn(clazz : Class&lt;&gt;, message : Object) </td></tr>
-<tr><td align="left" balign="left"> + error(clazz : Class&lt;&gt;, message : String) </td></tr>
+<tr><td align="left" balign="left"> + error(clazz : Class&lt;&gt;, message : Object) </td></tr>
 <tr><td align="left" balign="left"> + error(clazz : Class&lt;&gt;, message : Object, throwable : Throwable) </td></tr>
-<tr><td align="left" balign="left"> + fatal(clazz : Class&lt;&gt;, message : String) </td></tr>
+<tr><td align="left" balign="left"> + fatal(clazz : Class&lt;&gt;, message : Object) </td></tr>
 <tr><td align="left" balign="left"> + fatal(clazz : Class&lt;&gt;, message : Object, throwable : Throwable) </td></tr>
-<tr><td align="left" balign="left"> + getLevel() : Level </td></tr>
 <tr><td align="left" balign="left"> + setLevel(logLevel : Level) </td></tr>
 		</table></td></tr>
 		</table>>, URL="./LogUtil.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
